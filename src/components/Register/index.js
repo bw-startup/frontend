@@ -21,7 +21,9 @@ export default function Register(props) {
   const handleRegisterSubmit = event => {
     event.preventDefault();
     dispatch({ type: REGISTER_START });
+    // get data
     //DISPATCH REGISTER_SUCCESS ON RESPONSE
+    // history.push "/predictor"
   };
 
   return (

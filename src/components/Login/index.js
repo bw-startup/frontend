@@ -5,6 +5,7 @@ import { LOGIN_START } from '../../utils/constants';
 
 export default function Login(props) {
   const { from } = props.location.state || { from: { pathname: '/' } };
+  // authentication check
   if (false) {
     return <Redirect to={from} />;
   }
@@ -27,6 +28,8 @@ export default function Login(props) {
   const handleLoginSubmit = event => {
     event.preventDefault();
     dispatch({ type: LOGIN_START });
+    console.log(inputs.email);
+    console.log(inputs.password);
     // get data
     //DISPATCH LOGIN_SUCCESS ON RESPONSE
     // history.push to "/predictor"
