@@ -1,9 +1,13 @@
 import React, { useState, useContext } from 'react';
-import AuthenticationContext from '../../utils/context';
-import { REGISTER_START } from '../../utils/constants';
+import GlobalContext from '../../utils/context';
+import {
+  REGISTER_START,
+  REGISTER_SUCCESS,
+  REGISTER_FAILURE
+} from '../../utils/constants';
 
 export default function Register(props) {
-  const { state, dispatch } = useContext(AuthenticationContext);
+  const { state, dispatch } = useContext(GlobalContext);
 
   const [inputs, setInputs] = useState({
     email: '',
@@ -22,8 +26,11 @@ export default function Register(props) {
     event.preventDefault();
     dispatch({ type: REGISTER_START });
     // get data
-    //DISPATCH REGISTER_SUCCESS ON RESPONSE
+    // then
+    // DISPATCH REGISTER_SUCCESS ON RESPONSE
     // history.push "/predictor"
+    // catch
+    // display error bellow form
   };
 
   return (

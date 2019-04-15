@@ -1,9 +1,10 @@
 import React from 'react';
 
-const AuthenticationContext = React.createContext({
+const GlobalState = React.createContext({
   isLogging: false,
   isRegistering: false,
+  isPredicting: false,
   errorMessage: ''
 });
 
-export default AuthenticationContext;
+export default GlobalState;

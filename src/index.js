@@ -8,21 +8,21 @@ import Predictor from './components/Predictor';
 
 import AuthenticatedRoute from './components/AuthenticatedRoute';
 
-import AuthenticationContext from './utils/context';
-import authenticationReducer from './utils/reducers';
+import GlobalState from './utils/context';
+import rootReducer from './utils/reducers';
 
 export default function App() {
-  const initialState = useContext(AuthenticationContext);
-  const [state, dispatch] = useReducer(authenticationReducer, initialState);
+  const initialState = useContext(GlobalState);
+  const [state, dispatch] = useReducer(rootReducer, initialState);
 
   return (
-    <AuthenticationContext.Provider value={{ state, dispatch }}>
+    <GlobalState.Provider value={{ state, dispatch }}>
       <BrowserRouter>
         <Route path='/' exact component={Login} />
         <Route path='/register' exact component={Register} />
         <AuthenticatedRoute path='/predictor' component={Predictor} />
       </BrowserRouter>
-    </AuthenticationContext.Provider>
+    </GlobalState.Provider>
   );
 }
 

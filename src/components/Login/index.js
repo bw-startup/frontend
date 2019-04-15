@@ -1,7 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
-import AuthenticationContext from '../../utils/context';
-import { LOGIN_START } from '../../utils/constants';
+import GlobalContext from '../../utils/context';
+import {
+  LOGIN_START,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE
+} from '../../utils/constants';
 
 export default function Login(props) {
   const { from } = props.location.state || { from: { pathname: '/' } };
@@ -10,7 +14,7 @@ export default function Login(props) {
     return <Redirect to={from} />;
   }
 
-  const { state, dispatch } = useContext(AuthenticationContext);
+  const { state, dispatch } = useContext(GlobalContext);
 
   const [inputs, setInputs] = useState({
     email: '',
@@ -31,9 +35,15 @@ export default function Login(props) {
     console.log(inputs.email);
     console.log(inputs.password);
     // get data
-    //DISPATCH LOGIN_SUCCESS ON RESPONSE
+    // then
+    // DISPATCH LOGIN_SUCCESS ON RESPONSE
     // history.push to "/predictor"
-    props.history.push('/predictor');
+    setTimeout(() => {
+      props.history.push('/predictor');
+    }, 2000);
+
+    // catch
+    // display error bellow form
   };
 
   return (

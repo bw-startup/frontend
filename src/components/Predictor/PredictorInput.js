@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 
-export default function PredictorInput() {
+import {
+  PREDICT_START,
+  PREDICT_SUCCESS,
+  PREDICT_FAILURE
+} from '../../utils/constants';
+
+export default function PredictorInput(props) {
   const [inputs, setInputs] = useState({
     input001: '',
     input002: '',
@@ -18,8 +24,13 @@ export default function PredictorInput() {
 
   const handlePredictorInputSubmit = event => {
     event.preventDefault();
-    //post with inputs
+    // dispatch predictor Start
+    // post with inputs
+    // then
+    // dispatch predictor SUCCESS / data
     // history.push "/predictor/results"
+    // catch
+    // display error bellow form
   };
 
   return (
