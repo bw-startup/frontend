@@ -8,8 +8,8 @@ import Predictor from './components/Predictor';
 
 import AuthenticatedRoute from './components/AuthenticatedRoute';
 
-import AuthenticationContext from './components/context';
-import { authenticationReducer } from './components/reducer';
+import AuthenticationContext from './utils/context';
+import authenticationReducer from './utils/reducers';
 
 export default function App() {
   const initialState = useContext(AuthenticationContext);

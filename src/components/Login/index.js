@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
-import AuthenticationContext from '../context';
-import { LOGIN_START } from "../reducer"
+import AuthenticationContext from '../../utils/context';
+import { LOGIN_START } from '../../utils/constants';
 
 export default function Login(props) {
   const { from } = props.location.state || { from: { pathname: '/' } };
@@ -26,13 +26,15 @@ export default function Login(props) {
 
   const handleLoginSubmit = event => {
     event.preventDefault();
-    //DISPATCH ON RESPONSE
     dispatch({ type: LOGIN_START });
+    // get data
+    //DISPATCH LOGIN_SUCCESS ON RESPONSE
+    // history.push to "/predictor"
   };
 
   return (
     <div>
-      {state.isLogging && <p>what</p>}
+      {state.isLogging && <p>Logging in...</p>}
       <form onSubmit={handleLoginSubmit}>
         <div>
           <label htmlFor='email'>Email:</label>
