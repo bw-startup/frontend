@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import GlobalContext from '../../utils/context';
 
 import {
   PREDICT_START,
   PREDICT_SUCCESS,
   PREDICT_FAILURE
 } from '../../utils/constants';
+import { dispatch } from 'rxjs/internal/observable/pairs';
 
 export default function PredictorInput(props) {
+  const { state, dispatch } = useContext(GlobalContext);
+
   const [inputs, setInputs] = useState({
     input001: '',
     input002: '',
@@ -24,6 +28,7 @@ export default function PredictorInput(props) {
 
   const handlePredictorInputSubmit = event => {
     event.preventDefault();
+    dispatch({ type: PREDICT_START });
     // dispatch predictor Start
     // post with inputs
     // then
@@ -31,28 +36,34 @@ export default function PredictorInput(props) {
     // history.push "/predictor/results"
     // catch
     // display error bellow form
+    setTimeout(() => {
+      props.history.push('/predictor/results');
+    }, 2000);
   };
 
   return (
     <div>
-      PREDICTOR INPUT
-      <form onSubmit={handlePredictorInputSubmit}>
-        <div>Input 001</div>
-        <div>
-          <input type='text' />
-        </div>
-        <div>Input 001</div>
-        <div>
-          <input type='text' />
-        </div>
-        <div>Input 001</div>
-        <div>
-          <input type='text' />
-        </div>
-        <div>
-          <button type='submit'>See Prediction!</button>
-        </div>
-      </form>
+      {state.isPredicting ? (
+        <p>Predicting trajectory...</p>
+      ) : (
+        <form onSubmit={handlePredictorInputSubmit}>
+          <div>Input 001</div>
+          <div>
+            <input type='text' />
+          </div>
+          <div>Input 001</div>
+          <div>
+            <input type='text' />
+          </div>
+          <div>Input 001</div>
+          <div>
+            <input type='text' />
+          </div>
+          <div>
+            <button type='submit'>See Prediction!</button>
+          </div>
+        </form>
+      )}
     </div>
   );
 }

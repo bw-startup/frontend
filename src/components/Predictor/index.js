@@ -8,8 +8,8 @@ import PredictorOutput from './PredictorOutput';
 export default function Predictor() {
   return (
     <div>
-      <Route path='/predictor' component={PredictorInput} />
-      <PredictorResults path='/predictor/results' component={PredictorOutput} />
+      <Route exact path='/predictor' component={PredictorInput} />
+      <PredictorResults exact path='/predictor/results' component={PredictorOutput} />
     </div>
   );
 }

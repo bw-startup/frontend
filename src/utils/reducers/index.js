@@ -60,6 +60,7 @@ export default (state, action) => {
       return {
         ...state,
         isPredicting: false,
+        // data
         errorMessage: ''
       };
     case PREDICT_FAILURE:
