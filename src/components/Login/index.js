@@ -7,6 +7,8 @@ import {
   LOGIN_FAILURE
 } from '../../utils/constants';
 
+import Input from './Input';
+
 export default function Login(props) {
   const { from } = props.location.state || { from: { pathname: '/' } };
   // authentication check // COOKIE CHECK
@@ -56,7 +58,7 @@ export default function Login(props) {
             <label htmlFor='email'>Email:</label>
           </div>
           <div>
-            <input
+            <Input
               required
               type='email'
               name='email'
@@ -68,7 +70,7 @@ export default function Login(props) {
             <label htmlFor='password'>Password:</label>
           </div>
           <div>
-            <input
+            <Input
               required
               type='password'
               name='password'

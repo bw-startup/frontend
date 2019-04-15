@@ -7,7 +7,7 @@ export default function AuthenticatedRoute({ component: Component, ...rest }) {
       {...rest}
       render={props =>
         // authentication conditional // COOKIE CHECK
-        true ? (
+        false ? (
           <Component {...props} />
         ) : (
           <Redirect
