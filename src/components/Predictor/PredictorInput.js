@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function PredictorInput() {
   const [inputs, setInputs] = useState({
@@ -19,11 +19,12 @@ export default function PredictorInput() {
   const handlePredictorInputSubmit = event => {
     event.preventDefault();
     //post with inputs
-    // history.push "/predictor-output"
+    // history.push "/predictor/results"
   };
 
   return (
     <div>
+      PREDICTOR INPUT
       <form onSubmit={handlePredictorInputSubmit}>
         <div>Input 001</div>
         <div>
@@ -36,6 +37,9 @@ export default function PredictorInput() {
         <div>Input 001</div>
         <div>
           <input type='text' />
+        </div>
+        <div>
+          <button type='submit'>See Prediction!</button>
         </div>
       </form>
     </div>
