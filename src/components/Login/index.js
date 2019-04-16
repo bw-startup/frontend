@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import GlobalContext from '../../utils/context';
@@ -9,7 +9,11 @@ import {
   LOGIN_FAILURE
 } from '../../utils/constants';
 
+import Loader from 'react-loader-spinner';
 import Input from './Input';
+import Label from './Label';
+
+import './Login.scss';
 
 export default function Login(props) {
   const { state, dispatch } = useContext(GlobalContext);
@@ -48,27 +52,37 @@ export default function Login(props) {
       });
   };
 
-  if (cookie['StartupTrajectoryPredictor'] && !state.isLogging) {
+  if (cookie['StartupTrajectoryPredictor']) {
     return <Redirect to='/predictor' />;
   } else {
-    return (
-      <div>
-        {state.isRegisterSuccess && (
-          <div>
-            <p>Thank you for registering!</p>
-            <p>Please Log in to continue: </p>
-          </div>
-        )}
+    return state.isLogging ? (
+      <div className='loader__container'>
+        <Loader type='ThreeDots' color='#4285f4' height={200} width={200} />
+        <p>Logging in...</p>
+      </div>
+    ) : (
+      <div className='login__container'>
+        <div className='login__image'>
+          <img
+            className='login__image--img'
+            src='/images/investing-login.svg'
+            alt='Investing'
+          />
+        </div>
 
-        {state.isLogging ? (
-          <p>Logging in...</p>
-        ) : (
-          <form onSubmit={handleLoginSubmit}>
+        <div className='login__form'>
+          {state.isRegisterSuccess && (
             <div>
-              <label htmlFor='email'>Email:</label>
+              <p>Thank you for registering!</p>
+              <p>Please Log in to continue: </p>
             </div>
-            <div>
-              <Input
+          )}
+          <h2>Welcome back</h2>
+          <p>Sign in to continue using STP</p>
+          <form onSubmit={handleLoginSubmit}>
+            <div className='login__field'>
+              <label htmlFor='email'>Email:</label>
+              <input
                 required
                 type='email'
                 name='email'
@@ -76,11 +90,9 @@ export default function Login(props) {
                 value={inputs.email}
               />
             </div>
-            <div>
+            <div className='login__field'>
               <label htmlFor='password'>Password:</label>
-            </div>
-            <div>
-              <Input
+              <input
                 required
                 type='password'
                 name='password'
@@ -88,13 +100,22 @@ export default function Login(props) {
                 value={inputs.password}
               />
             </div>
+            {state.errorMessage && (
+              <div className='error'>{state.errorMessage}</div>
+            )}
             <div>
-              <button type='submit'>Log In</button>
+              <button className='login__button' type='submit'>
+                Log In
+              </button>
+            </div>
+            <div className='login__link'>
+              <p>
+                Don't have an account?
+                <Link to='/register'> Register Here!</Link>
+              </p>
             </div>
           </form>
-        )}
-
-        {state.errorMessage && <p>{state.errorMessage}</p>}
+        </div>
       </div>
     );
   }

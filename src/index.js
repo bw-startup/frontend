@@ -1,5 +1,6 @@
 import React, { useContext, useReducer } from 'react';
 import ReactDOM from 'react-dom';
+import './index.scss';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
 
