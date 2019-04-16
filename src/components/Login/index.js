@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
 import GlobalContext from '../../utils/context';
 import {
   LOGIN_START,
@@ -12,16 +12,8 @@ import {
 import Input from './Input';
 
 export default function Login(props) {
-  const [cookie, setCookie] = useCookies(['StartupTrajectoryPredictor']);
-
-  const { from } = props.location.state || { from: { pathname: '/' } };
-  // authentication check // COOKIE CHECK
-  if (cookie.value) {
-    return <Redirect to={from} />;
-  }
-
   const { state, dispatch } = useContext(GlobalContext);
-
+  const [cookie, setCookie] = useCookies(['StartupTrajectoryPredictor']);
   const [inputs, setInputs] = useState({
     email: '',
     password: ''
@@ -46,7 +38,6 @@ export default function Login(props) {
         setTimeout(() => {
           dispatch({ type: LOGIN_SUCCESS, payload: response.data.token });
           setCookie('StartupTrajectoryPredictor', response.data.token);
-          props.history.push('/predictor');
         }, 2000);
       })
       .catch(err => {
@@ -55,43 +46,54 @@ export default function Login(props) {
       });
   };
 
-  return (
-    <div>
-      {state.isLogging ? (
-        <p>Logging in...</p>
-      ) : (
-        <form onSubmit={handleLoginSubmit}>
+  if (cookie['StartupTrajectoryPredictor']) {
+    return <Redirect to='/predictor' />;
+  } else {
+    return (
+      <div>
+        {state.isRegisterSuccess && (
           <div>
-            <label htmlFor='email'>Email:</label>
+            <p>Thank you for registering!</p>
+            <p>Please Log in to continue: </p>
           </div>
-          <div>
-            <Input
-              required
-              type='email'
-              name='email'
-              onChange={handleInputChange}
-              value={inputs.email}
-            />
-          </div>
-          <div>
-            <label htmlFor='password'>Password:</label>
-          </div>
-          <div>
-            <Input
-              required
-              type='password'
-              name='password'
-              onChange={handleInputChange}
-              value={inputs.password}
-            />
-          </div>
-          <div>
-            <button type='submit'>Log In</button>
-          </div>
-        </form>
-      )}
+        )}
 
-      {state.errorMessage && <p>{state.errorMessage}</p>}
-    </div>
-  );
+        {state.isLogging ? (
+          <p>Logging in...</p>
+        ) : (
+          <form onSubmit={handleLoginSubmit}>
+            <div>
+              <label htmlFor='email'>Email:</label>
+            </div>
+            <div>
+              <Input
+                required
+                type='email'
+                name='email'
+                onChange={handleInputChange}
+                value={inputs.email}
+              />
+            </div>
+            <div>
+              <label htmlFor='password'>Password:</label>
+            </div>
+            <div>
+              <Input
+                required
+                type='password'
+                name='password'
+                onChange={handleInputChange}
+                value={inputs.password}
+              />
+            </div>
+            <div>
+              <button type='submit'>Log In</button>
+            </div>
+          </form>
+        )}
+
+        {state.errorMessage && <p>{state.errorMessage}</p>}
+      </div>
+    );
+  }
 }
