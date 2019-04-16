@@ -1,6 +1,7 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
 export const primaryColor = '#4285f4';
+export const secondaryColor = '#38c172';
 export const labelColor = '#A2AEBB';
 
 export const GlobalCssReset = createGlobalStyle`
@@ -19,7 +20,10 @@ html {
 }
 
 body {
-  background: linear-gradient(to right, #4285f4 50%, #f3f3f3 50%);
+  background: ${props =>
+    props.primary
+      ? `linear-gradient(to right, ${primaryColor} 50%, #f3f3f3 50%)`
+      : `linear-gradient(to right, ${secondaryColor} 50%, #f3f3f3 50%)`};
   font-family: 'Lato', sans-serif;
   font-size: 62.5%;
   font-weight: 300;
@@ -45,16 +49,24 @@ a {
     text-decoration: underline;
   }
 }
-/* create styled component for errors
-create styled component for form footer link
-*/
-.error {
+`;
+
+export const ErrorMessage = styled.div`
+  border-radius: 5px;
+  font-size: 0.7rem;
   color: white;
   padding: 10px;
-  margin: 20px 0;
+  margin: 30px 0 10px;
   background: lightcoral;
-}
+`;
 
+export const FormFooterLink = styled.div`
+  font-size: 0.8rem;
+  margin: 20px 0;
+  a {
+    color: ${props => (props.primary ? primaryColor : secondaryColor)};
+    text-decoration: none;
+  }
 `;
 
 // LOADER
@@ -144,12 +156,21 @@ export const LoginButton = styled.button`
   margin: 20px 0;
 `;
 
-export const LoginLink = styled.div`
-  margin: 20px 0;
-  a {
-    color: #4285f4;
-    text-decoration: none;
-  }
+// REGISTER
+export const Register = styled(Login)`
+  flex-direction: row-reverse;
+`;
+
+export const RegisterImage = styled(LoginImage)``;
+
+export const RegisterImageImg = styled(LoginImageImg)``;
+
+export const RegisterForm = styled(LoginForm)``;
+
+export const RegisterField = styled(LoginField)``;
+
+export const RegisterButton = styled(LoginButton)`
+  background: ${secondaryColor};
 `;
 
 // PREDICTOR

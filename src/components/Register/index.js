@@ -9,6 +9,9 @@ import {
   REGISTER_FAILURE
 } from '../../utils/constants';
 import Loader from '../shared/Loader';
+import ErrorMessage from '../shared/ErrorMessage';
+import FormFooterLink from '../shared/FormFooterLink';
+import * as S from '../../styles';
 
 export default function Register(props) {
   const { state, dispatch } = useContext(GlobalContext);
@@ -51,16 +54,24 @@ export default function Register(props) {
   if (cookie['StartupTrajectoryPredictor']) {
     return <Redirect to='/predictor' />;
   } else {
-    return (
-      <div>
-        {state.isRegistering ? (
-          <Loader text='Registering...' />
-        ) : (
+    return state.isRegistering ? (
+      <Loader text='Registering...' />
+    ) : (
+      <S.Register>
+        <S.GlobalCssReset/>
+        <S.RegisterImage>
+          <S.RegisterImageImg
+            className='login__image--img'
+            src='/images/investing-register.svg'
+            alt='Investing'
+          />
+        </S.RegisterImage>
+        <S.RegisterForm>
+          <h2>Hello, Friend!</h2>
+          <p>Join us and lets get started.</p>
           <form onSubmit={handleRegisterSubmit}>
-            <div>
+            <S.RegisterField>
               <label htmlFor='email'>Email:</label>
-            </div>
-            <div>
               <input
                 required
                 type='email'
@@ -68,11 +79,10 @@ export default function Register(props) {
                 onChange={handleInputChange}
                 value={inputs.email}
               />
-            </div>
-            <div>
+            </S.RegisterField>
+
+            <S.RegisterField>
               <label htmlFor='password'>Password:</label>
-            </div>
-            <div>
               <input
                 required
                 type='password'
@@ -80,14 +90,19 @@ export default function Register(props) {
                 onChange={handleInputChange}
                 value={inputs.password}
               />
-            </div>
-            <div>
-              <button type='submit'>Register Now</button>
-            </div>
+            </S.RegisterField>
+            <S.RegisterButton type='submit'>Join Now</S.RegisterButton>
+            {state.errorMessage && (
+              <ErrorMessage message={state.errorMessage} />
+            )}
+            <FormFooterLink
+              text='Already a member?'
+              to='/'
+              linkText='Log In!'
+            />
           </form>
-        )}
-        {state.errorMessage && <p>{state.errorMessage}</p>}
-      </div>
+        </S.RegisterForm>
+      </S.Register>
     );
   }
 }

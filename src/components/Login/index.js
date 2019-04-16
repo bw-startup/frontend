@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import GlobalContext from '../../utils/context';
@@ -9,6 +8,8 @@ import {
   LOGIN_FAILURE
 } from '../../utils/constants';
 import Loader from '../shared/Loader';
+import ErrorMessage from '../shared/ErrorMessage';
+import FormFooterLink from '../shared/FormFooterLink';
 import * as S from '../../styles';
 
 export default function Login(props) {
@@ -62,6 +63,7 @@ export default function Login(props) {
     <Loader text='Logging In...' />
   ) : (
     <S.Login>
+      <S.GlobalCssReset primary />
       <S.LoginImage>
         <S.LoginImageImg
           className='login__image--img'
@@ -100,16 +102,14 @@ export default function Login(props) {
               value={inputs.password}
             />
           </S.LoginField>
-          {state.errorMessage && (
-            <div className='error'>{state.errorMessage}</div>
-          )}
+          {state.errorMessage && <ErrorMessage message={state.errorMessage} />}
           <S.LoginButton type='submit'>Log In</S.LoginButton>
-          <S.LoginLink>
-            <p>
-              Don't have an account?
-              <Link to='/register'> Register Here!</Link>
-            </p>
-          </S.LoginLink>
+          <FormFooterLink
+            primary
+            text="Don't have an account?"
+            to='/register'
+            linkText='Register Here!'
+          />
         </form>
       </S.LoginForm>
     </S.Login>

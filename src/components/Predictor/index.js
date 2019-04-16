@@ -9,7 +9,11 @@ export default function Predictor() {
   return (
     <div>
       <Route exact path='/predictor' component={PredictorInput} />
-      <PredictorResultsRoute exact path='/predictor/results' component={PredictorOutput} />
+      <PredictorResultsRoute
+        exact
+        path='/predictor/results'
+        component={PredictorOutput}
+      />
     </div>
   );
 }
