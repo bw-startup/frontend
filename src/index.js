@@ -7,7 +7,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Predictor from './components/Predictor';
 
-import AuthenticatedRoute from './components/AuthenticatedRoute';
+import AuthenticationRoute from './components/PrivateRoutes/AuthenticationRoute';
 
 import GlobalState from './utils/context';
 import rootReducer from './utils/reducers';
@@ -22,7 +22,7 @@ export default function App() {
         <BrowserRouter>
           <Route path='/' exact component={Login} />
           <Route path='/register' exact component={Register} />
-          <AuthenticatedRoute path='/predictor' component={Predictor} />
+          <AuthenticationRoute path='/predictor' component={Predictor} />
         </BrowserRouter>
       </CookiesProvider>
     </GlobalState.Provider>
