@@ -6,7 +6,6 @@ import {
   PREDICT_SUCCESS,
   PREDICT_FAILURE
 } from '../../utils/constants';
-import { dispatch } from 'rxjs/internal/observable/pairs';
 
 export default function PredictorInput(props) {
   const { state, dispatch } = useContext(GlobalContext);

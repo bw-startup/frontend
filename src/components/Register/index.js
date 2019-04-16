@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import axios from 'axios';
 import GlobalContext from '../../utils/context';
 import {
   REGISTER_START,
@@ -25,46 +26,57 @@ export default function Register(props) {
   const handleRegisterSubmit = event => {
     event.preventDefault();
     dispatch({ type: REGISTER_START });
-    // get data
+
+    axios
+      .post('http://localhost:5000/api/register', inputs)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => console.log(err));
+    // post register
     // then
     // DISPATCH REGISTER_SUCCESS ON RESPONSE
     // history.push "/predictor"
     // catch
     // display error bellow form
+    console.log(inputs);
   };
 
   return (
     <div>
-      {state.isRegistering && <p>Registering...</p>}
-      <form onSubmit={handleRegisterSubmit}>
-        <div>
-          <label htmlFor='email'>Email:</label>
-        </div>
-        <div>
-          <input
-            required
-            type='email'
-            name='email'
-            onChange={handleInputChange}
-            value={inputs.email}
-          />
-        </div>
-        <div>
-          <label htmlFor='password'>Password:</label>
-        </div>
-        <div>
-          <input
-            required
-            type='password'
-            name='password'
-            onChange={handleInputChange}
-            value={inputs.password}
-          />
-        </div>
-        <div>
-          <button type='submit'>Register Now</button>
-        </div>
-      </form>
+      {state.isRegistering ? (
+        <p>Registering...</p>
+      ) : (
+        <form onSubmit={handleRegisterSubmit}>
+          <div>
+            <label htmlFor='email'>Email:</label>
+          </div>
+          <div>
+            <input
+              required
+              type='email'
+              name='email'
+              onChange={handleInputChange}
+              value={inputs.email}
+            />
+          </div>
+          <div>
+            <label htmlFor='password'>Password:</label>
+          </div>
+          <div>
+            <input
+              required
+              type='password'
+              name='password'
+              onChange={handleInputChange}
+              value={inputs.password}
+            />
+          </div>
+          <div>
+            <button type='submit'>Register Now</button>
+          </div>
+        </form>
+      )}
     </div>
   );
 }
