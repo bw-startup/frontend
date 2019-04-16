@@ -1,6 +1,10 @@
 .loader__container {
-  width: 700px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  padding: 120px;
   margin: 80px auto 80px;
+  width: 700px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -70,6 +74,7 @@
     text-transform: uppercase;
     width: 100%;
     padding: 10px;
+    margin: 20px 0;
   }
 
   .login__link {

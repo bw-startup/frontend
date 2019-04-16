@@ -1,7 +1,7 @@
 import React, { useContext, useReducer } from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
 
 import Login from './components/Login';
@@ -21,9 +21,12 @@ export default function App() {
     <GlobalState.Provider value={{ state, dispatch }}>
       <CookiesProvider>
         <BrowserRouter>
-          <Route path='/' exact component={Login} />
-          <Route path='/register' exact component={Register} />
-          <AuthenticationRoute path='/predictor' component={Predictor} />
+          <Switch>
+            <Route path='/' exact component={Login} />
+            <Route path='/register' exact component={Register} />
+            <AuthenticationRoute path='/predictor' component={Predictor} />
+            <Route component={Login} />
+          </Switch>
         </BrowserRouter>
       </CookiesProvider>
     </GlobalState.Provider>

@@ -1,11 +1,12 @@
 import React, { useState, useContext } from 'react';
 import GlobalContext from '../../utils/context';
-
 import {
   PREDICT_START,
   PREDICT_SUCCESS,
   PREDICT_FAILURE
 } from '../../utils/constants';
+
+import PredictorInputForm from './PredictorInputSteps';
 
 export default function PredictorInput(props) {
   const { state, dispatch } = useContext(GlobalContext);
@@ -61,41 +62,11 @@ export default function PredictorInput(props) {
         <p>Predicting trajectory...</p>
       ) : (
         <form onSubmit={handlePredictorInputSubmit}>
-          <div>Company Age (in months):</div>
-          <div>
-            <input type='text' />
-          </div>
-          <div>Industry:</div>
-          <div>
-            <input type='text' />
-          </div>
-          <div>Company Location:</div>
-          <div>
-            <input type='text' />
-          </div>
-          <div>Number of Founders:</div>
-          <div>
-            <input type='text' />
-          </div>
-          <div>Number of Employees:</div>
-          <div>
-            <input type='text' />
-          </div>
-          <div>Last Funding Amount:</div>
-          <div>
-            <input type='text' />
-          </div>
-          <div>Number of Funding Rounds:</div>
-          <div>
-            <input type='text' />
-          </div>
-          <div>Number of Public News Articles Written About the Company:</div>
-          <div>
-            <input type='text' />
-          </div>
-          <div>
-            <button type='submit'>See Prediction!</button>
-          </div>
+          <h2>
+            <div>Let's get your started</div>
+            <div>so you can make the best investment decision!</div>
+          </h2>
+          <PredictorInputForm />
         </form>
       )}
     </div>
