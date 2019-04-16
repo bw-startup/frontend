@@ -9,8 +9,7 @@ import {
   LOGIN_FAILURE
 } from '../../utils/constants';
 import Loader from '../shared/Loader';
-
-import './Login.scss';
+import * as S from '../../styles';
 
 export default function Login(props) {
   const { state, dispatch } = useContext(GlobalContext);
@@ -62,16 +61,16 @@ export default function Login(props) {
   return state.isLogging ? (
     <Loader text='Logging In...' />
   ) : (
-    <div className='login__container'>
-      <div className='login__image'>
-        <img
+    <S.Login>
+      <S.LoginImage>
+        <S.LoginImageImg
           className='login__image--img'
           src='/images/investing-login.svg'
           alt='Investing'
         />
-      </div>
+      </S.LoginImage>
 
-      <div className='login__form'>
+      <S.LoginForm>
         {state.isRegisterSuccess && (
           <div>
             <p>Thank you for registering!</p>
@@ -81,7 +80,7 @@ export default function Login(props) {
         <h2>Welcome back!</h2>
         <p>Sign in to continue using STP</p>
         <form onSubmit={handleLoginSubmit}>
-          <div className='login__field'>
+          <S.LoginField>
             <label htmlFor='email'>Email:</label>
             <input
               required
@@ -90,8 +89,8 @@ export default function Login(props) {
               onChange={handleInputChange}
               value={inputs.email}
             />
-          </div>
-          <div className='login__field'>
+          </S.LoginField>
+          <S.LoginField>
             <label htmlFor='password'>Password:</label>
             <input
               required
@@ -100,23 +99,19 @@ export default function Login(props) {
               onChange={handleInputChange}
               value={inputs.password}
             />
-          </div>
+          </S.LoginField>
           {state.errorMessage && (
             <div className='error'>{state.errorMessage}</div>
           )}
-          <div>
-            <button className='login__button' type='submit'>
-              Log In
-            </button>
-          </div>
-          <div className='login__link'>
+          <S.LoginButton type='submit'>Log In</S.LoginButton>
+          <S.LoginLink>
             <p>
               Don't have an account?
               <Link to='/register'> Register Here!</Link>
             </p>
-          </div>
+          </S.LoginLink>
         </form>
-      </div>
-    </div>
+      </S.LoginForm>
+    </S.Login>
   );
 }
