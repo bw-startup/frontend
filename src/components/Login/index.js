@@ -8,8 +8,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE
 } from '../../utils/constants';
-
-import Loader from 'react-loader-spinner';
+import Loader from '../shared/Loader';
 
 import './Login.scss';
 
@@ -61,10 +60,7 @@ export default function Login(props) {
   };
 
   return state.isLogging ? (
-    <div className='loader__container'>
-      <Loader type='ThreeDots' color='#4285f4' height={200} width={200} />
-      <p>Logging in...</p>
-    </div>
+    <Loader text='Logging In...' />
   ) : (
     <div className='login__container'>
       <div className='login__image'>

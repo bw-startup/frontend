@@ -1,9 +1,10 @@
 import React from 'react'
+import * as S from "../../styles"
 
 export default function PredictorOutput() {
   return (
-    <div>
+    <S.PredictorOutput>
       DISPLAY RESULTS
-    </div>
+    </S.PredictorOutput>
   )
 }

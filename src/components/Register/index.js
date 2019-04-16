@@ -8,6 +8,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAILURE
 } from '../../utils/constants';
+import Loader from '../shared/Loader';
 
 export default function Register(props) {
   const { state, dispatch } = useContext(GlobalContext);
@@ -53,7 +54,7 @@ export default function Register(props) {
     return (
       <div>
         {state.isRegistering ? (
-          <p>Registering...</p>
+          <Loader text='Registering...' />
         ) : (
           <form onSubmit={handleRegisterSubmit}>
             <div>

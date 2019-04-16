@@ -5,6 +5,7 @@ import {
   PREDICT_SUCCESS,
   PREDICT_FAILURE
 } from '../../utils/constants';
+import Loader from '../shared/Loader';
 
 import PredictorInputSteps from './PredictorInputSteps';
 import * as S from '../../styles';
@@ -58,10 +59,9 @@ export default function PredictorInput(props) {
   };
 
   return state.isPredicting ? (
-    <p>Predicting trajectory...</p>
+    <Loader text='Predicting Trajectory...' />
   ) : (
     <S.PredictorInput>
-      <S.PredictorInputTitle>Let's get your started!</S.PredictorInputTitle>
       <S.PredictorInputForm onSubmit={handlePredictorInputSubmit}>
         <PredictorInputSteps />
       </S.PredictorInputForm>
