@@ -1,7 +1,61 @@
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 export const primaryColor = '#4285f4';
 export const labelColor = '#A2AEBB';
+
+export const GlobalCssReset = createGlobalStyle`
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400');
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: linear-gradient(to right, #4285f4 50%, #f3f3f3 50%);
+  font-family: 'Lato', sans-serif;
+  font-size: 62.5%;
+  font-weight: 300;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+input {
+  font-family: 'Lato', sans-serif;
+}
+
+p {
+  color: #838eaf;
+  font-size: 0.8rem;
+}
+
+a {
+  font-weight: 400;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+/* create styled component for errors
+create styled component for form footer link
+*/
+.error {
+  color: white;
+  padding: 10px;
+  margin: 20px 0;
+  background: lightcoral;
+}
+
+`;
 
 // LOADER
 export const Loader = styled.div`

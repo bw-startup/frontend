@@ -1,6 +1,5 @@
 import React, { useContext, useReducer } from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
 
@@ -13,12 +12,15 @@ import AuthenticationRoute from './components/PrivateRoutes/AuthenticationRoute'
 import GlobalState from './utils/context';
 import rootReducer from './utils/reducers';
 
+import * as S from './styles';
+
 export default function App() {
   const initialState = useContext(GlobalState);
   const [state, dispatch] = useReducer(rootReducer, initialState);
 
   return (
     <GlobalState.Provider value={{ state, dispatch }}>
+      <S.GlobalCssReset />
       <CookiesProvider>
         <BrowserRouter>
           <Switch>
