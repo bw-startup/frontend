@@ -42,11 +42,13 @@ export default function Login(props) {
       })
       .catch(err => {
         console.log(err);
-        dispatch({ type: LOGIN_FAILURE, payload: err.response.data.message });
+        setTimeout(() => {
+          dispatch({ type: LOGIN_FAILURE, payload: err.response.data.message });
+        }, 2000);
       });
   };
 
-  if (cookie['StartupTrajectoryPredictor']) {
+  if (cookie['StartupTrajectoryPredictor'] && !state.isLogging) {
     return <Redirect to='/predictor' />;
   } else {
     return (

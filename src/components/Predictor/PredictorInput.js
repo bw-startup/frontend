@@ -10,6 +10,21 @@ import {
 export default function PredictorInput(props) {
   const { state, dispatch } = useContext(GlobalContext);
 
+  /**
+  |--------------------------------------------------
+  | INPUTS
+  |--------------------------------------------------
+  */
+
+  //  Company Age- (in months)
+  //  Industry-
+  //  Company Location-
+  //  Number of Founders-
+  //  Last Funding Amount-
+  //  Number of Funding Rounds-
+  //  Number of Public News Articles Written About the Company-
+  //  Number of Employees-
+
   const [inputs, setInputs] = useState({
     input001: '',
     input002: '',
@@ -46,15 +61,35 @@ export default function PredictorInput(props) {
         <p>Predicting trajectory...</p>
       ) : (
         <form onSubmit={handlePredictorInputSubmit}>
-          <div>Input 001</div>
+          <div>Company Age (in months):</div>
           <div>
             <input type='text' />
           </div>
-          <div>Input 001</div>
+          <div>Industry:</div>
           <div>
             <input type='text' />
           </div>
-          <div>Input 001</div>
+          <div>Company Location:</div>
+          <div>
+            <input type='text' />
+          </div>
+          <div>Number of Founders:</div>
+          <div>
+            <input type='text' />
+          </div>
+          <div>Number of Employees:</div>
+          <div>
+            <input type='text' />
+          </div>
+          <div>Last Funding Amount:</div>
+          <div>
+            <input type='text' />
+          </div>
+          <div>Number of Funding Rounds:</div>
+          <div>
+            <input type='text' />
+          </div>
+          <div>Number of Public News Articles Written About the Company:</div>
           <div>
             <input type='text' />
           </div>

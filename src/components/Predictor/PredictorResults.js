@@ -9,7 +9,7 @@ export default function PredictorResults({ component: Component, ...rest }) {
         // isPredictorInputSubmitted check
         // or is data from predictor available in state
         // remember to useContext to connect to global state
-        false ? <Component {...props} /> : <Redirect to='/predictor' />
+        true ? <Component {...props} /> : <Redirect to='/predictor' />
       }
     />
   );
