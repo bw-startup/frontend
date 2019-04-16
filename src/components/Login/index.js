@@ -37,25 +37,18 @@ export default function Login(props) {
     dispatch({ type: LOGIN_START });
 
     axios
-      .post('http://localhost:5000/api/login', 'inputs')
+      .post('http://localhost:5000/api/login', inputs)
       .then(response => {
-        dispatch({ type: LOGIN_SUCCESS, payload: response.data.token });
+        console.log(response);
+        setTimeout(() => {
+          dispatch({ type: LOGIN_SUCCESS, payload: response.data.token });
+          props.history.push('/predictor');
+        }, 2000);
       })
       .catch(err => {
+        console.log(err);
         dispatch({ type: LOGIN_FAILURE, payload: err.response.data.message });
       });
-
-    console.log(inputs);
-    // get data
-    // then
-    // DISPATCH LOGIN_SUCCESS ON RESPONSE
-    // history.push to "/predictor"
-    // setTimeout(() => {
-    //   props.history.push('/predictor');
-    // }, 2000);
-
-    // catch
-    // display error bellow form
   };
 
   return (
@@ -93,6 +86,8 @@ export default function Login(props) {
           </div>
         </form>
       )}
+
+      {state.errorMessage && <p>{state.errorMessage}</p>}
     </div>
   );
 }

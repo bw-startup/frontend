@@ -31,14 +31,18 @@ export default function Register(props) {
       .post('http://localhost:5000/api/register', inputs)
       .then(response => {
         console.log(response);
+        setTimeout(() => {
+          dispatch({ type: REGISTER_SUCCESS, payload: response.data.message });
+        }, 2000);
       })
-      .catch(err => console.log(err));
-    // post register
-    // then
-    // DISPATCH REGISTER_SUCCESS ON RESPONSE
+      .catch(err => {
+        console.log(err);
+        dispatch({
+          type: REGISTER_FAILURE,
+          payload: err.response.data.message
+        });
+      });
     // history.push "/predictor"
-    // catch
-    // display error bellow form
     console.log(inputs);
   };
 
@@ -77,6 +81,7 @@ export default function Register(props) {
           </div>
         </form>
       )}
+      {state.errorMessage && <p>{state.errorMessage}</p>}
     </div>
   );
 }

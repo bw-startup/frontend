@@ -23,13 +23,12 @@ export default (state, action) => {
         ...state,
         isLogging: false,
         errorMessage: ''
-        // data
       };
     case LOGIN_FAILURE:
       return {
         ...state,
-        isLogging: false
-        // errorMessage: "error message from action.payload"
+        isLogging: false,
+        errorMessage: action.payload
       };
     case REGISTER_START:
       return {
@@ -47,8 +46,8 @@ export default (state, action) => {
     case REGISTER_FAILURE:
       return {
         ...state,
-        isRegistering: false
-        /// errorMessage: "error message from action.payload"
+        isRegistering: false,
+        errorMessage: action.payload
       };
     case PREDICT_START:
       return {
