@@ -65,11 +65,7 @@ export default function Login(props) {
     <S.Login>
       <S.GlobalCssReset primary />
       <S.LoginImage>
-        <S.LoginImageImg
-          className='login__image--img'
-          src='/images/investing-login.svg'
-          alt='Investing'
-        />
+        <S.LoginImageImg src='/images/investing-login.svg' alt='Investing' />
       </S.LoginImage>
 
       <S.LoginForm>

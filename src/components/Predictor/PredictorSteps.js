@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import PredictorInputStep from './PredictorInputStep';
+import PredictorStep from './PredictorStep';
+import PredictorStepButtons from './PredictorStepButtons';
 import * as S from '../../styles';
 
 export default function PredictorInputForm(props) {
@@ -9,6 +10,10 @@ export default function PredictorInputForm(props) {
     setStep(prevStep => prevStep + 1);
   };
 
+  const previousStep = () => {
+    setStep(prevStep => prevStep - 1);
+  };
+
   // todo:
   // display all inputs on default case
 
@@ -16,91 +21,99 @@ export default function PredictorInputForm(props) {
     case 0:
       return (
         <div>
-          <S.PredictorInputTitle>Let's get your started!</S.PredictorInputTitle>
-          <PredictorInputStep
+          <S.PredictorTitle>Let's get you started!</S.PredictorTitle>
+          <PredictorStep
             type='text'
             title='Company Location:'
             htmlFor='companyLocation'
             name='companyLocation'
             id='companyLocation'
           />
-          <S.PredictorInputStepButton onClick={nextStep}>
-            Next
-          </S.PredictorInputStepButton>
+          <PredictorStepButtons
+            step={step}
+            previousStep={previousStep}
+            nextStep={nextStep}
+          />
         </div>
       );
     case 1:
       return (
         <div>
-          <PredictorInputStep
+          <PredictorStep
             type='text'
             title='Company Age:'
             htmlFor='companyAge'
             name='companyAge'
             id='companyAge'
           />
-          <PredictorInputStep
+          <PredictorStep
             type='text'
             title='Industry:'
             htmlFor='industry'
             name='industry'
             id='industry'
           />
-          <PredictorInputStep
+          <PredictorStep
             type='text'
             title='Number of Public News Articles Written About the Company:'
             htmlFor='numberOfPublicNewsArticles'
             name='numberOfPublicNewsArticles'
             id='numberOfPublicNewsArticles'
           />
-          <S.PredictorInputStepButton onClick={nextStep}>
-            Next
-          </S.PredictorInputStepButton>
+          <PredictorStepButtons
+            step={step}
+            previousStep={previousStep}
+            nextStep={nextStep}
+          />
         </div>
       );
     case 2:
       return (
         <div>
-          <PredictorInputStep
+          <PredictorStep
             type='text'
             title='Number of Funding Rounds:'
             htmlFor='numberOfFundingRounds'
             name='numberOfFundingRounds'
             id='numberOfFundingRounds'
           />
-          <PredictorInputStep
+          <PredictorStep
             type='text'
             title='Last Funding Amount:'
             htmlFor='lastFundingAmount'
             name='lastFundingAmount'
             id='lastFundingAmount'
           />
-          <S.PredictorInputStepButton onClick={nextStep}>
-            Next
-          </S.PredictorInputStepButton>
+          <PredictorStepButtons
+            step={step}
+            previousStep={previousStep}
+            nextStep={nextStep}
+          />
         </div>
       );
 
     case 3:
       return (
         <div>
-          <PredictorInputStep
+          <PredictorStep
             type='text'
             title='Number of Founders:'
             htmlFor='numberOfFounders'
             name='numberOfFounders'
             id='numberOfFounders'
           />
-          <PredictorInputStep
+          <PredictorStep
             type='text'
             title='Number of Employees:'
             htmlFor='numberOfEmployees'
             name='numberOfEmployees'
             id='numberOfEmployees'
           />
-          <S.PredictorInputStepSubmitButton type='submit'>
-            See Prediction!
-          </S.PredictorInputStepSubmitButton>
+          <PredictorStepButtons
+            step={step}
+            previousStep={previousStep}
+            nextStep={nextStep}
+          />
         </div>
       );
     default:

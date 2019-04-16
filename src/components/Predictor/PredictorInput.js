@@ -7,7 +7,7 @@ import {
 } from '../../utils/constants';
 import Loader from '../shared/Loader';
 
-import PredictorInputSteps from './PredictorInputSteps';
+import PredictorInputSteps from './PredictorSteps';
 import * as S from '../../styles';
 
 export default function PredictorInput(props) {

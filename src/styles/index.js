@@ -1,6 +1,7 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
 export const primaryColor = '#4285f4';
+export const primaryColorLight = '#aad4f5';
 export const secondaryColor = '#38c172';
 export const labelColor = '#A2AEBB';
 
@@ -20,6 +21,7 @@ html {
 }
 
 body {
+  color: #05133C;
   background: ${props =>
     props.primary
       ? `linear-gradient(to right, ${primaryColor} 50%, #f3f3f3 50%)`
@@ -192,7 +194,7 @@ export const PredictorInputStep = styled.div`
 
 export const PredictorInputForm = styled.form``;
 
-export const PredictorInputTitle = styled.h2``;
+export const PredictorTitle = styled.h2``;
 
 export const PredictorInputStepField = styled.div`
   color: ${labelColor};
@@ -226,29 +228,41 @@ export const PredictorInputStepField = styled.div`
   }
 `;
 
-export const PredictorInputStepButton = styled.div`
+export const StepButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const NextStepButton = styled.div`
   text-transform: uppercase;
   text-align: center;
   width: 200px;
   cursor: pointer;
   color: white;
-  background: ${primaryColor};
-  border-radius: 5px;
+  background: ${primaryColorLight};
+  border-radius: 50px;
   margin: 30px 0;
   font-size: 1rem;
   padding: 15px;
-  float: right;
+
+  &:hover {
+    background: ${primaryColor};
+  }
 `;
 
-export const PredictorInputStepSubmitButton = styled.button`
+export const PreviousStepButton = styled(NextStepButton)`
+  visibility: ${props => (props.visible ? 'visible' : 'hidden')};
+`;
+
+export const PredictorStepSubmitButton = styled.button`
   font-weight: 300;
   text-transform: uppercase;
   text-align: center;
-  width: 200px;
+  width: 230px;
   cursor: pointer;
   color: white;
   background: ${primaryColor};
-  border-radius: 5px;
+  border-radius: 50px;
   margin: 30px 0;
   font-size: 1rem;
   padding: 15px;
@@ -266,4 +280,32 @@ export const PredictorOutput = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+export const OutputTop = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`;
+
+export const OutputMiddle = styled.div`
+  display: flex;
+`;
+
+export const OutputBottom = styled.div`
+  display: flex;
+`;
+
+export const OutputItem = styled.div`
+  border-radius: 20px;
+  background: #4286f417;
+  margin: 20px;
+  font-size: 2rem;
+  padding: 20px;
+`;
+
+export const OutputItemResult = styled(OutputItem)`
+  font-size: 5rem;
+  color: white;
+  font-weight: 400;
+  background: ${primaryColor};
 `;
