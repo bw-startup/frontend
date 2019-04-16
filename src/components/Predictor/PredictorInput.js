@@ -6,7 +6,8 @@ import {
   PREDICT_FAILURE
 } from '../../utils/constants';
 
-import PredictorInputForm from './PredictorInputSteps';
+import PredictorInputSteps from './PredictorInputSteps';
+import * as S from '../../styles';
 
 export default function PredictorInput(props) {
   const { state, dispatch } = useContext(GlobalContext);
@@ -56,19 +57,14 @@ export default function PredictorInput(props) {
     }, 2000);
   };
 
-  return (
-    <div>
-      {state.isPredicting ? (
-        <p>Predicting trajectory...</p>
-      ) : (
-        <form onSubmit={handlePredictorInputSubmit}>
-          <h2>
-            <div>Let's get your started</div>
-            <div>so you can make the best investment decision!</div>
-          </h2>
-          <PredictorInputForm />
-        </form>
-      )}
-    </div>
+  return state.isPredicting ? (
+    <p>Predicting trajectory...</p>
+  ) : (
+    <S.PredictorInput>
+      <S.PredictorInputTitle>Let's get your started!</S.PredictorInputTitle>
+      <S.PredictorInputForm onSubmit={handlePredictorInputSubmit}>
+        <PredictorInputSteps />
+      </S.PredictorInputForm>
+    </S.PredictorInput>
   );
 }

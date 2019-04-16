@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import PredictorInputStep from './PredictorInputStep';
+
 export default function PredictorInputForm(props) {
   const [step, setStep] = useState(0);
 
@@ -7,16 +9,18 @@ export default function PredictorInputForm(props) {
     setStep(prevStep => prevStep + 1);
   };
 
+  // todo:
+  // display all inputs on default case
+
   switch (step) {
     case 0:
       return (
-        <div>
-          <div>
-            <label htmlFor='companyLocation'>Company Location:</label>
-            <input type='text' name='companyLocation' id='companyLocation' />
-          </div>
-          <div onClick={nextStep}>Next</div>
-        </div>
+        <PredictorInputStep
+          type='text'
+          htmlFor='companyLocation'
+          name='companyLocation'
+          id='companyLocation'
+        />
       );
     case 1:
       return (
