@@ -1,6 +1,7 @@
 import React, { useContext, useReducer } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
+import { CookiesProvider } from 'react-cookie';
 
 import Login from './components/Login';
 import Register from './components/Register';
@@ -17,11 +18,13 @@ export default function App() {
 
   return (
     <GlobalState.Provider value={{ state, dispatch }}>
-      <BrowserRouter>
-        <Route path='/' exact component={Login} />
-        <Route path='/register' exact component={Register} />
-        <AuthenticatedRoute path='/predictor' component={Predictor} />
-      </BrowserRouter>
+      <CookiesProvider>
+        <BrowserRouter>
+          <Route path='/' exact component={Login} />
+          <Route path='/register' exact component={Register} />
+          <AuthenticatedRoute path='/predictor' component={Predictor} />
+        </BrowserRouter>
+      </CookiesProvider>
     </GlobalState.Provider>
   );
 }

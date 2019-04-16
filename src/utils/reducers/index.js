@@ -41,7 +41,6 @@ export default (state, action) => {
         ...state,
         isRegistering: false,
         errorMessage: ''
-        // data
       };
     case REGISTER_FAILURE:
       return {

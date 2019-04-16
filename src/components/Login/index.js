@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import GlobalContext from '../../utils/context';
@@ -11,9 +12,11 @@ import {
 import Input from './Input';
 
 export default function Login(props) {
+  const [cookie, setCookie] = useCookies(['StartupTrajectoryPredictor']);
+
   const { from } = props.location.state || { from: { pathname: '/' } };
   // authentication check // COOKIE CHECK
-  if (false) {
+  if (cookie.value) {
     return <Redirect to={from} />;
   }
 
@@ -42,6 +45,7 @@ export default function Login(props) {
         console.log(response);
         setTimeout(() => {
           dispatch({ type: LOGIN_SUCCESS, payload: response.data.token });
+          setCookie('StartupTrajectoryPredictor', response.data.token);
           props.history.push('/predictor');
         }, 2000);
       })
