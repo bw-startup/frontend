@@ -59,7 +59,7 @@ export default function Register(props) {
       <Loader text='Registering...' />
     ) : (
       <S.Register>
-        <S.GlobalCssReset/>
+        <S.BodyBackgroundForms />
         <S.RegisterImage>
           <S.RegisterImageImg
             className='login__image--img'

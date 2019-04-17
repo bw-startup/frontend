@@ -6,8 +6,8 @@ export const primaryColorLight = '#aad4f5';
 export const secondaryColor = '#38c172';
 export const labelColor = '#A2AEBB';
 
+// GLOBAL CSS RESET
 export const GlobalCssReset = createGlobalStyle`
-
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400');
 
 html {
@@ -24,10 +24,6 @@ html {
 
 body {
   color: #05133C;
-  background: ${props =>
-    props.primary
-      ? `linear-gradient(to right, ${primaryColor} 50%, #f3f3f3 50%)`
-      : `linear-gradient(to right, ${secondaryColor} 50%, #f3f3f3 50%)`};
   font-family: 'Lato', sans-serif;
   font-size: 62.5%;
   font-weight: 300;
@@ -71,6 +67,25 @@ export const FormFooterLink = styled.div`
   a {
     color: ${props => (props.primary ? primaryColor : secondaryColor)};
     text-decoration: none;
+  }
+`;
+
+// BODY BACKGROUND INJECTION
+export const BodyBackgroundForms = createGlobalStyle`
+  body {
+    background: ${props =>
+      props.primary
+        ? `linear-gradient(to right, ${primaryColor} 50%, #f3f3f3 50%)`
+        : `linear-gradient(to right, ${secondaryColor} 50%, #f3f3f3 50%)`};
+  }
+`;
+
+export const BodyBackgroundPredictor = createGlobalStyle`
+  body {
+    background: ${props =>
+      props.primary
+        ? `linear-gradient(${primaryColor} 50%, transparent 50%) no-repeat`
+        : `linear-gradient(${secondaryColor} 50%, transparent 50%) no-repeat`};
   }
 `;
 
@@ -282,7 +297,7 @@ export const PredictorStepSubmitButton = styled.button`
 `;
 
 export const PredictorOutput = styled.div`
-background: #e3e9f3;
+  background: #e3e9f3;
   border-radius: 5px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   padding: 120px;

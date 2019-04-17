@@ -44,18 +44,12 @@ export default function Login(props) {
     axios
       .post('https://startups7.herokuapp.com/api/auth/login', inputs)
       .then(response => {
-        console.log(response);
-        setTimeout(() => {
-          dispatch({ type: LOGIN_SUCCESS, payload: response.data.token });
-          setCookie('StartupTrajectoryPredictor', response.data.token);
-          props.history.push('/predictor');
-        }, 2000);
+        dispatch({ type: LOGIN_SUCCESS, payload: response.data.token });
+        setCookie('StartupTrajectoryPredictor', response.data.token);
+        props.history.push('/predictor');
       })
       .catch(err => {
-        console.log(err);
-        setTimeout(() => {
-          dispatch({ type: LOGIN_FAILURE, payload: err.response.data.message });
-        }, 2000);
+        dispatch({ type: LOGIN_FAILURE, payload: err.response.data.message });
       });
   };
 
@@ -63,7 +57,7 @@ export default function Login(props) {
     <Loader text='Logging In...' />
   ) : (
     <S.Login>
-      <S.GlobalCssReset primary />
+      <S.BodyBackgroundForms primary />
       <S.LoginImage>
         <S.LoginImageImg src='/images/investing-login.svg' alt='Investing' />
       </S.LoginImage>

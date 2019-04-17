@@ -20,7 +20,8 @@ export default function App() {
 
   return (
     <GlobalState.Provider value={{ state, dispatch }}>
-      <S.GlobalCssReset primary />
+      <S.GlobalCssReset/>
+      <S.BodyBackgroundForms primary />
       <S.Container>
         <CookiesProvider>
           <BrowserRouter>
