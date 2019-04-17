@@ -24,7 +24,6 @@ export default (state, action) => {
         ...state,
         isLogging: false,
         isRegisterSuccess: false,
-        token: action.payload,
         errorMessage: ''
       };
     case LOGIN_FAILURE:

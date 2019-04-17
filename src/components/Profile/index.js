@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import axiosAuthentication from '../../utils/axiosAuthentication';
-import Loader from "../shared/Loader"
+import Loader from '../shared/Loader';
 import * as S from '../../styles';
 
-export default function Profile() {
-  const [cookie] = useCookies(['StartupTrajectoryPredictor']);
-
+export default function Profile(props) {
+  const [cookie, removeCookie] = useCookies(['StartupTrajectoryPredictor']);
+  const [updatedMessage, setUpdatedMessage] = useState('');
   const [updatedUser, setUpdatedUser] = useState({
     id: '',
     email: '',
@@ -29,11 +29,17 @@ export default function Profile() {
 
   const handleUpdatePasswordSubmit = event => {
     event.preventDefault();
-
     console.log(updatedUser);
     axiosAuthentication(cookie['StartupTrajectoryPredictor'])
       .put('https://startups7.herokuapp.com/api/me', updatedUser)
-      .then(response => console.log(response))
+      .then(response => {
+        setUpdatedMessage('Password updated successfully!');
+        setUpdatedUser(inputs => ({
+          ...inputs,
+          password: ''
+        }));
+        console.log(response);
+      })
       .catch(err => console.log(err.response.data.message));
   };
 
@@ -45,8 +51,18 @@ export default function Profile() {
     }));
   };
 
+  const handleLogOut = event => {
+    event.preventDefault();
+    console.log(cookie);
+    debugger;
+    removeCookie('StartupTrajectoryPredictor');
+    debugger;
+    props.history.push('/');
+  };
+
   return updatedUser.email ? (
     <S.Profile>
+      <button onClick={handleLogOut}>logout</button>
       <S.Title>{updatedUser.email}</S.Title>
       <S.PredictorInputForm onSubmit={handleUpdatePasswordSubmit}>
         <S.PredictorInputStepField>
@@ -56,6 +72,7 @@ export default function Profile() {
             name='password'
             id='password'
             onChange={handleUpdatePasswordChange}
+            value={updatedUser.password}
           />
         </S.PredictorInputStepField>
         <S.PredictorInputStepField>
@@ -65,11 +82,13 @@ export default function Profile() {
             name='password'
             id='passwordRepeat'
             onChange={handleUpdatePasswordChange}
+            value={updatedUser.password}
           />
         </S.PredictorInputStepField>
-        <S.PredictorStepSubmitButton>
-          Update Password
-        </S.PredictorStepSubmitButton>
+        <S.Button>Update Password</S.Button>
+        {updatedMessage && (
+          <S.FormMessage success>{updatedMessage}</S.FormMessage>
+        )}
       </S.PredictorInputForm>
     </S.Profile>
   ) : (

@@ -40,6 +40,7 @@ export default function PredictorInputForm(props) {
       return (
         <div>
           <S.PredictorTitle>Let's get started!</S.PredictorTitle>
+          <S.PredictorTitle>Step 1:</S.PredictorTitle>
           <PredictorStep
             type='select'
             placeholder="Select Location"
@@ -72,6 +73,7 @@ export default function PredictorInputForm(props) {
     case 1:
       return (
         <div>
+          <S.PredictorTitle>Step 2:</S.PredictorTitle>
           <PredictorStep
             type='number'
             title='Number of Funding Rounds:'
@@ -102,6 +104,7 @@ export default function PredictorInputForm(props) {
     case 2:
       return (
         <div>
+          <S.PredictorTitle>Step 3:</S.PredictorTitle>
           <PredictorStep
             type='number'
             title='Number of Employees:'

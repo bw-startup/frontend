@@ -6,7 +6,9 @@ import GlobalContext from '../../utils/context';
 import {
   REGISTER_START,
   REGISTER_SUCCESS,
-  REGISTER_FAILURE
+  REGISTER_FAILURE,
+  LOGIN_START,
+  LOGIN_SUCCESS
 } from '../../utils/constants';
 import Loader from '../shared/Loader';
 import ErrorMessage from '../shared/ErrorMessage';
@@ -15,7 +17,7 @@ import * as S from '../../styles';
 
 export default function Register(props) {
   const { state, dispatch } = useContext(GlobalContext);
-  const [cookie] = useCookies(['StartupTrajectoryPredictor']);
+  const [cookie, setCookie] = useCookies(['StartupTrajectoryPredictor']);
   const [inputs, setInputs] = useState({
     email: '',
     password: ''
@@ -32,17 +34,24 @@ export default function Register(props) {
   const handleRegisterSubmit = event => {
     event.preventDefault();
     dispatch({ type: REGISTER_START });
-
     axios
       .post('https://startups7.herokuapp.com/api/auth/register', inputs)
       .then(response => {
-        console.log(response);
+        dispatch({ type: REGISTER_SUCCESS, payload: response.data.message });
+        dispatch({ type: LOGIN_START });
+        return axios.post(
+          'https://startups7.herokuapp.com/api/auth/login',
+          inputs
+        );
+      })
+      .then(response => {
+        console.log('2nd then', response);
         setTimeout(() => {
-          dispatch({ type: REGISTER_SUCCESS, payload: response.data.message });
-          props.history.push('/');
+          dispatch({ type: LOGIN_SUCCESS, payload: response.data.token });
+          setCookie('StartupTrajectoryPredictor', response.data.token);
+          props.history.push('/predictor');
         }, 2000);
       })
-      // then login
       .catch(err => {
         console.log(err);
         dispatch({
@@ -55,8 +64,8 @@ export default function Register(props) {
   if (cookie['StartupTrajectoryPredictor']) {
     return <Redirect to='/predictor' />;
   } else {
-    return state.isRegistering ? (
-      <Loader text='Registering...' />
+    return state.isLogging ? (
+      <Loader text='Thank you for Registering. Logging you in...' />
     ) : (
       <S.Register>
         <S.BodyBackgroundVertical />

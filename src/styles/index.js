@@ -70,7 +70,16 @@ export const ViewContainer = styled.div`
 `;
 
 // SHARED COMPONENTS
-export const ErrorMessage = styled.div`
+export const FormMessage = styled.div`
+  border-radius: 5px;
+  font-size: 1.2rem;
+  color: white;
+  padding: 10px;
+  ${props => props.error && `background: lightcoral;`}
+  ${props => props.success && `background: lightgreen;`}
+`;
+
+export const ErrorMessage = styled(FormMessage)`
   border-radius: 5px;
   font-size: 0.7rem;
   color: white;
@@ -178,6 +187,7 @@ export const LoginField = styled.div`
 `;
 
 export const LoginButton = styled.button`
+  cursor: pointer;
   border-radius: 5px;
   color: white;
   background: #4285f4;
@@ -217,7 +227,10 @@ export const PredictorInputStep = styled.div`
 
 export const PredictorInputForm = styled.form``;
 
-export const PredictorTitle = styled.h2``;
+export const PredictorTitle = styled.h2`
+  text-align: center;
+  margin: 15px 0 35px 0;
+`;
 
 export const PredictorInputStepField = styled.div`
   color: ${labelColor};
@@ -257,6 +270,7 @@ export const PredictorInputStepField = styled.div`
   }
 
   select {
+    font-weight: 300;
     font-size: 2rem;
     width: 100%;
     height: 65px;
@@ -300,6 +314,20 @@ export const PreviousStepButton = styled(NextStepButton)`
   visibility: ${props => (props.visible ? 'visible' : 'hidden')};
 `;
 
+export const Button = styled.button`
+  font-weight: 300;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  color: white;
+  background: ${primaryColor};
+  border-radius: 50px;
+  margin: 40px 0;
+  font-size: 1rem;
+  padding: 20px;
+`;
+
 export const PredictorStepSubmitButton = styled.button`
   font-weight: 300;
   text-transform: uppercase;
@@ -312,7 +340,6 @@ export const PredictorStepSubmitButton = styled.button`
   margin: 30px 0;
   font-size: 1rem;
   padding: 15px;
-  float: right;
 `;
 
 export const PredictorOutput = styled.div`
