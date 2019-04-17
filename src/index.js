@@ -21,7 +21,7 @@ export default function App() {
   return (
     <GlobalState.Provider value={{ state, dispatch }}>
       <S.GlobalCssReset/>
-      <S.BodyBackgroundForms primary />
+      <S.BodyBackgroundVertical primary />
       <S.Container>
         <CookiesProvider>
           <BrowserRouter>

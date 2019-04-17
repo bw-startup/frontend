@@ -13,7 +13,7 @@ import * as S from '../../styles';
 export default function Predictor() {
   return (
     <S.Predictor>
-      <S.BodyBackgroundPredictor primary />
+      <S.BodyBackgroundHorizontal primary />
       <Navigation />
       <Route exact path='/predictor/members' component={Members} />
       <Route exact path='/predictor/myprofile' component={Profile} />

@@ -18,23 +18,24 @@ export default function PredictorInput(props) {
   |--------------------------------------------------
   */
 
-  //  Company Age- (in months)
-  //  Industry-
-  //  Company Location-
-  //  Number of Founders-
-  //  Last Funding Amount-
-  //  Number of Funding Rounds-
-  //  Number of Public News Articles Written About the Company-
-  //  Number of Employees-
+  // Headquarters Location
+  // Industry
+  // Number of Founders
+  // Number of Funding rounds
+  // Number of Articles
+  // Number of Employees
 
   const [inputs, setInputs] = useState({
-    input001: '',
-    input002: '',
-    input003: '',
-    input004: ''
+    headquartersLocation: '',
+    industry: '',
+    numberOfFounders: '',
+    numberOfFundingRounds: '',
+    numberOfArticles: '',
+    numberOfEmployees: ''
   });
 
   const handleInputChange = event => {
+    console.log('connected');
     event.persist();
     setInputs(inputs => ({
       ...inputs,
@@ -43,6 +44,7 @@ export default function PredictorInput(props) {
   };
 
   const handlePredictorInputSubmit = event => {
+    console.log(inputs);
     event.preventDefault();
     dispatch({ type: PREDICT_START });
     // dispatch predictor Start
@@ -63,7 +65,10 @@ export default function PredictorInput(props) {
   ) : (
     <S.PredictorInput>
       <S.PredictorInputForm onSubmit={handlePredictorInputSubmit}>
-        <PredictorInputSteps />
+        <PredictorInputSteps
+          handleInputChange={handleInputChange}
+          inputs={inputs}
+        />
       </S.PredictorInputForm>
     </S.PredictorInput>
   );

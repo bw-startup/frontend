@@ -57,7 +57,7 @@ export default function Login(props) {
     <Loader text='Logging In...' />
   ) : (
     <S.Login>
-      <S.BodyBackgroundForms primary />
+      <S.BodyBackgroundVertical primary />
       <S.LoginImage>
         <S.LoginImageImg src='/images/investing-login.svg' alt='Investing' />
       </S.LoginImage>

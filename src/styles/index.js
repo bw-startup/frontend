@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 export const primaryColor = '#4285f4';
 export const primaryColorLight = '#aad4f5';
 export const secondaryColor = '#38c172';
+export const viewContainerBackground = '#e3e9f3';
 export const labelColor = '#A2AEBB';
 
 // GLOBAL CSS RESET
@@ -51,7 +52,24 @@ a {
 }
 `;
 
-// SHARED
+// APP CONTAINER
+export const Container = styled.div`
+  margin: 100px auto;
+`;
+
+// VIEW CONTAINER
+export const ViewContainer = styled.div`
+  background: ${viewContainerBackground};
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  padding: 40px;
+  margin: 0 auto;
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+// SHARED COMPONENTS
 export const ErrorMessage = styled.div`
   border-radius: 5px;
   font-size: 0.7rem;
@@ -70,8 +88,8 @@ export const FormFooterLink = styled.div`
   }
 `;
 
-// BODY BACKGROUND INJECTION
-export const BodyBackgroundForms = createGlobalStyle`
+// BODY BACKGROUND INJECTIONS
+export const BodyBackgroundVertical = createGlobalStyle`
   body {
     background: ${props =>
       props.primary
@@ -80,7 +98,7 @@ export const BodyBackgroundForms = createGlobalStyle`
   }
 `;
 
-export const BodyBackgroundPredictor = createGlobalStyle`
+export const BodyBackgroundHorizontal = createGlobalStyle`
   body {
     background: ${props =>
       props.primary
@@ -89,22 +107,10 @@ export const BodyBackgroundPredictor = createGlobalStyle`
   }
 `;
 
-// CONTAINER
-export const Container = styled.div`
-  margin: 100px auto;
-`;
-
 // LOADER
-export const Loader = styled.div`
-  background: #e3e9f3;
+export const Loader = styled(ViewContainer)`
   border-radius: 5px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   padding: 120px;
-  margin: 0 auto;
-  width: 700px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
 `;
 
@@ -203,17 +209,7 @@ export const Predictor = styled.div`
   margin: 0 auto;
 `;
 
-export const PredictorInput = styled.div`
-  background: #e3e9f3;
-  border-radius: 5px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  padding: 40px;
-  margin: 0 auto;
-  width: 700px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
+export const PredictorInput = styled(ViewContainer)``;
 
 export const PredictorInputStep = styled.div`
   margin: 20px 0;
@@ -229,10 +225,10 @@ export const PredictorInputStepField = styled.div`
   flex-direction: column;
 
   label {
+    font-size: 1.2rem;
     font-weight: 400;
     padding: 10px 0;
     text-transform: uppercase;
-    font-size: 1rem;
   }
 
   &:focus-within {
@@ -247,8 +243,31 @@ export const PredictorInputStepField = styled.div`
     border-right: none;
     border-bottom: 4px solid #dde0e9;
     border-left: none;
+
     &:focus {
+      color: #05133c;
+      outline: none;
+      border-bottom: 4px solid #4285f4;
+    }
+
+    &::placeholder {
+      font-weight: 300;
       color: #838eaf;
+    }
+  }
+
+  select {
+    font-size: 2rem;
+    width: 100%;
+    height: 65px;
+    color: #838eaf;
+    border-radius: none;
+    border-top: none;
+    border-right: none;
+    border-bottom: 4px solid #dde0e9;
+    border-left: none;
+    &:focus {
+      color: #05133c;
       outline: none;
       border-bottom: 4px solid #4285f4;
     }
@@ -338,17 +357,15 @@ export const OutputItemResult = styled(OutputItem)`
   background: ${primaryColor};
 `;
 
-// PROFILE
-export const Profile = styled.div`
-  background: #e3e9f3;
+// MEMBERS
+export const Members = styled(ViewContainer)`
   border-radius: 5px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+`;
+
+// PROFILE
+export const Profile = styled(ViewContainer)`
+  border-radius: 5px;
   padding: 120px;
-  margin: 0 auto;
-  width: 700px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
 `;
 
