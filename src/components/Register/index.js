@@ -34,7 +34,7 @@ export default function Register(props) {
     dispatch({ type: REGISTER_START });
 
     axios
-      .post('http://localhost:5000/api/register', inputs)
+      .post('https://startups7.herokuapp.com/api/auth/register', inputs)
       .then(response => {
         console.log(response);
         setTimeout(() => {
@@ -42,6 +42,7 @@ export default function Register(props) {
           props.history.push('/');
         }, 2000);
       })
+      // then login
       .catch(err => {
         console.log(err);
         dispatch({

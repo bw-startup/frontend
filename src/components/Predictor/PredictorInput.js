@@ -12,7 +12,6 @@ import * as S from '../../styles';
 
 export default function PredictorInput(props) {
   const { state, dispatch } = useContext(GlobalContext);
-
   /**
   |--------------------------------------------------
   | INPUTS
@@ -54,6 +53,7 @@ export default function PredictorInput(props) {
     // catch
     // display error bellow form
     setTimeout(() => {
+      dispatch({ type: PREDICT_SUCCESS });
       props.history.push('/predictor/results');
     }, 2000);
   };

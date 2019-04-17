@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const primaryColor = '#4285f4';
 export const primaryColorLight = '#aad4f5';
@@ -6,6 +7,7 @@ export const secondaryColor = '#38c172';
 export const labelColor = '#A2AEBB';
 
 export const GlobalCssReset = createGlobalStyle`
+
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400');
 
 html {
@@ -53,6 +55,7 @@ a {
 }
 `;
 
+// SHARED
 export const ErrorMessage = styled.div`
   border-radius: 5px;
   font-size: 0.7rem;
@@ -71,13 +74,18 @@ export const FormFooterLink = styled.div`
   }
 `;
 
+// CONTAINER
+export const Container = styled.div`
+  margin: 100px auto;
+`;
+
 // LOADER
 export const Loader = styled.div`
-  background: white;
+  background: #e3e9f3;
   border-radius: 5px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   padding: 120px;
-  margin: 80px auto 80px;
+  margin: 0 auto;
   width: 700px;
   display: flex;
   flex-direction: column;
@@ -95,7 +103,7 @@ export const Login = styled.div`
   border-radius: 5px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   width: 800px;
-  margin: 80px auto 80px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
 `;
@@ -176,12 +184,16 @@ export const RegisterButton = styled(LoginButton)`
 `;
 
 // PREDICTOR
+export const Predictor = styled.div`
+  margin: 0 auto;
+`;
+
 export const PredictorInput = styled.div`
   background: #e3e9f3;
   border-radius: 5px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   padding: 40px;
-  margin: 80px auto 80px;
+  margin: 0 auto;
   width: 700px;
   display: flex;
   flex-direction: column;
@@ -270,11 +282,11 @@ export const PredictorStepSubmitButton = styled.button`
 `;
 
 export const PredictorOutput = styled.div`
-  background: white;
+background: #e3e9f3;
   border-radius: 5px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   padding: 120px;
-  margin: 80px auto 80px;
+  margin: 0 auto;
   width: 700px;
   display: flex;
   flex-direction: column;
@@ -297,7 +309,7 @@ export const OutputBottom = styled.div`
 
 export const OutputItem = styled.div`
   border-radius: 20px;
-  background: #4286f417;
+  background: white;
   margin: 20px;
   font-size: 2rem;
   padding: 20px;
@@ -306,6 +318,53 @@ export const OutputItem = styled.div`
 export const OutputItemResult = styled(OutputItem)`
   font-size: 5rem;
   color: white;
+  padding: 20px 50px;
   font-weight: 400;
   background: ${primaryColor};
+`;
+
+// PROFILE
+export const Profile = styled.div`
+  background: #e3e9f3;
+  border-radius: 5px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  padding: 120px;
+  margin: 0 auto;
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+// NAVIGATION
+export const Navigation = styled.div`
+  width: 700px;
+  display: flex;
+  margin: 0 auto;
+  justify-content: flex-end;
+`;
+
+export const NavigationLink = styled(NavLink)`
+  color: white;
+  font-size: 0.8rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 20px;
+  background: ${primaryColor};
+
+  &.active {
+    color: ${primaryColor};
+    background: #e3e9f3;
+  }
+
+  &:hover {
+    color: ${primaryColor};
+    background: #e3e9f3;
+    text-decoration: none;
+  }
+`;
+
+export const Title = styled.h2`
+  margin-bottom: 40px;
 `;

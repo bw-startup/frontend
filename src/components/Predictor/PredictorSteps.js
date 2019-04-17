@@ -21,7 +21,7 @@ export default function PredictorInputForm(props) {
     case 0:
       return (
         <div>
-          <S.PredictorTitle>Let's get you started!</S.PredictorTitle>
+          <S.PredictorTitle>Let's get started!</S.PredictorTitle>
           <PredictorStep
             type='text'
             title='Company Location:'

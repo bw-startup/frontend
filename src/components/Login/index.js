@@ -42,7 +42,7 @@ export default function Login(props) {
     dispatch({ type: LOGIN_START });
 
     axios
-      .post('http://localhost:5000/api/login', inputs)
+      .post('https://startups7.herokuapp.com/api/auth/login', inputs)
       .then(response => {
         console.log(response);
         setTimeout(() => {

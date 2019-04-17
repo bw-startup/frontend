@@ -21,16 +21,18 @@ export default function App() {
   return (
     <GlobalState.Provider value={{ state, dispatch }}>
       <S.GlobalCssReset primary />
-      <CookiesProvider>
-        <BrowserRouter>
-          <Switch>
-            <Route path='/' exact component={Login} />
-            <Route path='/register' exact component={Register} />
-            <AuthenticationRoute path='/predictor' component={Predictor} />
-            <Route component={Login} />
-          </Switch>
-        </BrowserRouter>
-      </CookiesProvider>
+      <S.Container>
+        <CookiesProvider>
+          <BrowserRouter>
+            <Switch>
+              <Route path='/' exact component={Login} />
+              <Route path='/register' exact component={Register} />
+              <AuthenticationRoute path='/predictor' component={Predictor} />
+              <Route component={Login} />
+            </Switch>
+          </BrowserRouter>
+        </CookiesProvider>
+      </S.Container>
     </GlobalState.Provider>
   );
 }
