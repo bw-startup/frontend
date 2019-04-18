@@ -17,7 +17,9 @@ import * as S from '../../styles';
 
 export default function Predictor(props) {
   const { state, dispatch } = useContext(GlobalContext);
-  const [cookie, , removeCookie] = useCookies(['StartupTrajectoryPredictor']);
+  const [cookie, setCookie, removeCookie] = useCookies([
+    'StartupTrajectoryPredictor'
+  ]);
   const [updatedMessage, setUpdatedMessage] = useState('');
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState({
@@ -90,6 +92,24 @@ export default function Predictor(props) {
       .then(response => {
         setTimeout(() => {
           console.log(response);
+          if (cookie['PredictorResults']) {
+            const pastResults = cookie['PredictorResults'];
+            const newResults = [
+              ...pastResults,
+              { ...inputs, prediction: response.data.prediction }
+            ];
+            setCookie('PredictorResults', newResults, {
+              path: '/'
+            });
+          } else {
+            setCookie(
+              'PredictorResults',
+              [{ ...inputs, prediction: response.data.prediction }],
+              {
+                path: '/'
+              }
+            );
+          }
           dispatch({
             type: PREDICT_SUCCESS,
             payload: response.data.prediction
@@ -100,9 +120,9 @@ export default function Predictor(props) {
       .catch(err => {
         dispatch({
           type: PREDICT_FAILURE,
-          payload: err.response.message
+          payload: err.response.data.message
         });
-        console.log(err.response.message);
+        console.log('error', err.response.data.message);
       });
   };
 
@@ -138,7 +158,7 @@ export default function Predictor(props) {
       .then(() => {
         removeCookie('StartupTrajectoryPredictor', { path: '/' });
       })
-      .catch(err => console.log(err.response));
+      .catch(err => console.log(err.response.data.message));
   };
 
   return (

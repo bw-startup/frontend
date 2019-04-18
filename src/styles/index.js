@@ -294,12 +294,11 @@ export const StepButtonContainer = styled.div`
 `;
 
 export const NextStepButton = styled.div`
-  text-transform: uppercase;
   text-align: center;
   width: 200px;
   cursor: pointer;
   color: white;
-  background: ${primaryColorLight};
+  background: ${primaryColor};
   border-radius: 50px;
   margin: 30px 0;
   font-size: 1rem;
@@ -311,6 +310,7 @@ export const NextStepButton = styled.div`
 `;
 
 export const PreviousStepButton = styled(NextStepButton)`
+  background: ${primaryColorLight};
   visibility: ${props => (props.visible ? 'visible' : 'hidden')};
 `;
 
@@ -330,7 +330,6 @@ export const Button = styled.button`
 
 export const PredictorStepSubmitButton = styled.button`
   font-weight: 300;
-  text-transform: uppercase;
   text-align: center;
   width: 230px;
   cursor: pointer;
@@ -358,21 +357,24 @@ export const PredictorOutput = styled.div`
 export const OutputTop = styled.div`
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
 `;
 
 export const OutputMiddle = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 export const OutputBottom = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 export const OutputItem = styled.div`
   border-radius: 20px;
   background: white;
   margin: 20px;
-  font-size: 2rem;
+  font-size: 1rem;
   padding: 20px;
 `;
 
