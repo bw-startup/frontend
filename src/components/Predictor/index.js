@@ -17,9 +17,7 @@ import * as S from '../../styles';
 
 export default function Predictor(props) {
   const { state, dispatch } = useContext(GlobalContext);
-  const [cookie, setCookie, removeCookie] = useCookies([
-    'StartupTrajectoryPredictor'
-  ]);
+  const [cookie, , removeCookie] = useCookies(['StartupTrajectoryPredictor']);
   const [cookieResults, setCookieResults, removeCookieResults] = useCookies([
     'PredictorResults'
   ]);
@@ -93,27 +91,15 @@ export default function Predictor(props) {
         numEmployees: +inputs.numEmployees
       })
       .then(response => {
-        console.log(response);
-        console.log('outside if', cookieResults['PredictorResults']);
         if (cookieResults['PredictorResults']) {
-          console.log('if', cookieResults['PredictorResults']);
-          const pastResults = [...cookieResults['PredictorResults']];
-          debugger;
-          pastResults.push({
-            ...inputs,
-            prediction: response.data.prediction
-          });
-          debugger;
-          // const newResults = [
-          //   ...pastResults,
-          //   { ...inputs, prediction: response.data.prediction }
-          // ];
+          const newResults = [
+            ...cookieResults['PredictorResults'],
+            { ...inputs, prediction: response.data.prediction }
+          ];
           removeCookieResults('PredictorResults', { path: '/' });
-          debugger;
-          setCookieResults('PredictorResults', pastResults, {
+          setCookieResults('PredictorResults', newResults, {
             path: '/'
           });
-          debugger;
         } else {
           setCookieResults(
             'PredictorResults',

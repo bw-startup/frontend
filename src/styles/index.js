@@ -54,7 +54,7 @@ a {
 
 // APP CONTAINER
 export const Container = styled.div`
-  margin: 40px auto;
+  margin: 40px auto 0;
 `;
 
 // VIEW CONTAINER
@@ -121,6 +121,7 @@ export const Loader = styled(ViewContainer)`
   border-radius: 5px;
   padding: 120px;
   align-items: center;
+  background: white;
 `;
 
 export const LoaderText = styled.div`
@@ -220,16 +221,14 @@ export const Predictor = styled.div`
 `;
 
 export const PredictorInput = styled(ViewContainer)`
-  padding: 40px 120px;
+  padding: 40px 150px;
 `;
 
 export const PredictorInputStep = styled.div`
   margin: 20px 0;
 `;
 
-export const PredictorInputForm = styled.form`
-  margin: 0 auto;
-`;
+export const PredictorInputForm = styled.form``;
 
 export const PredictorTitle = styled.h2`
   text-align: center;
@@ -359,6 +358,7 @@ export const PredictorOutput = styled.div`
 
 export const OutputTop = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
 `;
@@ -370,16 +370,20 @@ export const OutputMiddle = styled.div`
 
 export const OutputBottom = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   align-items: center;
 `;
 
 export const OutputItem = styled.div`
-  max-width: 230px;
   border-radius: 5px;
   background: white;
   margin: 20px;
   font-size: 1rem;
   padding: 15px;
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 export const OutputItemResult = styled(OutputItem)`
