@@ -8,6 +8,7 @@ const PredictorInputStep = props => {
         <label htmlFor={props.htmlFor}>{props.title}</label>
         {props.type !== 'select' ? (
           <input
+            required
             type={props.type}
             name={props.name}
             id={props.id}
@@ -16,12 +17,15 @@ const PredictorInputStep = props => {
             placeholder={props.placeholder}
           />
         ) : (
-          <select name={props.name} onChange={props.handleInputChange} value={props.value[props.name]}>
+          <select
+            required
+            name={props.name}
+            onChange={props.handleInputChange}
+            value={props.value[props.name]}
+          >
             <option default>{props.placeholder}</option>
             {props.options.sort().map(option => (
-              <option key={option}>
-                {option}
-              </option>
+              <option key={option}>{option}</option>
             ))}
           </select>
         )}

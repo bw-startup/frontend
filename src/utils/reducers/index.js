@@ -65,8 +65,8 @@ export default (state, action) => {
     case PREDICT_FAILURE:
       return {
         ...state,
-        isPredicting: false
-        // errorMessage: "error message from action.payload"
+        isPredicting: false,
+        errorMessage: action.payload
       };
     default:
       return {
