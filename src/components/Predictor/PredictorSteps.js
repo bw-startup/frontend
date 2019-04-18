@@ -5,6 +5,8 @@ import {
   headquartersLocationOptions,
   industryOptions
 } from '../../utils/formOptions';
+import { Progress } from 'react-sweet-progress';
+import 'react-sweet-progress/lib/style.css';
 import * as S from '../../styles';
 
 export default function PredictorInputForm(props) {
@@ -47,7 +49,6 @@ export default function PredictorInputForm(props) {
       return (
         <div>
           <S.PredictorTitle>Let's get started!</S.PredictorTitle>
-          <S.PredictorTitle>Step 1:</S.PredictorTitle>
           <PredictorStep
             type='select'
             placeholder='Select Location'
@@ -75,6 +76,7 @@ export default function PredictorInputForm(props) {
             previousStep={previousStep}
             nextStep={nextStep}
           />
+          <Progress percent={33} style={{ padding: '20px' }} />
         </div>
       );
     case 1:
@@ -106,12 +108,13 @@ export default function PredictorInputForm(props) {
             previousStep={previousStep}
             nextStep={nextStep}
           />
+          <Progress percent={66} style={{ padding: '20px' }} />
         </div>
       );
     case 2:
       return (
         <div>
-          <S.PredictorTitle>Step 3:</S.PredictorTitle>
+          <S.PredictorTitle>Lets see the prediction!</S.PredictorTitle>
           <PredictorStep
             type='number'
             title='Number of Employees:'
@@ -138,6 +141,7 @@ export default function PredictorInputForm(props) {
             previousStep={previousStep}
             nextStep={nextStep}
           />
+          <Progress percent={100} style={{ padding: '20px' }}  status="success"/>
         </div>
       );
     default:
