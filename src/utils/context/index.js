@@ -1,12 +1,11 @@
 import React from 'react';
 
 const GlobalState = React.createContext({
-  isLogging: false,
+  isLoggingIn: false,
   isRegistering: false,
-  isRegisterSuccess: false,
   isPredicting: false,
-  token: '',
-  errorMessage: ''
+  errorMessage: '',
+  prediction: 0
 });
 
 export default GlobalState;

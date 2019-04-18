@@ -1,9 +1,13 @@
-import React from 'react'
+import React from 'react';
+import * as S from '../../styles';
 
-export default function Members() {
+export default function Members(props) {
   return (
-    <div>
+    <S.Members>
       List of Members
-    </div>
-  )
+      {props.users.map(user => (
+        <div key={user.id}>{user.email}</div>
+      ))}
+    </S.Members>
+  );
 }

@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 export const primaryColor = '#4285f4';
 export const primaryColorLight = '#aad4f5';
 export const secondaryColor = '#38c172';
+export const viewContainerBackground = '#e3e9f3';
 export const labelColor = '#A2AEBB';
 
 // GLOBAL CSS RESET
@@ -51,8 +52,33 @@ a {
 }
 `;
 
-// SHARED
-export const ErrorMessage = styled.div`
+// APP CONTAINER
+export const Container = styled.div`
+  margin: 40px auto;
+`;
+
+// VIEW CONTAINER
+export const ViewContainer = styled.div`
+  background: ${viewContainerBackground};
+  padding: 40px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+// SHARED COMPONENTS
+export const FormMessage = styled.div`
+  border-radius: 5px;
+  font-size: 1.2rem;
+  color: white;
+  padding: 10px;
+  ${props => props.error && `background: lightcoral;`}
+  ${props => props.success && `background: lightgreen;`}
+`;
+
+export const ErrorMessage = styled(FormMessage)`
   border-radius: 5px;
   font-size: 0.7rem;
   color: white;
@@ -70,8 +96,8 @@ export const FormFooterLink = styled.div`
   }
 `;
 
-// BODY BACKGROUND INJECTION
-export const BodyBackgroundForms = createGlobalStyle`
+// BODY BACKGROUND INJECTIONS
+export const BodyBackgroundVertical = createGlobalStyle`
   body {
     background: ${props =>
       props.primary
@@ -80,31 +106,20 @@ export const BodyBackgroundForms = createGlobalStyle`
   }
 `;
 
-export const BodyBackgroundPredictor = createGlobalStyle`
+export const BodyBackgroundHorizontal = createGlobalStyle`
   body {
     background: ${props =>
       props.primary
-        ? `linear-gradient(${primaryColor} 50%, transparent 50%) no-repeat`
-        : `linear-gradient(${secondaryColor} 50%, transparent 50%) no-repeat`};
+        ? `linear-gradient(${primaryColor} 50%, ${viewContainerBackground} 50%) no-repeat`
+        : `linear-gradient(${secondaryColor} 50%, ${viewContainerBackground} 50%) no-repeat`};
   }
 `;
 
-// CONTAINER
-export const Container = styled.div`
-  margin: 100px auto;
-`;
-
 // LOADER
-export const Loader = styled.div`
-  background: #e3e9f3;
-  border-radius: 5px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  padding: 120px;
-  margin: 0 auto;
+export const Loader = styled(ViewContainer)`
   width: 700px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  border-radius: 5px;
+  padding: 120px;
   align-items: center;
 `;
 
@@ -118,7 +133,7 @@ export const Login = styled.div`
   border-radius: 5px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   width: 800px;
-  margin: 0 auto;
+  margin: 80px auto;
   display: flex;
   align-items: center;
 `;
@@ -172,6 +187,7 @@ export const LoginField = styled.div`
 `;
 
 export const LoginButton = styled.button`
+  cursor: pointer;
   border-radius: 5px;
   color: white;
   background: #4285f4;
@@ -203,25 +219,22 @@ export const Predictor = styled.div`
   margin: 0 auto;
 `;
 
-export const PredictorInput = styled.div`
-  background: #e3e9f3;
-  border-radius: 5px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  padding: 40px;
-  margin: 0 auto;
-  width: 700px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+export const PredictorInput = styled(ViewContainer)`
+  padding: 40px 120px;
 `;
 
 export const PredictorInputStep = styled.div`
   margin: 20px 0;
 `;
 
-export const PredictorInputForm = styled.form``;
+export const PredictorInputForm = styled.form`
+  margin: 0 auto;
+`;
 
-export const PredictorTitle = styled.h2``;
+export const PredictorTitle = styled.h2`
+  text-align: center;
+  margin: 15px 0 35px 0;
+`;
 
 export const PredictorInputStepField = styled.div`
   color: ${labelColor};
@@ -229,10 +242,10 @@ export const PredictorInputStepField = styled.div`
   flex-direction: column;
 
   label {
+    font-size: 1.2rem;
     font-weight: 400;
     padding: 10px 0;
     text-transform: uppercase;
-    font-size: 1rem;
   }
 
   &:focus-within {
@@ -247,8 +260,32 @@ export const PredictorInputStepField = styled.div`
     border-right: none;
     border-bottom: 4px solid #dde0e9;
     border-left: none;
+
     &:focus {
+      color: #05133c;
+      outline: none;
+      border-bottom: 4px solid #4285f4;
+    }
+
+    &::placeholder {
+      font-weight: 300;
       color: #838eaf;
+    }
+  }
+
+  select {
+    font-weight: 300;
+    font-size: 2rem;
+    width: 100%;
+    height: 65px;
+    color: #838eaf;
+    border-radius: none;
+    border-top: none;
+    border-right: none;
+    border-bottom: 4px solid #dde0e9;
+    border-left: none;
+    &:focus {
+      color: #05133c;
       outline: none;
       border-bottom: 4px solid #4285f4;
     }
@@ -261,12 +298,11 @@ export const StepButtonContainer = styled.div`
 `;
 
 export const NextStepButton = styled.div`
-  text-transform: uppercase;
   text-align: center;
   width: 200px;
   cursor: pointer;
   color: white;
-  background: ${primaryColorLight};
+  background: ${primaryColor};
   border-radius: 50px;
   margin: 30px 0;
   font-size: 1rem;
@@ -278,12 +314,26 @@ export const NextStepButton = styled.div`
 `;
 
 export const PreviousStepButton = styled(NextStepButton)`
+  background: ${primaryColorLight};
   visibility: ${props => (props.visible ? 'visible' : 'hidden')};
+`;
+
+export const Button = styled.button`
+  font-weight: 300;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  color: white;
+  background: ${primaryColor};
+  border-radius: 50px;
+  margin: 40px 0;
+  font-size: 1rem;
+  padding: 20px;
 `;
 
 export const PredictorStepSubmitButton = styled.button`
   font-weight: 300;
-  text-transform: uppercase;
   text-align: center;
   width: 230px;
   cursor: pointer;
@@ -293,16 +343,14 @@ export const PredictorStepSubmitButton = styled.button`
   margin: 30px 0;
   font-size: 1rem;
   padding: 15px;
-  float: right;
 `;
 
 export const PredictorOutput = styled.div`
   background: #e3e9f3;
-  border-radius: 5px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  padding: 120px;
+  padding: 40px;
   margin: 0 auto;
-  width: 700px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -312,43 +360,46 @@ export const PredictorOutput = styled.div`
 export const OutputTop = styled.div`
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
 `;
 
 export const OutputMiddle = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 export const OutputBottom = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 export const OutputItem = styled.div`
-  border-radius: 20px;
+  max-width: 230px;
+  border-radius: 5px;
   background: white;
   margin: 20px;
-  font-size: 2rem;
-  padding: 20px;
+  font-size: 1rem;
+  padding: 15px;
 `;
 
 export const OutputItemResult = styled(OutputItem)`
+  max-width: 100%;
   font-size: 5rem;
-  color: white;
   padding: 20px 50px;
   font-weight: 400;
-  background: ${primaryColor};
+  color: white;
+  background: ${secondaryColor};
+`;
+
+// MEMBERS
+export const Members = styled(ViewContainer)`
+  border-radius: 5px;
 `;
 
 // PROFILE
-export const Profile = styled.div`
-  background: #e3e9f3;
+export const Profile = styled(ViewContainer)`
   border-radius: 5px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   padding: 120px;
-  margin: 0 auto;
-  width: 700px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
 `;
 

@@ -15,44 +15,37 @@ export default (state, action) => {
     case LOGIN_START:
       return {
         ...state,
-        isLogging: true,
-        isRegisterSuccess: false,
+        isLoggingIn: true,
         errorMessage: ''
       };
     case LOGIN_SUCCESS:
       return {
         ...state,
-        isLogging: false,
-        isRegisterSuccess: false,
-        token: action.payload,
+        isLoggingIn: false,
         errorMessage: ''
       };
     case LOGIN_FAILURE:
       return {
         ...state,
-        isLogging: false,
-        isRegisterSuccess: false,
+        isLoggingIn: false,
         errorMessage: action.payload
       };
     case REGISTER_START:
       return {
         ...state,
         isRegistering: true,
-        isRegisterSuccess: false,
         errorMessage: ''
       };
     case REGISTER_SUCCESS:
       return {
         ...state,
         isRegistering: false,
-        isRegisterSuccess: true,
         errorMessage: ''
       };
     case REGISTER_FAILURE:
       return {
         ...state,
         isRegistering: false,
-        isRegisterSuccess: false,
         errorMessage: action.payload
       };
     case PREDICT_START:
@@ -62,17 +55,18 @@ export default (state, action) => {
         errorMessage: ''
       };
     case PREDICT_SUCCESS:
+      console.log(action.payload);
       return {
         ...state,
         isPredicting: false,
-        // data
-        errorMessage: ''
+        errorMessage: '',
+        prediction: action.payload
       };
     case PREDICT_FAILURE:
       return {
         ...state,
-        isPredicting: false
-        // errorMessage: "error message from action.payload"
+        isPredicting: false,
+        errorMessage: action.payload
       };
     default:
       return {

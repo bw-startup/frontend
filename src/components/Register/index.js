@@ -1,12 +1,13 @@
-import React, { useState, useContext } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import GlobalContext from '../../utils/context';
 import {
   REGISTER_START,
   REGISTER_SUCCESS,
-  REGISTER_FAILURE
+  REGISTER_FAILURE,
+  LOGIN_START,
+  LOGIN_SUCCESS
 } from '../../utils/constants';
 import Loader from '../shared/Loader';
 import ErrorMessage from '../shared/ErrorMessage';
@@ -15,11 +16,20 @@ import * as S from '../../styles';
 
 export default function Register(props) {
   const { state, dispatch } = useContext(GlobalContext);
-  const [cookie] = useCookies(['StartupTrajectoryPredictor']);
+  const [cookie, setCookie] = useCookies(['StartupTrajectoryPredictor']);
   const [inputs, setInputs] = useState({
     email: '',
     password: ''
   });
+
+  useEffect(() => {
+    if (cookie['StartupTrajectoryPredictor']) {
+      dispatch({ type: LOGIN_START });
+      setTimeout(() => {
+        props.history.push('/predictor');
+      }, 2000);
+    }
+  }, []);
 
   const handleInputChange = event => {
     event.persist();
@@ -32,19 +42,26 @@ export default function Register(props) {
   const handleRegisterSubmit = event => {
     event.preventDefault();
     dispatch({ type: REGISTER_START });
-
     axios
       .post('https://startups7.herokuapp.com/api/auth/register', inputs)
       .then(response => {
-        console.log(response);
+        dispatch({ type: REGISTER_SUCCESS, payload: response.data.message });
+        dispatch({ type: LOGIN_START });
+        return axios.post(
+          'https://startups7.herokuapp.com/api/auth/login',
+          inputs
+        );
+      })
+      .then(response => {
         setTimeout(() => {
-          dispatch({ type: REGISTER_SUCCESS, payload: response.data.message });
-          props.history.push('/');
+          dispatch({ type: LOGIN_SUCCESS, payload: response.data.token });
+          setCookie('StartupTrajectoryPredictor', response.data.token, {
+            path: '/'
+          });
+          props.history.push('/predictor');
         }, 2000);
       })
-      // then login
       .catch(err => {
-        console.log(err);
         dispatch({
           type: REGISTER_FAILURE,
           payload: err.response.data.message
@@ -52,14 +69,18 @@ export default function Register(props) {
       });
   };
 
-  if (cookie['StartupTrajectoryPredictor']) {
-    return <Redirect to='/predictor' />;
+  if (state.isRegistering) {
+    return <Loader text='Registering...' />;
+  } else if (state.isLoggingIn) {
+    return <Loader text='Thank you for registering! Logging you in...' />;
   } else {
-    return state.isRegistering ? (
-      <Loader text='Registering...' />
-    ) : (
+    // if (cookie['StartupTrajectoryPredictor']) {
+    //   return <Loader text='Thank you for Registering. Logging you in...' />;
+    // }
+
+    return (
       <S.Register>
-        <S.BodyBackgroundForms />
+        <S.BodyBackgroundVertical />
         <S.RegisterImage>
           <S.RegisterImageImg
             className='login__image--img'

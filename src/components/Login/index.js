@@ -40,12 +40,13 @@ export default function Login(props) {
   const handleLoginSubmit = event => {
     event.preventDefault();
     dispatch({ type: LOGIN_START });
-
     axios
       .post('https://startups7.herokuapp.com/api/auth/login', inputs)
       .then(response => {
-        dispatch({ type: LOGIN_SUCCESS, payload: response.data.token });
-        setCookie('StartupTrajectoryPredictor', response.data.token);
+        dispatch({ type: LOGIN_SUCCESS });
+        setCookie('StartupTrajectoryPredictor', response.data.token, {
+          path: '/'
+        });
         props.history.push('/predictor');
       })
       .catch(err => {
@@ -53,22 +54,16 @@ export default function Login(props) {
       });
   };
 
-  return state.isLogging ? (
+  return state.isLoggingIn ? (
     <Loader text='Logging In...' />
   ) : (
     <S.Login>
-      <S.BodyBackgroundForms primary />
+      <S.BodyBackgroundVertical primary />
       <S.LoginImage>
         <S.LoginImageImg src='/images/investing-login.svg' alt='Investing' />
       </S.LoginImage>
 
       <S.LoginForm>
-        {state.isRegisterSuccess && (
-          <div>
-            <p>Thank you for registering!</p>
-            <p>Please Log in to continue: </p>
-          </div>
-        )}
         <h2>Welcome back!</h2>
         <p>Sign in to continue using STP</p>
         <form onSubmit={handleLoginSubmit}>

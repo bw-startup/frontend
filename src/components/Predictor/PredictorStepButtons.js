@@ -10,9 +10,9 @@ export default function(props) {
       >
         Previous
       </S.PreviousStepButton>
-      {props.step === 3 ? (
+      {props.step === 2 ? (
         <S.PredictorStepSubmitButton type='submit'>
-          See Prediction!
+          Predict Now
         </S.PredictorStepSubmitButton>
       ) : (
         <S.NextStepButton onClick={props.nextStep}>Next</S.NextStepButton>
