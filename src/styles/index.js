@@ -13,6 +13,7 @@ export const GlobalCssReset = createGlobalStyle`
 
 html {
   box-sizing: border-box;
+
 }
 
 *,
@@ -54,7 +55,8 @@ a {
 
 // APP CONTAINER
 export const Container = styled.div`
-  margin: 40px auto 0;
+  padding-top: 40px;
+  margin: 0 auto;
 `;
 
 // VIEW CONTAINER
@@ -101,8 +103,8 @@ export const BodyBackgroundVertical = createGlobalStyle`
   body {
     background: ${props =>
       props.primary
-        ? `linear-gradient(to right, ${primaryColor} 50%, #f3f3f3 50%)`
-        : `linear-gradient(to right, ${secondaryColor} 50%, #f3f3f3 50%)`};
+        ? `linear-gradient(to right, ${primaryColor} 50%, ${viewContainerBackground} 50%)`
+        : `linear-gradient(to right, ${secondaryColor} 50%, ${viewContainerBackground} 50%)`};
   }
 `;
 
@@ -304,7 +306,7 @@ export const NextStepButton = styled.div`
   background: ${primaryColor};
   border-radius: 50px;
   margin: 30px 0;
-  font-size: 1rem;
+  font-size: 1.2rem;
   padding: 15px;
 
   &:hover {
@@ -337,16 +339,15 @@ export const PredictorStepSubmitButton = styled.button`
   width: 230px;
   cursor: pointer;
   color: white;
-  background: ${primaryColor};
+  background: ${secondaryColor};
   border-radius: 50px;
   margin: 30px 0;
-  font-size: 1rem;
+  font-size: 1.2rem;
   padding: 15px;
 `;
 
 export const PredictorOutput = styled.div`
   background: #e3e9f3;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   padding: 40px;
   margin: 0 auto;
   width: 100%;
@@ -393,11 +394,6 @@ export const OutputItemResult = styled(OutputItem)`
   font-weight: 400;
   color: white;
   background: ${secondaryColor};
-`;
-
-// MEMBERS
-export const Members = styled(ViewContainer)`
-  border-radius: 5px;
 `;
 
 // PROFILE

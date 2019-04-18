@@ -94,7 +94,7 @@ export default function PredictorOutput(props) {
               duration={900}
               stepPrecision={0}
               value={latestResult.prediction}
-              formatValue={n => `${n} %`}
+              formatValue={n => `▲ ${n} %`}
             />
           </S.OutputItemResult>
         </S.OutputMiddle>
@@ -148,33 +148,85 @@ export default function PredictorOutput(props) {
             </div>
           </S.OutputItem>
         </S.OutputBottom>
-        <div>
+        <div
+          style={{
+            marginTop: '60px',
+            borderTop: '4px solid white',
+            width: '100%',
+            fontSize: '1rem'
+          }}
+        >
+          <h1 style={{ margin: '40px', fontWeight: '300' }}>
+            Prediction History:{' '}
+          </h1>
           {cookie['PredictorResults'].map((result, index) => (
             <div
               key={index}
               style={{
                 display: 'flex',
-                justifyContent: 'space-evenly',
+                justifyContent: 'space-between',
                 alignItems: 'center',
-                border: '1px solid lightblue',
-                margin: '10px'
+                margin: '0 0 80px 0',
+                padding: '20px',
+                background: 'white'
               }}
             >
-              <div style={{ padding: '10px' }}>
-                <div>{result.headquarters}</div>
-                <div>{result.industry}</div>
+              <div style={{ maxWidth: '400px' }}>
+                <div style={{ padding: '20px' }}>
+                  <div style={{ fontWeight: '400', fontSize: '2rem' }}>
+                    {result.headquarters}
+                  </div>
+                  <div>Location</div>
+                </div>
+
+                <div style={{ padding: '20px' }}>
+                  <div style={{ fontWeight: '400', fontSize: '2rem' }}>
+                    {result.industry}
+                  </div>
+                  <div>Industry</div>
+                </div>
               </div>
-              <div style={{ padding: '10px' }}>
-                <div>employees: {result.numEmployees}</div>
-                <div>founders: {result.numFounders}</div>
+
+              <div>
+                <div style={{ padding: '20px', textAlign: 'right' }}>
+                  <div style={{ fontWeight: '400', fontSize: '2rem' }}>
+                    {result.numEmployees}
+                  </div>
+                  <div>Employees</div>
+                </div>
+                <div style={{ padding: '20px', textAlign: 'right' }}>
+                  <div style={{ fontWeight: '400', fontSize: '2rem' }}>
+                    {result.numFounders}
+                  </div>
+                  <div>Founders</div>
+                </div>
               </div>
-              <div style={{ padding: '10px' }}>
-                <div>public articles: {result.numArticles}</div>
-                <div>funding rounds: {result.numFundingRounds}</div>
+
+              <div>
+                <div style={{ padding: '20px', textAlign: 'right' }}>
+                  <div style={{ fontWeight: '400', fontSize: '2rem' }}>
+                    {result.numFundingRounds}
+                  </div>
+                  <div>Funding Rounds</div>
+                </div>
+
+                <div style={{ padding: '20px', textAlign: 'right' }}>
+                  <div style={{ fontWeight: '400', fontSize: '2rem' }}>
+                    {result.numArticles}
+                  </div>
+                  <div>Public Articles</div>
+                </div>
               </div>
-              <div style={{ padding: '10px', color: 'green' }}>
-                <div>{result.prediction}%</div>
-                <div>prediction</div>
+
+              <div
+                style={{
+                  padding: '10px',
+                  color: '#249d57',
+                  textAlign: 'right'
+                }}
+              >
+                <div style={{ fontSize: '3rem' }}>▲ {result.prediction}%</div>
+                <div>Survival Chance</div>
               </div>
             </div>
           ))}

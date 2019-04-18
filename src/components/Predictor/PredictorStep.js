@@ -9,12 +9,17 @@ const PredictorInputStep = props => {
         {props.type !== 'select' ? (
           <input
             required
-            type={props.type}
+            type='text'
             name={props.name}
             id={props.id}
             onChange={props.handleInputChange}
             value={props.value[props.name]}
             placeholder={props.placeholder}
+            maxLength={
+              props.name === 'numFundingRounds' || props.name === 'numFounders'
+                ? '1'
+                : '999999999'
+            }
           />
         ) : (
           <select

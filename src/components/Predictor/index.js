@@ -9,7 +9,6 @@ import {
 } from '../../utils/constants';
 import { Route } from 'react-router-dom';
 import Navigation from '../Navigation';
-import Members from '../Members';
 import Profile from '../Profile';
 import PredictorInput from './PredictorInput';
 import PredictorOutput from './PredictorOutput';
@@ -22,7 +21,6 @@ export default function Predictor(props) {
     'PredictorResults'
   ]);
   const [updatedMessage, setUpdatedMessage] = useState('');
-  const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState({
     id: '',
     email: '',
@@ -50,15 +48,6 @@ export default function Predictor(props) {
           id: response.data.id,
           email: response.data.email
         }));
-
-        return axios.get('https://startups7.herokuapp.com/api/users', {
-          headers: {
-            Authorization: cookie['StartupTrajectoryPredictor']
-          }
-        });
-      })
-      .then(response => {
-        setUsers(response.data);
       })
       .catch(err => console.log(err));
   }, []);
@@ -171,11 +160,6 @@ export default function Predictor(props) {
     <S.Predictor>
       <S.BodyBackgroundHorizontal primary />
       <Navigation />
-      <Route
-        exact
-        path='/predictor/members'
-        render={() => <Members {...props} users={users} />}
-      />
       <Route
         exact
         path='/predictor/myprofile'
