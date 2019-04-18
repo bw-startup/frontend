@@ -10,7 +10,7 @@ export default function AuthenticationRoute({ component: Component, ...rest }) {
       {...rest}
       render={props =>
         // authentication conditional // COOKIE CHECK
-        cookie['StartupTrajectoryPredictor'] !== "undefined" ? (
+        cookie['StartupTrajectoryPredictor'] ? (
           <Component {...props} />
         ) : (
           <Redirect to='/' />
