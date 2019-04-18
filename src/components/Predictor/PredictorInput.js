@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import axios from 'axios';
 import GlobalContext from '../../utils/context';
 import {
   PREDICT_START,
@@ -25,13 +26,20 @@ export default function PredictorInput(props) {
   // Number of Articles
   // Number of Employees
 
+  // headquarters,
+  // numFounders,
+  // numFundingRounds,
+  // numArticles,
+  // numEmployees,
+  // industry
+
   const [inputs, setInputs] = useState({
-    headquartersLocation: '',
-    industry: '',
-    numberOfFounders: '',
-    numberOfFundingRounds: '',
-    numberOfArticles: '',
-    numberOfEmployees: ''
+    headquarters: '',
+    numFounders: '',
+    numFundingRounds: '',
+    numArticles: '',
+    numEmployees: '',
+    industry: ''
   });
 
   const handleInputChange = event => {
@@ -47,6 +55,25 @@ export default function PredictorInput(props) {
     console.log(inputs);
     event.preventDefault();
     dispatch({ type: PREDICT_START });
+    axios
+      .post('https://startups7.herokuapp.com/api/predict', {
+        ...inputs,
+        numFounders: +inputs.numFounders,
+        numFundingRounds: +inputs.numFundingRounds,
+        numArticles: +inputs.numArticles,
+        numEmployees: +inputs.numEmployees
+      })
+      .then(response => {
+        setTimeout(() => {
+          console.log(response.data.inputCompany);
+          dispatch({
+            type: PREDICT_SUCCESS,
+            payload: response.data.prediction
+          });
+          props.history.push('/predictor/results');
+        }, 2000);
+      })
+      .catch(err => console.log(err.response));
     // dispatch predictor Start
     // post with inputs
     // then
@@ -54,10 +81,6 @@ export default function PredictorInput(props) {
     // history.push "/predictor/results"
     // catch
     // display error bellow form
-    setTimeout(() => {
-      dispatch({ type: PREDICT_SUCCESS });
-      props.history.push('/predictor/results');
-    }, 2000);
   };
 
   return state.isPredicting ? (

@@ -35,6 +35,13 @@ export default function PredictorInputForm(props) {
   // numberOfArticles: '',
   // numberOfEmployees: ''
 
+  // headquarters,
+  // numFounders,
+  // numFundingRounds,
+  // numArticles,
+  // numEmployees,
+  // industry
+
   switch (step) {
     case 0:
       return (
@@ -43,18 +50,18 @@ export default function PredictorInputForm(props) {
           <S.PredictorTitle>Step 1:</S.PredictorTitle>
           <PredictorStep
             type='select'
-            placeholder="Select Location"
+            placeholder='Select Location'
             options={headquartersLocationOptions}
             title='Headquarters Location:'
-            htmlFor='headquartersLocation'
-            name='headquartersLocation'
-            id='headquartersLocation'
+            htmlFor='headquarters'
+            name='headquarters'
+            id='headquarters'
             value={props.inputs}
             handleInputChange={props.handleInputChange}
           />
           <PredictorStep
             type='select'
-            placeholder="Select Industry"
+            placeholder='Select Industry'
             options={industryOptions}
             title='Industry:'
             htmlFor='industry'
@@ -77,20 +84,20 @@ export default function PredictorInputForm(props) {
           <PredictorStep
             type='number'
             title='Number of Funding Rounds:'
-            htmlFor='numberOfFundingRounds'
-            name='numberOfFundingRounds'
-            id='numberOfFundingRounds'
-            placeholder="Enter number of Funding Rounds"
+            htmlFor='numFundingRounds'
+            name='numFundingRounds'
+            id='numFundingRounds'
+            placeholder='Enter number of Funding Rounds'
             value={props.inputs}
             handleInputChange={props.handleInputChange}
           />
           <PredictorStep
             type='number'
             title='Number of Founders:'
-            htmlFor='numberOfFounders'
-            name='numberOfFounders'
-            id='numberOfFounders'
-            placeholder="Enter number of Founders"
+            htmlFor='numFounders'
+            name='numFounders'
+            id='numFounders'
+            placeholder='Enter number of Founders'
             value={props.inputs}
             handleInputChange={props.handleInputChange}
           />
@@ -108,10 +115,10 @@ export default function PredictorInputForm(props) {
           <PredictorStep
             type='number'
             title='Number of Employees:'
-            htmlFor='numberOfEmployees'
-            name='numberOfEmployees'
-            id='numberOfEmployees'
-            placeholder="Enter number of Employes"
+            htmlFor='numEmployees'
+            name='numEmployees'
+            id='numEmployees'
+            placeholder='Enter number of Employes'
             value={props.inputs}
             handleInputChange={props.handleInputChange}
           />
@@ -119,10 +126,10 @@ export default function PredictorInputForm(props) {
           <PredictorStep
             type='number'
             title='Number of Public News Articles Written About the Company:'
-            htmlFor='numberOfArticles'
-            name='numberOfArticles'
-            id='numberOfArticles'
-            placeholder="Enter number of Public Articles"
+            htmlFor='numArticles'
+            name='numArticles'
+            id='numArticles'
+            placeholder='Enter number of Public Articles'
             value={props.inputs}
             handleInputChange={props.handleInputChange}
           />

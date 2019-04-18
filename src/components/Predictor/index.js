@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import GlobalContext from '../../utils/context';
 import { useCookies } from 'react-cookie';
 import { Route } from 'react-router-dom';
-
 import Navigation from '../Navigation';
 import Members from '../Members';
 import Profile from '../Profile';
@@ -14,6 +14,7 @@ import axiosAuthentication from '../../utils/axiosAuthentication';
 import * as S from '../../styles';
 
 export default function Predictor(props) {
+  const { state, dispatch } = useContext(GlobalContext);
   const [cookie, , removeCookie] = useCookies(['StartupTrajectoryPredictor']);
   const [updatedMessage, setUpdatedMessage] = useState('');
   const [currentUser, setCurrentUser] = useState({
@@ -91,10 +92,12 @@ export default function Predictor(props) {
         )}
       />
       <Route exact path='/predictor' component={PredictorInput} />
-      <PredictorResultsRoute
+      <Route
         exact
         path='/predictor/results'
-        component={PredictorOutput}
+        render={() => (
+          <PredictorOutput {...props} prediction={state.prediction} />
+        )}
       />
     </S.Predictor>
   );

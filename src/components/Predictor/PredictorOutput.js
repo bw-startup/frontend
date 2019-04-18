@@ -2,8 +2,7 @@ import React from 'react';
 import AnimatedNumber from 'react-animated-number';
 import * as S from '../../styles';
 
-export default function PredictorOutput() {
-  const number = 76;
+export default function PredictorOutput(props) {
   return (
     <S.PredictorOutput>
       <S.OutputTop>
@@ -24,7 +23,7 @@ export default function PredictorOutput() {
             }
             duration={900}
             stepPrecision={0}
-            value={number}
+            value={props.prediction}
             formatValue={n => `${n} %`}
           />
         </S.OutputItemResult>

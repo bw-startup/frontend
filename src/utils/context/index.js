@@ -4,7 +4,8 @@ const GlobalState = React.createContext({
   isLoggingIn: false,
   isRegistering: false,
   isPredicting: false,
-  errorMessage: ''
+  errorMessage: '',
+  prediction: 0
 });
 
 export default GlobalState;

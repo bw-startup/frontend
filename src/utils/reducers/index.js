@@ -55,11 +55,12 @@ export default (state, action) => {
         errorMessage: ''
       };
     case PREDICT_SUCCESS:
+      console.log(action.payload);
       return {
         ...state,
         isPredicting: false,
-        // data
-        errorMessage: ''
+        errorMessage: '',
+        prediction: action.payload
       };
     case PREDICT_FAILURE:
       return {
