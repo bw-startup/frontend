@@ -11,10 +11,11 @@ import * as S from '../../styles';
 // industry: ''
 
 export default function PredictorOutput(props) {
-  const [results, setResults] = useState({});
+  console.log('props output', props);
   const [cookie] = useCookies(['PredictorResults']);
-  const latestResult =
-    cookie['PredictorResults'][cookie['PredictorResults'].length - 1];
+  const latestResult = [...cookie['PredictorResults']].pop();
+  console.log('output end', cookie['PredictorResults']);
+  console.log('latestresult', latestResult);
 
   return (
     <div>

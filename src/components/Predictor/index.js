@@ -20,6 +20,9 @@ export default function Predictor(props) {
   const [cookie, setCookie, removeCookie] = useCookies([
     'StartupTrajectoryPredictor'
   ]);
+  const [cookieResults, setCookieResults, removeCookieResults] = useCookies([
+    'PredictorResults'
+  ]);
   const [updatedMessage, setUpdatedMessage] = useState('');
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState({
@@ -90,32 +93,49 @@ export default function Predictor(props) {
         numEmployees: +inputs.numEmployees
       })
       .then(response => {
-        setTimeout(() => {
-          console.log(response);
-          if (cookie['PredictorResults']) {
-            const pastResults = cookie['PredictorResults'];
-            const newResults = [
-              ...pastResults,
-              { ...inputs, prediction: response.data.prediction }
-            ];
-            setCookie('PredictorResults', newResults, {
-              path: '/'
-            });
-          } else {
-            setCookie(
-              'PredictorResults',
-              [{ ...inputs, prediction: response.data.prediction }],
-              {
-                path: '/'
-              }
-            );
-          }
-          dispatch({
-            type: PREDICT_SUCCESS,
-            payload: response.data.prediction
+        console.log(response);
+        console.log('outside if', cookieResults['PredictorResults']);
+        if (cookieResults['PredictorResults']) {
+          console.log('if', cookieResults['PredictorResults']);
+          const pastResults = [...cookieResults['PredictorResults']];
+          debugger;
+          pastResults.push({
+            ...inputs,
+            prediction: response.data.prediction
           });
-          props.history.push('/predictor/results');
-        }, 2000);
+          debugger;
+          // const newResults = [
+          //   ...pastResults,
+          //   { ...inputs, prediction: response.data.prediction }
+          // ];
+          removeCookieResults('PredictorResults', { path: '/' });
+          debugger;
+          setCookieResults('PredictorResults', pastResults, {
+            path: '/'
+          });
+          debugger;
+        } else {
+          setCookieResults(
+            'PredictorResults',
+            [{ ...inputs, prediction: response.data.prediction }],
+            {
+              path: '/'
+            }
+          );
+        }
+        dispatch({
+          type: PREDICT_SUCCESS,
+          payload: response.data.prediction
+        });
+        setInputs({
+          headquarters: '',
+          numFounders: '',
+          numFundingRounds: '',
+          numArticles: '',
+          numEmployees: '',
+          industry: ''
+        });
+        props.history.push('/predictor/results');
       })
       .catch(err => {
         dispatch({
@@ -202,6 +222,7 @@ export default function Predictor(props) {
         path='/predictor/results'
         render={() => (
           <PredictorOutput
+            cookie={cookieResults['PredictorResults']}
             {...props}
             prediction={state.prediction}
             inputs={inputs}
