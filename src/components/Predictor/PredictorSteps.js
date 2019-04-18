@@ -87,7 +87,7 @@ export default function PredictorInputForm(props) {
             htmlFor='numFundingRounds'
             name='numFundingRounds'
             id='numFundingRounds'
-            placeholder='Enter number of Funding Rounds'
+            placeholder='Funding Rounds'
             value={props.inputs}
             handleInputChange={props.handleInputChange}
           />
@@ -97,7 +97,7 @@ export default function PredictorInputForm(props) {
             htmlFor='numFounders'
             name='numFounders'
             id='numFounders'
-            placeholder='Enter number of Founders'
+            placeholder='Founders'
             value={props.inputs}
             handleInputChange={props.handleInputChange}
           />
@@ -118,7 +118,7 @@ export default function PredictorInputForm(props) {
             htmlFor='numEmployees'
             name='numEmployees'
             id='numEmployees'
-            placeholder='Enter number of Employes'
+            placeholder='Employees'
             value={props.inputs}
             handleInputChange={props.handleInputChange}
           />
@@ -129,7 +129,7 @@ export default function PredictorInputForm(props) {
             htmlFor='numArticles'
             name='numArticles'
             id='numArticles'
-            placeholder='Enter number of Public Articles'
+            placeholder='Public Articles'
             value={props.inputs}
             handleInputChange={props.handleInputChange}
           />

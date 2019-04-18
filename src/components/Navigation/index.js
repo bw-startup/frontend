@@ -6,7 +6,6 @@ export default function Navigation() {
   const [cookie] = useCookies(['PredictorResults']);
   return (
     <S.Navigation>
-      <S.NavigationLink to='/predictor/members'>Members</S.NavigationLink>
       <S.NavigationLink to='/predictor/myprofile'>My Profile</S.NavigationLink>
       <S.NavigationLink exact to='/predictor'>
         Predictor
