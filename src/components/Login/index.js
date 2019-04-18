@@ -1,5 +1,4 @@
-import React, { useState, useContext } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import GlobalContext from '../../utils/context';
@@ -8,8 +7,10 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE
 } from '../../utils/constants';
-
-import Input from './Input';
+import Loader from '../shared/Loader';
+import ErrorMessage from '../shared/ErrorMessage';
+import FormFooterLink from '../shared/FormFooterLink';
+import * as S from '../../styles';
 
 export default function Login(props) {
   const { state, dispatch } = useContext(GlobalContext);
@@ -18,6 +19,15 @@ export default function Login(props) {
     email: '',
     password: ''
   });
+
+  useEffect(() => {
+    if (cookie['StartupTrajectoryPredictor']) {
+      dispatch({ type: LOGIN_START });
+      setTimeout(() => {
+        props.history.push('/predictor');
+      }, 2000);
+    }
+  }, []);
 
   const handleInputChange = event => {
     event.persist();
@@ -32,70 +42,66 @@ export default function Login(props) {
     dispatch({ type: LOGIN_START });
 
     axios
-      .post('http://localhost:5000/api/login', inputs)
+      .post('https://startups7.herokuapp.com/api/auth/login', inputs)
       .then(response => {
-        console.log(response);
-        setTimeout(() => {
-          dispatch({ type: LOGIN_SUCCESS, payload: response.data.token });
-          setCookie('StartupTrajectoryPredictor', response.data.token);
-        }, 2000);
+        dispatch({ type: LOGIN_SUCCESS, payload: response.data.token });
+        setCookie('StartupTrajectoryPredictor', response.data.token);
+        props.history.push('/predictor');
       })
       .catch(err => {
-        console.log(err);
-        setTimeout(() => {
-          dispatch({ type: LOGIN_FAILURE, payload: err.response.data.message });
-        }, 2000);
+        dispatch({ type: LOGIN_FAILURE, payload: err.response.data.message });
       });
   };
 
-  if (cookie['StartupTrajectoryPredictor'] && !state.isLogging) {
-    return <Redirect to='/predictor' />;
-  } else {
-    return (
-      <div>
+  return state.isLogging ? (
+    <Loader text='Logging In...' />
+  ) : (
+    <S.Login>
+      <S.BodyBackgroundForms primary />
+      <S.LoginImage>
+        <S.LoginImageImg src='/images/investing-login.svg' alt='Investing' />
+      </S.LoginImage>
+
+      <S.LoginForm>
         {state.isRegisterSuccess && (
           <div>
             <p>Thank you for registering!</p>
             <p>Please Log in to continue: </p>
           </div>
         )}
-
-        {state.isLogging ? (
-          <p>Logging in...</p>
-        ) : (
-          <form onSubmit={handleLoginSubmit}>
-            <div>
-              <label htmlFor='email'>Email:</label>
-            </div>
-            <div>
-              <Input
-                required
-                type='email'
-                name='email'
-                onChange={handleInputChange}
-                value={inputs.email}
-              />
-            </div>
-            <div>
-              <label htmlFor='password'>Password:</label>
-            </div>
-            <div>
-              <Input
-                required
-                type='password'
-                name='password'
-                onChange={handleInputChange}
-                value={inputs.password}
-              />
-            </div>
-            <div>
-              <button type='submit'>Log In</button>
-            </div>
-          </form>
-        )}
-
-        {state.errorMessage && <p>{state.errorMessage}</p>}
-      </div>
-    );
-  }
+        <h2>Welcome back!</h2>
+        <p>Sign in to continue using STP</p>
+        <form onSubmit={handleLoginSubmit}>
+          <S.LoginField>
+            <label htmlFor='email'>Email:</label>
+            <input
+              required
+              type='email'
+              name='email'
+              onChange={handleInputChange}
+              value={inputs.email}
+            />
+          </S.LoginField>
+          <S.LoginField>
+            <label htmlFor='password'>Password:</label>
+            <input
+              required
+              type='password'
+              name='password'
+              onChange={handleInputChange}
+              value={inputs.password}
+            />
+          </S.LoginField>
+          {state.errorMessage && <ErrorMessage message={state.errorMessage} />}
+          <S.LoginButton type='submit'>Log In</S.LoginButton>
+          <FormFooterLink
+            primary
+            text="Don't have an account?"
+            to='/register'
+            linkText='Register Here!'
+          />
+        </form>
+      </S.LoginForm>
+    </S.Login>
+  );
 }

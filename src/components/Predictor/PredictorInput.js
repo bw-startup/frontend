@@ -1,15 +1,17 @@
 import React, { useState, useContext } from 'react';
 import GlobalContext from '../../utils/context';
-
 import {
   PREDICT_START,
   PREDICT_SUCCESS,
   PREDICT_FAILURE
 } from '../../utils/constants';
+import Loader from '../shared/Loader';
+
+import PredictorInputSteps from './PredictorSteps';
+import * as S from '../../styles';
 
 export default function PredictorInput(props) {
   const { state, dispatch } = useContext(GlobalContext);
-
   /**
   |--------------------------------------------------
   | INPUTS
@@ -51,53 +53,18 @@ export default function PredictorInput(props) {
     // catch
     // display error bellow form
     setTimeout(() => {
+      dispatch({ type: PREDICT_SUCCESS });
       props.history.push('/predictor/results');
     }, 2000);
   };
 
-  return (
-    <div>
-      {state.isPredicting ? (
-        <p>Predicting trajectory...</p>
-      ) : (
-        <form onSubmit={handlePredictorInputSubmit}>
-          <div>Company Age (in months):</div>
-          <div>
-            <input type='text' />
-          </div>
-          <div>Industry:</div>
-          <div>
-            <input type='text' />
-          </div>
-          <div>Company Location:</div>
-          <div>
-            <input type='text' />
-          </div>
-          <div>Number of Founders:</div>
-          <div>
-            <input type='text' />
-          </div>
-          <div>Number of Employees:</div>
-          <div>
-            <input type='text' />
-          </div>
-          <div>Last Funding Amount:</div>
-          <div>
-            <input type='text' />
-          </div>
-          <div>Number of Funding Rounds:</div>
-          <div>
-            <input type='text' />
-          </div>
-          <div>Number of Public News Articles Written About the Company:</div>
-          <div>
-            <input type='text' />
-          </div>
-          <div>
-            <button type='submit'>See Prediction!</button>
-          </div>
-        </form>
-      )}
-    </div>
+  return state.isPredicting ? (
+    <Loader text='Predicting Trajectory...' />
+  ) : (
+    <S.PredictorInput>
+      <S.PredictorInputForm onSubmit={handlePredictorInputSubmit}>
+        <PredictorInputSteps />
+      </S.PredictorInputForm>
+    </S.PredictorInput>
   );
 }

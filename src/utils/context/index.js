@@ -5,6 +5,7 @@ const GlobalState = React.createContext({
   isRegistering: false,
   isRegisterSuccess: false,
   isPredicting: false,
+  token: '',
   errorMessage: ''
 });
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { useCookies } from 'react-cookie';
 import { Route, Redirect } from 'react-router-dom';
 
-export default function AuthenticatedRoute({ component: Component, ...rest }) {
+export default function AuthenticationRoute({ component: Component, ...rest }) {
   const [cookie] = useCookies(['StartupTrajectoryPredictor']);
 
   return (
