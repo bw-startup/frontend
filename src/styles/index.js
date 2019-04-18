@@ -54,16 +54,15 @@ a {
 
 // APP CONTAINER
 export const Container = styled.div`
-  margin: 100px auto;
+  margin: 40px auto;
 `;
 
 // VIEW CONTAINER
 export const ViewContainer = styled.div`
   background: ${viewContainerBackground};
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   padding: 40px;
   margin: 0 auto;
-  width: 700px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -111,13 +110,14 @@ export const BodyBackgroundHorizontal = createGlobalStyle`
   body {
     background: ${props =>
       props.primary
-        ? `linear-gradient(${primaryColor} 50%, transparent 50%) no-repeat`
-        : `linear-gradient(${secondaryColor} 50%, transparent 50%) no-repeat`};
+        ? `linear-gradient(${primaryColor} 50%, ${viewContainerBackground} 50%) no-repeat`
+        : `linear-gradient(${secondaryColor} 50%, ${viewContainerBackground} 50%) no-repeat`};
   }
 `;
 
 // LOADER
 export const Loader = styled(ViewContainer)`
+  width: 700px;
   border-radius: 5px;
   padding: 120px;
   align-items: center;
@@ -133,7 +133,7 @@ export const Login = styled.div`
   border-radius: 5px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   width: 800px;
-  margin: 0 auto;
+  margin: 80px auto;
   display: flex;
   align-items: center;
 `;
@@ -219,13 +219,17 @@ export const Predictor = styled.div`
   margin: 0 auto;
 `;
 
-export const PredictorInput = styled(ViewContainer)``;
+export const PredictorInput = styled(ViewContainer)`
+  padding: 40px 120px;
+`;
 
 export const PredictorInputStep = styled.div`
   margin: 20px 0;
 `;
 
-export const PredictorInputForm = styled.form``;
+export const PredictorInputForm = styled.form`
+  margin: 0 auto;
+`;
 
 export const PredictorTitle = styled.h2`
   text-align: center;
@@ -343,11 +347,10 @@ export const PredictorStepSubmitButton = styled.button`
 
 export const PredictorOutput = styled.div`
   background: #e3e9f3;
-  border-radius: 5px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  padding: 120px;
+  padding: 40px;
   margin: 0 auto;
-  width: 700px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -371,19 +374,21 @@ export const OutputBottom = styled.div`
 `;
 
 export const OutputItem = styled.div`
-  border-radius: 20px;
+  max-width: 230px;
+  border-radius: 5px;
   background: white;
   margin: 20px;
   font-size: 1rem;
-  padding: 20px;
+  padding: 15px;
 `;
 
 export const OutputItemResult = styled(OutputItem)`
+  max-width: 100%;
   font-size: 5rem;
-  color: white;
   padding: 20px 50px;
   font-weight: 400;
-  background: ${primaryColor};
+  color: white;
+  background: ${secondaryColor};
 `;
 
 // MEMBERS

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import AnimatedNumber from 'react-animated-number';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserTie, faUsers, faChartLine, faNewspaper } from '@fortawesome/free-solid-svg-icons';
 import * as S from '../../styles';
 
 // headquarters: '',
@@ -21,9 +23,38 @@ export default function PredictorOutput(props) {
     <div>
       <S.PredictorOutput>
         <S.OutputTop>
-          <S.OutputItem>{latestResult.numEmployees}</S.OutputItem>
-          <S.OutputItem>{latestResult.numFounders}</S.OutputItem>
-          <S.OutputItem>{latestResult.numFundingRounds}</S.OutputItem>
+          <S.OutputItem style={{ display: 'flex', alignItems: 'flex-end', justifyContent: "center" }}>
+            <div style={{ padding: '0 10px' }}>
+              <FontAwesomeIcon icon={faUsers} size='5x' />
+            </div>
+            <div style={{ padding: '0 10px' }}>
+              <div style={{ fontSize: '3rem' }}>
+                {latestResult.numEmployees}
+              </div>
+              <div style={{ fontSize: '.7rem' }}>Employees</div>
+            </div>
+          </S.OutputItem>
+
+          <S.OutputItem style={{ display: 'flex', alignItems: 'flex-end', justifyContent: "center"  }}>
+            <div style={{ padding: '0 10px' }}>
+              <FontAwesomeIcon icon={faUserTie} size='5x' />
+            </div>
+            <div style={{ padding: '0 10px' }}>
+              <div style={{ fontSize: '3rem' }}>{latestResult.numFounders}</div>
+              <div style={{ fontSize: '.7rem' }}>Founders</div>
+            </div>
+          </S.OutputItem>
+
+          <S.OutputItem style={{ display: 'flex', alignItems: 'flex-end', justifyContent: "center"  }}>
+            <div style={{ padding: ' 0 10px' }}>
+              <FontAwesomeIcon icon={faChartLine} size='5x' />
+            </div>
+            <div style={{ padding: ' 0 10px' }}>
+              <div style={{ fontSize: '3rem' }}>{latestResult.numFundingRounds}</div>
+              <div style={{ fontSize: '.7rem' }}>Funding Rounds</div>
+            </div>
+          </S.OutputItem>
+
         </S.OutputTop>
         <S.OutputMiddle>
           <S.OutputItemResult>
@@ -43,7 +74,17 @@ export default function PredictorOutput(props) {
           </S.OutputItemResult>
         </S.OutputMiddle>
         <S.OutputBottom>
-          <S.OutputItem>{latestResult.numArticles}</S.OutputItem>
+
+        <S.OutputItem style={{ display: 'flex', alignItems: 'flex-end', justifyContent: "center"  }}>
+            <div style={{ padding: ' 0 10px' }}>
+              <FontAwesomeIcon icon={faNewspaper} size='5x' />
+            </div>
+            <div style={{ padding: ' 0 10px' }}>
+              <div style={{ fontSize: '3rem' }}>{latestResult.numArticles}</div>
+              <div style={{ fontSize: '.7rem' }}>Public Articles</div>
+            </div>
+          </S.OutputItem>
+
           <S.OutputItem>{latestResult.industry}</S.OutputItem>
           <S.OutputItem>{latestResult.headquarters}</S.OutputItem>
         </S.OutputBottom>
