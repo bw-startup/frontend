@@ -14,57 +14,13 @@ import axiosAuthentication from '../../utils/axiosAuthentication';
 import * as S from '../../styles';
 
 export default function Predictor(props) {
-  const [cookie, setCookie, removeCookie] = useCookies([
-    'StartupTrajectoryPredictor'
-  ]);
+  const [cookie, , removeCookie] = useCookies(['StartupTrajectoryPredictor']);
   const [updatedMessage, setUpdatedMessage] = useState('');
   const [currentUser, setCurrentUser] = useState({
     id: '',
     email: '',
     password: ''
   });
-
-  const handleUpdatePasswordSubmit = event => {
-    event.preventDefault();
-    console.log("handleupdatepassubmit - currentUser",currentUser);
-    axiosAuthentication(cookie['StartupTrajectoryPredictor'])
-      .put('https://startups7.herokuapp.com/api/me', currentUser)
-      .then(response => {
-        setUpdatedMessage('Password updated successfully!');
-        setCurrentUser(inputs => ({
-          ...inputs,
-          password: ''
-        }));
-        console.log("handleupdaepasswordsubmit - response", response);
-      })
-      .catch(err => console.log(err.response.data.message));
-  };
-
-  const handleUpdatePasswordChange = event => {
-    event.persist();
-    setCurrentUser(inputs => ({
-      ...inputs,
-      [event.target.name]: event.target.value
-    }));
-  };
-
-  const handleLogOut = event => {
-    event.preventDefault();
-    removeCookie(['StartupTrajectoryPredictor']);
-    props.history.push('/');
-  };
-
-  const handleDeleteUser = () => {
-    axiosAuthentication(cookie['StartupTrajectoryPredictor'])
-      .delete('https://startups7.herokuapp.com/api/me', currentUser.id)
-      .then(response => {
-        removeCookie(['StartupTrajectoryPredictor']);
-        console.log('delete user', response);
-      })
-      .catch(err => {
-        console.log(err.response);
-      });
-  };
 
   useEffect(() => {
     axiosAuthentication(cookie['StartupTrajectoryPredictor'])
@@ -79,6 +35,41 @@ export default function Predictor(props) {
       .catch(err => console.log(err));
   }, []);
 
+  const handleUpdatePasswordSubmit = event => {
+    event.preventDefault();
+    axiosAuthentication(cookie['StartupTrajectoryPredictor'])
+      .put('https://startups7.herokuapp.com/api/me', currentUser)
+      .then(response => {
+        setUpdatedMessage('Password updated successfully!');
+        setCurrentUser(inputs => ({
+          ...inputs,
+          password: ''
+        }));
+      })
+      .catch(err => console.log(err.response.data.message));
+  };
+
+  const handleUpdatePasswordChange = event => {
+    event.persist();
+    setCurrentUser(inputs => ({
+      ...inputs,
+      [event.target.name]: event.target.value
+    }));
+  };
+
+  const handleLogOut = event => {
+    removeCookie('StartupTrajectoryPredictor', { path: '/' });
+  };
+
+  const handleDeleteUser = () => {
+    axiosAuthentication(cookie['StartupTrajectoryPredictor'])
+      .delete('https://startups7.herokuapp.com/api/me', currentUser.id)
+      .then(() => {
+        removeCookie('StartupTrajectoryPredictor', { path: '/' });
+      })
+      .catch(err => console.log(err.response));
+  };
+
   return (
     <S.Predictor>
       <S.BodyBackgroundHorizontal primary />
@@ -92,6 +83,7 @@ export default function Predictor(props) {
             {...props}
             currentUser={currentUser}
             handleLogOut={handleLogOut}
+            handleUpdatePasswordChange={handleUpdatePasswordChange}
             handleUpdatePasswordSubmit={handleUpdatePasswordSubmit}
             updatedMessage={updatedMessage}
             handleDeleteUser={handleDeleteUser}

@@ -1,5 +1,4 @@
-import React, { useState, useContext } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import GlobalContext from '../../utils/context';
@@ -23,6 +22,15 @@ export default function Register(props) {
     password: ''
   });
 
+  useEffect(() => {
+    if (cookie['StartupTrajectoryPredictor']) {
+      dispatch({ type: LOGIN_START });
+      setTimeout(() => {
+        props.history.push('/predictor');
+      }, 2000);
+    }
+  }, []);
+
   const handleInputChange = event => {
     event.persist();
     setInputs(inputs => ({
@@ -45,15 +53,15 @@ export default function Register(props) {
         );
       })
       .then(response => {
-        console.log('2nd then', response);
         setTimeout(() => {
           dispatch({ type: LOGIN_SUCCESS, payload: response.data.token });
-          setCookie('StartupTrajectoryPredictor', response.data.token);
+          setCookie('StartupTrajectoryPredictor', response.data.token, {
+            path: '/'
+          });
           props.history.push('/predictor');
         }, 2000);
       })
       .catch(err => {
-        console.log(err);
         dispatch({
           type: REGISTER_FAILURE,
           payload: err.response.data.message
@@ -61,12 +69,16 @@ export default function Register(props) {
       });
   };
 
-  if (cookie['StartupTrajectoryPredictor']) {
-    return <Redirect to='/predictor' />;
+  if (state.isRegistering) {
+    return <Loader text='Registering...' />;
+  } else if (state.isLoggingIn) {
+    return <Loader text='Thank you for registering! Logging you in...' />;
   } else {
-    return state.isLogging ? (
-      <Loader text='Thank you for Registering. Logging you in...' />
-    ) : (
+    // if (cookie['StartupTrajectoryPredictor']) {
+    //   return <Loader text='Thank you for Registering. Logging you in...' />;
+    // }
+
+    return (
       <S.Register>
         <S.BodyBackgroundVertical />
         <S.RegisterImage>

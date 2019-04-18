@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
-import Loader from '../shared/Loader';
+import React from 'react';
 import * as S from '../../styles';
 
 export default function Profile(props) {
-  return props.currentUser.email ? (
+  return (
     <S.Profile>
-      <div onClick={props.handleLogOut}>logout</div>
+      <button type='button' onClick={props.handleLogOut}>
+        logout
+      </button>
       <S.Title>{props.currentUser.email}</S.Title>
       <S.PredictorInputForm onSubmit={props.handleUpdatePasswordSubmit}>
         <S.PredictorInputStepField>
@@ -15,7 +15,7 @@ export default function Profile(props) {
             type='password'
             name='password'
             id='password'
-            onChange={props.handleUpdatePasswordSubmit}
+            onChange={props.handleUpdatePasswordChange}
             value={props.currentUser.password}
           />
         </S.PredictorInputStepField>
@@ -25,7 +25,7 @@ export default function Profile(props) {
             type='password'
             name='password'
             id='passwordRepeat'
-            onChange={props.handleUpdatePasswordSubmit}
+            onChange={props.handleUpdatePasswordChange}
             value={props.currentUser.password}
           />
         </S.PredictorInputStepField>
@@ -33,10 +33,10 @@ export default function Profile(props) {
         {props.updatedMessage && (
           <S.FormMessage success>{props.updatedMessage}</S.FormMessage>
         )}
-        <div onClick={props.handleDeleteUser}>Delete Account</div>
+        <button type='button' onClick={props.handleDeleteUser}>
+          Delete Account
+        </button>
       </S.PredictorInputForm>
     </S.Profile>
-  ) : (
-    <Loader text='Loading...' />
   );
 }
