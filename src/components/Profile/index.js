@@ -40,11 +40,12 @@ export default function Profile(props) {
           <button
             style={{
               cursor: 'pointer',
-              borderRadius: '20px',
+              borderRadius: '5px',
               padding: '10px',
               border: 'none',
-              background: '#ffb3b3',
-              color: 'white'
+              background: 'darkred',
+              color: 'white',
+              textTransform: 'uppercase'
             }}
             type='button'
             onClick={props.handleDeleteUser}
@@ -54,11 +55,12 @@ export default function Profile(props) {
           <button
             style={{
               cursor: 'pointer',
-              borderRadius: '20px',
+              borderRadius: '5px',
               color: 'white',
               padding: '10px',
               border: 'none',
-              background: '#aad4f5'
+              background: '#4285f4',
+              textTransform: 'uppercase'
             }}
             type='button'
             onClick={props.handleLogOut}

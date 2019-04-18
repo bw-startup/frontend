@@ -141,6 +141,7 @@ export default function Predictor(props) {
 
   const handleLogOut = event => {
     removeCookie('StartupTrajectoryPredictor', { path: '/' });
+    props.history.push('/');
   };
 
   const handleDeleteUser = () => {

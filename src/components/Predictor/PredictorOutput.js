@@ -163,6 +163,7 @@ export default function PredictorOutput(props) {
             <div
               key={index}
               style={{
+                borderRadius: '5px',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',

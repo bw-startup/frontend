@@ -8,14 +8,16 @@ export default function(props) {
         visible={props.step > 0 ? true : false}
         onClick={props.previousStep}
       >
-        ◀ Previous
+        <span style={{ padding: '0 10px' }}>◀</span> Previous
       </S.PreviousStepButton>
       {props.step === 2 ? (
         <S.PredictorStepSubmitButton type='submit'>
-          Predict Now
+          Predict Now <span style={{ padding: '0 10px' }}>▶</span>
         </S.PredictorStepSubmitButton>
       ) : (
-        <S.NextStepButton onClick={props.nextStep}>Next ▶</S.NextStepButton>
+        <S.NextStepButton onClick={props.nextStep}>
+          Next <span style={{ padding: '0 10px' }}>▶</span>
+        </S.NextStepButton>
       )}
     </S.StepButtonContainer>
   );
