@@ -28,7 +28,7 @@ const PredictorInputStep = props => {
             onChange={props.handleInputChange}
             value={props.value[props.name]}
           >
-            <option default>{props.placeholder}</option>
+            <option value="" default>{props.placeholder}</option>
             {props.options.sort().map(option => (
               <option key={option}>{option}</option>
             ))}

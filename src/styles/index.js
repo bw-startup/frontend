@@ -223,6 +223,7 @@ export const Predictor = styled.div`
 `;
 
 export const PredictorInput = styled(ViewContainer)`
+  height: 100vh;
   padding: 40px 150px;
 `;
 
@@ -344,6 +345,9 @@ export const PredictorStepSubmitButton = styled.button`
   margin: 30px 0;
   font-size: 1.2rem;
   padding: 15px;
+  &:hover {
+    background: rgb(4, 158, 81);
+  }
 `;
 
 export const PredictorOutput = styled.div`
