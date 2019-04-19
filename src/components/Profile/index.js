@@ -10,10 +10,21 @@ export default function Profile(props) {
     <Loader text='Deleting User...' color='#750000' />
   ) : (
     <S.Profile>
-      <S.Title>{props.currentUser.email}</S.Title>
       <S.PredictorInputForm onSubmit={props.handleUpdatePasswordSubmit}>
         <S.PredictorInputStepField>
-          <label htmlFor='password'>New Password: </label>
+          <input
+            type='email'
+            name='email'
+            id='email'
+            readOnly
+            value={props.currentUser.email}
+            style={{ textAlign: 'left' }}
+          />
+        </S.PredictorInputStepField>
+        <S.PredictorInputStepField>
+          <label htmlFor='password' style={{ textAlign: 'left' }}>
+            New Password:{' '}
+          </label>
           <input
             type='password'
             name='password'
@@ -23,7 +34,9 @@ export default function Profile(props) {
           />
         </S.PredictorInputStepField>
         <S.PredictorInputStepField>
-          <label htmlFor='passwordRepeat'>Repeat New Password: </label>
+          <label htmlFor='passwordRepeat' style={{ textAlign: 'left' }}>
+            Repeat New Password:{' '}
+          </label>
           <input
             type='password'
             name='password'
