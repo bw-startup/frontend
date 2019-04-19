@@ -84,7 +84,7 @@ export const FormMessage = styled.div`
   color: white;
   padding: 20px;
   ${props => props.error && `background: lightcoral;`}
-  ${props => props.success && `background: lightgreen;`}
+  ${props => props.success && `background: ${secondaryColor};`}
 `;
 
 export const ErrorMessage = styled(FormMessage)`
@@ -130,13 +130,23 @@ export const HtmlBackground = createGlobalStyle`
   }
 `;
 
+export const BodyBackgroundOnLoader = createGlobalStyle`
+  body {
+    background: ${primaryColor}
+  }
+
+  html {
+    background: ${primaryColor}
+  }
+`;
+
 // LOADER
 export const Loader = styled(ViewContainer)`
   width: 700px;
   border-radius: 5px;
-  padding: 120px 120px 200px 120px;
+  padding: 120px 120px 120px 120px;
   align-items: center;
-  background: white;
+  background: ${viewContainerBackground};
 `;
 
 export const LoaderText = styled.div`
@@ -463,12 +473,13 @@ export const OutputItemResult = styled.div`
 // PROFILE
 export const Profile = styled(ViewContainer)`
   border-radius: 5px;
-  padding: 65px 120px 420px 120px;
+  padding: 65px 250px 420px 250px;
   align-items: center;
 `;
 
 // NAVIGATION
 export const Navigation = styled.div`
+  transition: 7s ease-out;
   width: 700px;
   display: flex;
   margin: 0 auto;

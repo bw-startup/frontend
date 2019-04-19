@@ -6,6 +6,7 @@ import * as S from '../../styles';
 export default function(props) {
   return (
     <S.Loader>
+      <S.BodyBackgroundOnLoader />
       <Loader
         type={props.type ? props.type : 'ThreeDots'}
         color={props.color ? props.color : primaryColor}

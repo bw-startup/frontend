@@ -44,12 +44,13 @@ export default function Login(props) {
     axios
       .post('https://startups7.herokuapp.com/api/auth/login', inputs)
       .then(response => {
-        console.log('login success', response.data.token);
-        dispatch({ type: LOGIN_SUCCESS });
-        setCookie('StartupTrajectoryPredictor', response.data.token, {
-          path: '/'
+        setTimeout(() => {
+          dispatch({ type: LOGIN_SUCCESS });
+          setCookie('StartupTrajectoryPredictor', response.data.token, {
+            path: '/'
+          });
+          props.history.push('/predictor');
         });
-        props.history.push('/predictor');
       })
       .catch(err => {
         dispatch({ type: LOGIN_FAILURE, payload: err.response.data.message });

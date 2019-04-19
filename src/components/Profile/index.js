@@ -17,7 +17,10 @@ export default function Profile(props) {
       {props.updatedMessage && (
         <S.FormMessage success>{props.updatedMessage}</S.FormMessage>
       )}
-      <S.PredictorInputForm onSubmit={props.handleUpdatePasswordSubmit}>
+      <S.PredictorInputForm
+        onSubmit={props.handleUpdatePasswordSubmit}
+        style={{ width: '100%' }}
+      >
         <S.PredictorInputStepField>
           <input
             type='email'
@@ -62,9 +65,10 @@ export default function Profile(props) {
         >
           <button
             style={{
+              fontSize: '1rem',
               cursor: 'pointer',
               borderRadius: '5px',
-              padding: '10px',
+              padding: '20px',
               border: 'none',
               background: 'darkred',
               color: 'white',
@@ -77,10 +81,11 @@ export default function Profile(props) {
           </button>
           <button
             style={{
+              fontSize: '1rem',
               cursor: 'pointer',
               borderRadius: '5px',
               color: 'white',
-              padding: '10px',
+              padding: '20px',
               border: 'none',
               background: '#4285f4',
               textTransform: 'uppercase'
