@@ -55,7 +55,7 @@ export default function Login(props) {
   };
 
   return state.isLoggingIn ? (
-    <Loader text='Logging In...' />
+    <Loader text='Logging In...'/>
   ) : (
     <S.Login>
       <S.BodyBackgroundVertical primary />

@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import GlobalContext from '../../utils/context';
+import Loader from '../shared/Loader';
 import * as S from '../../styles';
 
 export default function Profile(props) {
-  return (
+  const { state } = useContext(GlobalContext);
+
+  return state.isDeleting ? (
+    <Loader text='Deleting User...' color='#750000' />
+  ) : (
     <S.Profile>
       <S.Title>{props.currentUser.email}</S.Title>
       <S.PredictorInputForm onSubmit={props.handleUpdatePasswordSubmit}>

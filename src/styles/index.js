@@ -210,6 +210,9 @@ export const LoginButton = styled.button`
   width: 100%;
   padding: 10px;
   margin: 20px 0;
+  &:hover {
+    background: #356dcc;
+  }
 `;
 
 // REGISTER
@@ -221,12 +224,27 @@ export const RegisterImage = styled(LoginImage)``;
 
 export const RegisterImageImg = styled(LoginImageImg)``;
 
-export const RegisterForm = styled(LoginForm)``;
+export const RegisterForm = styled(LoginForm)`
+  input {
+    &:focus {
+      color: #838eaf;
+      outline: none;
+      border-bottom: 4px solid #38c172;
+    }
+  }
+`;
 
-export const RegisterField = styled(LoginField)``;
+export const RegisterField = styled(LoginField)`
+  &:focus-within {
+    color: #38c172;
+  }
+`;
 
 export const RegisterButton = styled(LoginButton)`
   background: ${secondaryColor};
+  &:hover {
+    background: rgb(4, 158, 81);
+  }
 `;
 
 // PREDICTOR
@@ -332,7 +350,7 @@ export const NextStepButton = styled.button`
   }
 
   &:hover {
-    background: ${primaryColor};
+    background: #356dcc;
   }
 `;
 

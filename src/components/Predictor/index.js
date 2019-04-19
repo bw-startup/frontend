@@ -155,8 +155,11 @@ export default function Predictor(props) {
         }
       })
       .then(() => {
-        dispatch({ type: DELETE_USER_SUCCESS });
-        removeCookie('StartupTrajectoryPredictor', { path: '/' });
+        setTimeout(() => {
+          dispatch({ type: DELETE_USER_SUCCESS });
+          removeCookie('StartupTrajectoryPredictor', { path: '/' });
+          props.history.push('/');
+        }, 2000);
       })
       .catch(err => {
         dispatch({

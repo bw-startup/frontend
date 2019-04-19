@@ -94,7 +94,7 @@ export default function PredictorInputForm(props) {
           <S.StepButtonContainer>
             <S.PreviousStepButton
               type='button'
-              visible={false}
+              visible={true}
               onClick={previousStep}
             >
               <span style={{ padding: '0 10px' }}>◀</span> Previous
