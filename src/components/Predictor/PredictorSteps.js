@@ -25,7 +25,7 @@ export default function PredictorInputForm(props) {
       return (
         <div>
           <S.PredictorTitle>Let's get started!</S.PredictorTitle>
-          <Progress percent={33} />
+          <Progress percent={20} />
           <PredictorStep
             type='select'
             placeholder='Select location'

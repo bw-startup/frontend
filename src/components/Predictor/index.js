@@ -78,13 +78,21 @@ export default function Predictor(props) {
     event.preventDefault();
     dispatch({ type: PREDICT_START });
     axios
-      .post('https://startups7.herokuapp.com/api/predict', {
-        ...inputs,
-        numFounders: +inputs.numFounders,
-        numFundingRounds: +inputs.numFundingRounds,
-        numArticles: +inputs.numArticles,
-        numEmployees: +inputs.numEmployees
-      })
+      .post(
+        'https://startups7.herokuapp.com/api/predict',
+        {
+          ...inputs,
+          numFounders: +inputs.numFounders,
+          numFundingRounds: +inputs.numFundingRounds,
+          numArticles: +inputs.numArticles,
+          numEmployees: +inputs.numEmployees
+        },
+        {
+          headers: {
+            Authorization: cookie['StartupTrajectoryPredictor']
+          }
+        }
+      )
       .then(response => {
         if (cookieResults['PredictorResults']) {
           const newResults = [

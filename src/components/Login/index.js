@@ -22,7 +22,9 @@ export default function Login(props) {
 
   useEffect(() => {
     if (cookie['StartupTrajectoryPredictor']) {
+      dispatch({ type: LOGIN_START });
       setTimeout(() => {
+        dispatch({ type: LOGIN_SUCCESS });
         props.history.push('/predictor');
       }, 2000);
     }
@@ -42,12 +44,13 @@ export default function Login(props) {
     axios
       .post('https://startups7.herokuapp.com/api/auth/login', inputs)
       .then(response => {
-        console.log('login success', response.data.token);
-        dispatch({ type: LOGIN_SUCCESS });
-        setCookie('StartupTrajectoryPredictor', response.data.token, {
-          path: '/'
+        setTimeout(() => {
+          dispatch({ type: LOGIN_SUCCESS });
+          setCookie('StartupTrajectoryPredictor', response.data.token, {
+            path: '/'
+          });
+          props.history.push('/predictor');
         });
-        props.history.push('/predictor');
       })
       .catch(err => {
         dispatch({ type: LOGIN_FAILURE, payload: err.response.data.message });
@@ -55,7 +58,7 @@ export default function Login(props) {
   };
 
   return state.isLoggingIn ? (
-    <Loader text='Logging In...'/>
+    <Loader text='Logging In...' />
   ) : (
     <S.Login>
       <S.BodyBackgroundVertical primary />

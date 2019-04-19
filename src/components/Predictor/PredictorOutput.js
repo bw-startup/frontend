@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import AnimatedNumber from 'react-animated-number';
@@ -9,24 +9,69 @@ import {
   faChartLine,
   faNewspaper,
   faIndustry,
-  faCity
+  faCity,
+  faSortAmountUp,
+  faSortAmountDown,
+  faSortAlphaUp,
+  faSortAlphaDown
 } from '@fortawesome/free-solid-svg-icons';
 import * as S from '../../styles';
 
-// headquarters: '',
-// numFounders: '',
-// numFundingRounds: '',
-// numArticles: '',
-// numEmployees: '',
-// industry: ''
-
 export default function PredictorOutput(props) {
+  const [resultsHistory, setResultsHistory] = useState([]);
+  const [latestResult, setLatestResult] = useState({});
   const [cookie] = useCookies(['PredictorResults']);
-  let latestResult = [];
 
-  if (cookie['PredictorResults']) {
-    latestResult = [...cookie['PredictorResults']].pop();
-  }
+  useEffect(() => {
+    if (cookie['PredictorResults']) {
+      setResultsHistory(cookie['PredictorResults']);
+      setLatestResult(
+        cookie['PredictorResults'][cookie['PredictorResults'].length - 1]
+      );
+    }
+  }, []);
+
+  const handlePredictionSortAscending = event => {
+    event.preventDefault();
+    setResultsHistory(
+      [...cookie['PredictorResults']].sort(
+        (a, b) => a.prediction - b.prediction
+      )
+    );
+  };
+
+  const handlePredictionSortDescending = event => {
+    event.preventDefault();
+    setResultsHistory(
+      [...cookie['PredictorResults']].sort(
+        (a, b) => b.prediction - a.prediction
+      )
+    );
+  };
+
+  const handleCitySortDescending = event => {
+    event.preventDefault();
+    function sortByDescendingOrder(a, b) {
+      a = a.headquarters.toLowerCase();
+      b = b.headquarters.toLowerCase();
+      return a > b ? -1 : b > a ? 1 : 0;
+    }
+    setResultsHistory(
+      [...cookie['PredictorResults']].sort(sortByDescendingOrder)
+    );
+  };
+
+  const handleCitySortAscending = event => {
+    event.preventDefault();
+    function sortByAscendingOrder(a, b) {
+      a = a.headquarters.toLowerCase();
+      b = b.headquarters.toLowerCase();
+      return a > b ? 1 : b > a ? -1 : 0;
+    }
+    setResultsHistory(
+      [...cookie['PredictorResults']].sort(sortByAscendingOrder)
+    );
+  };
 
   return cookie['PredictorResults'] ? (
     <div>
@@ -46,8 +91,10 @@ export default function PredictorOutput(props) {
               <div style={{ fontSize: '3rem' }}>
                 {latestResult.numEmployees}
               </div>
-              <div style={{ fontSize: '.7rem', textAlign: 'right' }}>
-                Employees
+              <div
+                style={{ fontSize: '.7rem', textAlign: 'right', color: 'grey' }}
+              >
+                Employee{+latestResult.numEmployees > 1 && 's'}
               </div>
             </div>
           </S.OutputItem>
@@ -64,7 +111,9 @@ export default function PredictorOutput(props) {
             </div>
             <div style={{ padding: '0 10px', textAlign: 'right' }}>
               <div style={{ fontSize: '3rem' }}>{latestResult.numFounders}</div>
-              <div style={{ fontSize: '.7rem' }}>Founders</div>
+              <div style={{ fontSize: '.7rem', color: 'grey' }}>
+                Founder{+latestResult.numFounders > 1 && 's'}
+              </div>
             </div>
           </S.OutputItem>
 
@@ -82,7 +131,9 @@ export default function PredictorOutput(props) {
               <div style={{ fontSize: '3rem' }}>
                 {latestResult.numFundingRounds}
               </div>
-              <div style={{ fontSize: '.7rem' }}>Funding Rounds</div>
+              <div style={{ fontSize: '.7rem', color: 'grey' }}>
+                Funding Round{+latestResult.numFundingRounds > 1 && 's'}
+              </div>
             </div>
           </S.OutputItem>
         </S.OutputTop>
@@ -90,7 +141,8 @@ export default function PredictorOutput(props) {
           <S.OutputItemResult>
             <AnimatedNumber
               style={{
-                transition: '0.8s ease-out',
+                transition: '7s ease-out',
+                lineHeight: 1.1,
                 transitionProperty: 'background-color, color'
               }}
               frameStyle={perc =>
@@ -116,22 +168,28 @@ export default function PredictorOutput(props) {
             </div>
             <div style={{ padding: ' 0 10px', textAlign: 'right' }}>
               <div style={{ fontSize: '3rem' }}>{latestResult.numArticles}</div>
-              <div style={{ fontSize: '.7rem' }}>Public Articles</div>
+              <div style={{ fontSize: '.7rem', color: 'grey' }}>
+                Public Article{+latestResult.numArticles > 1 && 's'}
+              </div>
             </div>
           </S.OutputItem>
 
           <S.OutputItem
             style={{
               display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'flex-end',
+              alignItems: 'center'
             }}
           >
             <div style={{ padding: ' 0 10px' }}>
               <FontAwesomeIcon icon={faIndustry} size='5x' />
             </div>
-            <div style={{ padding: ' 0 10px' }}>
-              <div style={{ fontSize: '1rem' }}>{latestResult.industry}</div>
+            <div
+              style={{
+                padding: ' 0 10px'
+              }}
+            >
+              <div style={{ fontSize: '1.3rem' }}>{latestResult.industry}</div>
             </div>
           </S.OutputItem>
 
@@ -161,10 +219,55 @@ export default function PredictorOutput(props) {
             fontSize: '1rem'
           }}
         >
-          <h1 style={{ margin: '40px', fontWeight: '300' }}>
-            Prediction History:{' '}
-          </h1>
-          {cookie['PredictorResults'].map((result, index) => (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center'
+            }}
+          >
+            <div>
+              <FontAwesomeIcon
+                style={{ color: '249D57', cursor: 'pointer' }}
+                icon={faSortAlphaDown}
+                onClick={handleCitySortAscending}
+                size='3x'
+              />
+              <FontAwesomeIcon
+                style={{ margin: '0 20px', cursor: 'pointer' }}
+                rotation={180}
+                icon={faSortAlphaUp}
+                onClick={handleCitySortDescending}
+                size='3x'
+              />
+            </div>
+            <h2
+              style={{
+                margin: '70px 0',
+                fontWeight: '300',
+                fontSize: '1.6rem',
+                textTransform: 'uppercase'
+              }}
+            >
+              Prediction History
+            </h2>
+            <div>
+              <FontAwesomeIcon
+                style={{ margin: '0 20px', color: '249D57', cursor: 'pointer' }}
+                icon={faSortAmountDown}
+                onClick={handlePredictionSortDescending}
+                size='3x'
+              />
+              <FontAwesomeIcon
+                style={{ cursor: 'pointer' }}
+                rotation={180}
+                icon={faSortAmountUp}
+                onClick={handlePredictionSortAscending}
+                size='3x'
+              />
+            </div>
+          </div>
+          {resultsHistory.map((result, index) => (
             <div
               key={index}
               style={{
@@ -182,14 +285,20 @@ export default function PredictorOutput(props) {
                   <div style={{ fontWeight: '400', fontSize: '2rem' }}>
                     {result.headquarters}
                   </div>
-                  <div>Location</div>
+                  <div style={{ color: 'grey' }}>Location</div>
                 </div>
 
                 <div style={{ padding: '20px' }}>
-                  <div style={{ fontWeight: '400', fontSize: '2rem' }}>
+                  <div
+                    style={{
+                      fontWeight: '400',
+                      fontSize: '1.2rem',
+                      textTransform: 'uppercase'
+                    }}
+                  >
                     {result.industry}
                   </div>
-                  <div>Industry</div>
+                  <div style={{ color: 'grey' }}>Industry</div>
                 </div>
               </div>
 
@@ -198,13 +307,17 @@ export default function PredictorOutput(props) {
                   <div style={{ fontWeight: '400', fontSize: '2rem' }}>
                     {result.numEmployees}
                   </div>
-                  <div>Employees</div>
+                  <div style={{ color: 'grey' }}>
+                    Employee{+result.numEmployees > 1 && 's'}
+                  </div>
                 </div>
                 <div style={{ padding: '20px', textAlign: 'right' }}>
                   <div style={{ fontWeight: '400', fontSize: '2rem' }}>
                     {result.numFounders}
                   </div>
-                  <div>Founders</div>
+                  <div style={{ color: 'grey' }}>
+                    Founder{+result.numFounders > 1 && 's'}
+                  </div>
                 </div>
               </div>
 
@@ -213,14 +326,18 @@ export default function PredictorOutput(props) {
                   <div style={{ fontWeight: '400', fontSize: '2rem' }}>
                     {result.numFundingRounds}
                   </div>
-                  <div>Funding Rounds</div>
+                  <div style={{ color: 'grey' }}>
+                    Funding Round{+result.numFundingRounds > 1 && 's'}
+                  </div>
                 </div>
 
                 <div style={{ padding: '20px', textAlign: 'right' }}>
                   <div style={{ fontWeight: '400', fontSize: '2rem' }}>
                     {result.numArticles}
                   </div>
-                  <div>Public Articles</div>
+                  <div style={{ color: 'grey' }}>
+                    Public Article{+result.numArticles > 1 && 's'}
+                  </div>
                 </div>
               </div>
 
@@ -231,7 +348,9 @@ export default function PredictorOutput(props) {
                   textAlign: 'right'
                 }}
               >
-                <div style={{ fontSize: '3rem' }}>▲ {result.prediction}%</div>
+                <div style={{ fontSize: '3rem', lineHeight: '1.2' }}>
+                  ▲ {result.prediction}%
+                </div>
                 <div>Survival Chance</div>
               </div>
             </div>
