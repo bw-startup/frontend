@@ -5,7 +5,15 @@ import GlobalContext from '../../utils/context';
 import {
   PREDICT_START,
   PREDICT_SUCCESS,
-  PREDICT_FAILURE
+  PREDICT_FAILURE,
+  DELETE_USER_START,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAILURE,
+  UPDATE_USER_START,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAILURE,
+  LOGOUT_START,
+  LOGOUT_SUCCESS
 } from '../../utils/constants';
 import { Route } from 'react-router-dom';
 import Navigation from '../Navigation';
@@ -17,9 +25,7 @@ import * as S from '../../styles';
 export default function Predictor(props) {
   const { state, dispatch } = useContext(GlobalContext);
   const [cookie, , removeCookie] = useCookies(['StartupTrajectoryPredictor']);
-  const [cookieResults, setCookieResults, removeCookieResults] = useCookies([
-    'PredictorResults'
-  ]);
+  const [cookieResults, setCookieResults] = useCookies(['PredictorResults']);
   const [updatedMessage, setUpdatedMessage] = useState('');
   const [currentUser, setCurrentUser] = useState({
     id: '',
@@ -85,7 +91,6 @@ export default function Predictor(props) {
             ...cookieResults['PredictorResults'],
             { ...inputs, prediction: response.data.prediction }
           ];
-          removeCookieResults('PredictorResults', { path: '/' });
           setCookieResults('PredictorResults', newResults, {
             path: '/'
           });
@@ -98,19 +103,21 @@ export default function Predictor(props) {
             }
           );
         }
-        dispatch({
-          type: PREDICT_SUCCESS,
-          payload: response.data.prediction
-        });
-        setInputs({
-          headquarters: '',
-          numFounders: '',
-          numFundingRounds: '',
-          numArticles: '',
-          numEmployees: '',
-          industry: ''
-        });
-        props.history.push('/predictor/results');
+        setTimeout(() => {
+          dispatch({
+            type: PREDICT_SUCCESS,
+            payload: response.data.prediction
+          });
+          setInputs({
+            headquarters: '',
+            numFounders: '',
+            numFundingRounds: '',
+            numArticles: '',
+            numEmployees: '',
+            industry: ''
+          });
+          props.history.push('/predictor/results');
+        }, 3000);
       })
       .catch(err => {
         dispatch({
@@ -122,6 +129,7 @@ export default function Predictor(props) {
   };
 
   const handleUpdatePasswordSubmit = event => {
+    dispatch({ type: UPDATE_USER_START });
     event.preventDefault();
     axios
       .put('https://startups7.herokuapp.com/api/me', currentUser, {
@@ -130,35 +138,60 @@ export default function Predictor(props) {
         }
       })
       .then(() => {
-        setUpdatedMessage('Password updated successfully!');
-        setCurrentUser(inputs => ({
-          ...inputs,
-          password: ''
-        }));
+        setTimeout(() => {
+          dispatch({ type: UPDATE_USER_SUCCESS });
+          setUpdatedMessage('Password updated successfully!');
+          setCurrentUser(inputs => ({
+            ...inputs,
+            password: ''
+          }));
+        }, 2000);
       })
-      .catch(err => console.log(err.response.data.message));
+      .catch(err => {
+        dispatch({
+          type: UPDATE_USER_FAILURE,
+          payload: err.response.data.message
+        });
+        console.log(err.response.data.message);
+      });
   };
 
-  const handleLogOut = event => {
-    removeCookie('StartupTrajectoryPredictor', { path: '/' });
-    props.history.push('/');
+  const handleLogOut = () => {
+    dispatch({ type: LOGOUT_START });
+    setTimeout(() => {
+      dispatch({ type: LOGOUT_SUCCESS });
+      removeCookie('StartupTrajectoryPredictor', { path: '/' });
+      props.history.push('/');
+    }, 2000);
   };
 
   const handleDeleteUser = () => {
+    dispatch({ type: DELETE_USER_START });
     axios
-      .delete('https://startups7.herokuapp.com/api/me', currentUser.id, {
+      .delete('https://startups7.herokuapp.com/api/me', {
         headers: {
           Authorization: cookie['StartupTrajectoryPredictor']
         }
       })
       .then(() => {
-        removeCookie('StartupTrajectoryPredictor', { path: '/' });
+        setTimeout(() => {
+          dispatch({ type: DELETE_USER_SUCCESS });
+          removeCookie('StartupTrajectoryPredictor', { path: '/' });
+          props.history.push('/');
+        }, 2000);
       })
-      .catch(err => console.log(err.response.data.message));
+      .catch(err => {
+        dispatch({
+          type: DELETE_USER_FAILURE,
+          payload: err.response.data.message
+        });
+        console.log(err.response.data.message);
+      });
   };
 
   return (
     <S.Predictor>
+      <S.HtmlBackground />
       <S.BodyBackgroundHorizontal primary />
       <Navigation />
       <Route

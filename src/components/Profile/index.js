@@ -1,13 +1,37 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import GlobalContext from '../../utils/context';
+import Loader from '../shared/Loader';
 import * as S from '../../styles';
 
 export default function Profile(props) {
-  return (
+  const { state } = useContext(GlobalContext);
+
+  return state.isDeleting ? (
+    <Loader text='Deleting User...' color='#750000' type='Plane' />
+  ) : state.isUpdating ? (
+    <Loader text='Updating your password...' type='Oval' />
+  ) : state.isLoggingOut ? (
+    <Loader text='Logging out...' type='Plane' />
+  ) : (
     <S.Profile>
-      <S.Title>{props.currentUser.email}</S.Title>
+      {props.updatedMessage && (
+        <S.FormMessage success>{props.updatedMessage}</S.FormMessage>
+      )}
       <S.PredictorInputForm onSubmit={props.handleUpdatePasswordSubmit}>
         <S.PredictorInputStepField>
-          <label htmlFor='password'>New Password: </label>
+          <input
+            type='email'
+            name='email'
+            id='email'
+            readOnly
+            value={props.currentUser.email}
+            style={{ textAlign: 'left' }}
+          />
+        </S.PredictorInputStepField>
+        <S.PredictorInputStepField>
+          <label htmlFor='password' style={{ textAlign: 'left' }}>
+            New Password:{' '}
+          </label>
           <input
             type='password'
             name='password'
@@ -17,7 +41,9 @@ export default function Profile(props) {
           />
         </S.PredictorInputStepField>
         <S.PredictorInputStepField>
-          <label htmlFor='passwordRepeat'>Repeat New Password: </label>
+          <label htmlFor='passwordRepeat' style={{ textAlign: 'left' }}>
+            Repeat New Password:{' '}
+          </label>
           <input
             type='password'
             name='password'
@@ -27,9 +53,6 @@ export default function Profile(props) {
           />
         </S.PredictorInputStepField>
         <S.Button>Update Password</S.Button>
-        {props.updatedMessage && (
-          <S.FormMessage success>{props.updatedMessage}</S.FormMessage>
-        )}
 
         <div
           style={{

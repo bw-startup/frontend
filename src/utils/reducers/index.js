@@ -2,12 +2,20 @@ import {
   LOGIN_START,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOGOUT_START,
+  LOGOUT_SUCCESS,
   REGISTER_START,
   REGISTER_SUCCESS,
   REGISTER_FAILURE,
   PREDICT_START,
   PREDICT_SUCCESS,
-  PREDICT_FAILURE
+  PREDICT_FAILURE,
+  DELETE_USER_START,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAILURE,
+  UPDATE_USER_START,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAILURE
 } from '../constants';
 
 export default (state, action) => {
@@ -29,6 +37,18 @@ export default (state, action) => {
         ...state,
         isLoggingIn: false,
         errorMessage: action.payload
+      };
+    case LOGOUT_START:
+      return {
+        ...state,
+        isLoggingOut: true,
+        errorMessage: ''
+      };
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        isLoggingOut: false,
+        errorMessage: ''
       };
     case REGISTER_START:
       return {
@@ -55,7 +75,6 @@ export default (state, action) => {
         errorMessage: ''
       };
     case PREDICT_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         isPredicting: false,
@@ -66,6 +85,42 @@ export default (state, action) => {
       return {
         ...state,
         isPredicting: false,
+        errorMessage: action.payload
+      };
+    case DELETE_USER_START:
+      return {
+        ...state,
+        isDeleting: true,
+        errorMessage: ''
+      };
+    case DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        isDeleting: false,
+        errorMessage: ''
+      };
+    case DELETE_USER_FAILURE:
+      return {
+        ...state,
+        isDeleting: false,
+        errorMessage: action.payload
+      };
+    case UPDATE_USER_START:
+      return {
+        ...state,
+        isUpdating: true,
+        errorMessage: ''
+      };
+    case UPDATE_USER_SUCCESS:
+      return {
+        ...state,
+        isUpdating: false,
+        errorMessage: ''
+      };
+    case UPDATE_USER_FAILURE:
+      return {
+        ...state,
+        isUpdating: false,
         errorMessage: action.payload
       };
     default:

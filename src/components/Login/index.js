@@ -42,6 +42,7 @@ export default function Login(props) {
     axios
       .post('https://startups7.herokuapp.com/api/auth/login', inputs)
       .then(response => {
+        console.log('login success', response.data.token);
         dispatch({ type: LOGIN_SUCCESS });
         setCookie('StartupTrajectoryPredictor', response.data.token, {
           path: '/'
@@ -54,7 +55,7 @@ export default function Login(props) {
   };
 
   return state.isLoggingIn ? (
-    <Loader text='Logging In...' />
+    <Loader text='Logging In...'/>
   ) : (
     <S.Login>
       <S.BodyBackgroundVertical primary />

@@ -36,6 +36,10 @@ h2 {
   margin-bottom: 8px;
 }
 
+button {
+  border: none;
+}
+
 input {
   border-radius: 5px;
   font-family: 'Lato', sans-serif;
@@ -52,6 +56,7 @@ a {
     text-decoration: underline;
   }
 }
+
 `;
 
 // APP CONTAINER
@@ -73,10 +78,11 @@ export const ViewContainer = styled.div`
 
 // SHARED COMPONENTS
 export const FormMessage = styled.div`
+  margin-bottom: 40px;
   border-radius: 5px;
   font-size: 1.2rem;
   color: white;
-  padding: 10px;
+  padding: 20px;
   ${props => props.error && `background: lightcoral;`}
   ${props => props.success && `background: lightgreen;`}
 `;
@@ -118,16 +124,23 @@ export const BodyBackgroundHorizontal = createGlobalStyle`
   }
 `;
 
+export const HtmlBackground = createGlobalStyle`
+  html {
+    background: ${viewContainerBackground}
+  }
+`;
+
 // LOADER
 export const Loader = styled(ViewContainer)`
   width: 700px;
   border-radius: 5px;
-  padding: 120px;
+  padding: 120px 120px 200px 120px;
   align-items: center;
   background: white;
 `;
 
 export const LoaderText = styled.div`
+  margin: 60px;
   font-size: 1.5rem;
 `;
 
@@ -199,6 +212,9 @@ export const LoginButton = styled.button`
   width: 100%;
   padding: 10px;
   margin: 20px 0;
+  &:hover {
+    background: #356dcc;
+  }
 `;
 
 // REGISTER
@@ -210,12 +226,27 @@ export const RegisterImage = styled(LoginImage)``;
 
 export const RegisterImageImg = styled(LoginImageImg)``;
 
-export const RegisterForm = styled(LoginForm)``;
+export const RegisterForm = styled(LoginForm)`
+  input {
+    &:focus {
+      color: #838eaf;
+      outline: none;
+      border-bottom: 4px solid #38c172;
+    }
+  }
+`;
 
-export const RegisterField = styled(LoginField)``;
+export const RegisterField = styled(LoginField)`
+  &:focus-within {
+    color: #38c172;
+  }
+`;
 
 export const RegisterButton = styled(LoginButton)`
   background: ${secondaryColor};
+  &:hover {
+    background: rgb(4, 158, 81);
+  }
 `;
 
 // PREDICTOR
@@ -301,7 +332,7 @@ export const StepButtonContainer = styled.div`
   align-items: center;
 `;
 
-export const NextStepButton = styled.div`
+export const NextStepButton = styled.button`
   text-transform: uppercase;
   text-align: right;
   width: 200px;
@@ -313,8 +344,15 @@ export const NextStepButton = styled.div`
   font-size: 1.2rem;
   padding: 15px;
 
+  &:disabled {
+    background: ${primaryColorLight};
+    &:hover {
+      background: ${primaryColorLight};
+    }
+  }
+
   &:hover {
-    background: ${primaryColor};
+    background: #356dcc;
   }
 `;
 
@@ -350,6 +388,14 @@ export const PredictorStepSubmitButton = styled.button`
   margin: 30px 0;
   font-size: 1.2rem;
   padding: 15px;
+
+  &:disabled {
+    background: #c4eed6;
+    &:hover {
+      background: #c4eed6;
+    }
+  }
+
   &:hover {
     background: rgb(4, 158, 81);
   }

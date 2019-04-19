@@ -3,10 +3,15 @@ import Loader from 'react-loader-spinner';
 import { primaryColor } from '../../styles';
 import * as S from '../../styles';
 
-export default function (props) {
+export default function(props) {
   return (
     <S.Loader>
-      <Loader type='ThreeDots' color={primaryColor} height={200} width={200} />
+      <Loader
+        type={props.type ? props.type : 'ThreeDots'}
+        color={props.color ? props.color : primaryColor}
+        height={500}
+        width={500}
+      />
       <S.LoaderText>{props.text}</S.LoaderText>
     </S.Loader>
   );
