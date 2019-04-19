@@ -403,38 +403,38 @@ export const PredictorStepSubmitButton = styled.button`
 
 export const PredictorOutput = styled.div`
   background: #e3e9f3;
-  padding: 40px;
+  padding: 60px 80px;
   margin: 0 auto;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 `;
 
 export const OutputTop = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
 `;
 
 export const OutputMiddle = styled.div`
   display: flex;
-  align-items: center;
+  justify-content: center;
 `;
 
 export const OutputBottom = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
 `;
 
 export const OutputItem = styled.div`
+  width: 280px;
   border-radius: 5px;
+  margin: 20px 0;
   background: white;
-  margin: 20px;
   font-size: 1rem;
   padding: 15px;
   @media (max-width: 600px) {
@@ -442,13 +442,22 @@ export const OutputItem = styled.div`
   }
 `;
 
-export const OutputItemResult = styled(OutputItem)`
-  max-width: 100%;
-  font-size: 5rem;
-  padding: 20px 50px;
-  font-weight: 400;
+export const OutputItemResult = styled.div`
+  margin: 45px auto;
+  font-size: 9rem;
+  border-radius: 5px;
+  padding: 40px;
   color: white;
   background: ${secondaryColor};
+  & > div {
+    font-size: 1.2rem;
+  }
+  @media (max-width: 900px) {
+    font-size: 6rem;
+  }
+  @media (max-width: 600px) {
+    font-size: 3rem;
+  }
 `;
 
 // PROFILE
