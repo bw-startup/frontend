@@ -2,6 +2,8 @@ import {
   LOGIN_START,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOGOUT_START,
+  LOGOUT_SUCCESS,
   REGISTER_START,
   REGISTER_SUCCESS,
   REGISTER_FAILURE,
@@ -35,6 +37,18 @@ export default (state, action) => {
         ...state,
         isLoggingIn: false,
         errorMessage: action.payload
+      };
+    case LOGOUT_START:
+      return {
+        ...state,
+        isLoggingOut: true,
+        errorMessage: ''
+      };
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        isLoggingOut: false,
+        errorMessage: ''
       };
     case REGISTER_START:
       return {

@@ -11,7 +11,9 @@ import {
   DELETE_USER_FAILURE,
   UPDATE_USER_START,
   UPDATE_USER_SUCCESS,
-  UPDATE_USER_FAILURE
+  UPDATE_USER_FAILURE,
+  LOGOUT_START,
+  LOGOUT_SUCCESS
 } from '../../utils/constants';
 import { Route } from 'react-router-dom';
 import Navigation from '../Navigation';
@@ -154,9 +156,13 @@ export default function Predictor(props) {
       });
   };
 
-  const handleLogOut = event => {
-    removeCookie('StartupTrajectoryPredictor', { path: '/' });
-    props.history.push('/');
+  const handleLogOut = () => {
+    dispatch({ type: LOGOUT_START });
+    setTimeout(() => {
+      dispatch({ type: LOGOUT_SUCCESS });
+      removeCookie('StartupTrajectoryPredictor', { path: '/' });
+      props.history.push('/');
+    }, 2000);
   };
 
   const handleDeleteUser = () => {

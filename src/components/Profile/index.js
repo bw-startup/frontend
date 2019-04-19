@@ -10,6 +10,8 @@ export default function Profile(props) {
     <Loader text='Deleting User...' color='#750000' />
   ) : state.isUpdating ? (
     <Loader text='Updating your password...' />
+  ) : state.isLoggingOut ? (
+    <Loader text='Logging out...' />
   ) : (
     <S.Profile>
       {props.updatedMessage && (
