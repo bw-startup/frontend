@@ -78,10 +78,11 @@ export const ViewContainer = styled.div`
 
 // SHARED COMPONENTS
 export const FormMessage = styled.div`
+  margin-bottom: 40px;
   border-radius: 5px;
   font-size: 1.2rem;
   color: white;
-  padding: 10px;
+  padding: 20px;
   ${props => props.error && `background: lightcoral;`}
   ${props => props.success && `background: lightgreen;`}
 `;

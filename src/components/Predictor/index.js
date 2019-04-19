@@ -8,7 +8,10 @@ import {
   PREDICT_FAILURE,
   DELETE_USER_START,
   DELETE_USER_SUCCESS,
-  DELETE_USER_FAILURE
+  DELETE_USER_FAILURE,
+  UPDATE_USER_START,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAILURE
 } from '../../utils/constants';
 import { Route } from 'react-router-dom';
 import Navigation from '../Navigation';
@@ -124,6 +127,7 @@ export default function Predictor(props) {
   };
 
   const handleUpdatePasswordSubmit = event => {
+    dispatch({ type: UPDATE_USER_START });
     event.preventDefault();
     axios
       .put('https://startups7.herokuapp.com/api/me', currentUser, {
@@ -132,13 +136,22 @@ export default function Predictor(props) {
         }
       })
       .then(() => {
-        setUpdatedMessage('Password updated successfully!');
-        setCurrentUser(inputs => ({
-          ...inputs,
-          password: ''
-        }));
+        setTimeout(() => {
+          dispatch({ type: UPDATE_USER_SUCCESS });
+          setUpdatedMessage('Password updated successfully!');
+          setCurrentUser(inputs => ({
+            ...inputs,
+            password: ''
+          }));
+        }, 2000);
       })
-      .catch(err => console.log(err.response.data.message));
+      .catch(err => {
+        dispatch({
+          type: UPDATE_USER_FAILURE,
+          payload: err.response.data.message
+        });
+        console.log(err.response.data.message);
+      });
   };
 
   const handleLogOut = event => {

@@ -10,7 +10,10 @@ import {
   PREDICT_FAILURE,
   DELETE_USER_START,
   DELETE_USER_SUCCESS,
-  DELETE_USER_FAILURE
+  DELETE_USER_FAILURE,
+  UPDATE_USER_START,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAILURE
 } from '../constants';
 
 export default (state, action) => {
@@ -25,7 +28,7 @@ export default (state, action) => {
       return {
         ...state,
         isLoggingIn: false,
-        errorMessage: '',
+        errorMessage: ''
       };
     case LOGIN_FAILURE:
       return {
@@ -86,6 +89,24 @@ export default (state, action) => {
       return {
         ...state,
         isDeleting: false,
+        errorMessage: action.payload
+      };
+    case UPDATE_USER_START:
+      return {
+        ...state,
+        isUpdating: true,
+        errorMessage: ''
+      };
+    case UPDATE_USER_SUCCESS:
+      return {
+        ...state,
+        isUpdating: false,
+        errorMessage: ''
+      };
+    case UPDATE_USER_FAILURE:
+      return {
+        ...state,
+        isUpdating: false,
         errorMessage: action.payload
       };
     default:

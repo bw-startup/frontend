@@ -8,8 +8,13 @@ export default function Profile(props) {
 
   return state.isDeleting ? (
     <Loader text='Deleting User...' color='#750000' />
+  ) : state.isUpdating ? (
+    <Loader text='Updating your password...' />
   ) : (
     <S.Profile>
+      {props.updatedMessage && (
+        <S.FormMessage success>{props.updatedMessage}</S.FormMessage>
+      )}
       <S.PredictorInputForm onSubmit={props.handleUpdatePasswordSubmit}>
         <S.PredictorInputStepField>
           <input
@@ -46,9 +51,6 @@ export default function Profile(props) {
           />
         </S.PredictorInputStepField>
         <S.Button>Update Password</S.Button>
-        {props.updatedMessage && (
-          <S.FormMessage success>{props.updatedMessage}</S.FormMessage>
-        )}
 
         <div
           style={{
