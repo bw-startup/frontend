@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import AnimatedNumber from 'react-animated-number';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,9 +22,13 @@ import * as S from '../../styles';
 
 export default function PredictorOutput(props) {
   const [cookie] = useCookies(['PredictorResults']);
-  const latestResult = [...cookie['PredictorResults']].pop();
+  let latestResult = [];
 
-  return (
+  if (cookie['PredictorResults']) {
+    latestResult = [...cookie['PredictorResults']].pop();
+  }
+
+  return cookie['PredictorResults'] ? (
     <div>
       <S.PredictorOutput>
         <S.OutputTop>
@@ -234,5 +239,7 @@ export default function PredictorOutput(props) {
         </div>
       </S.PredictorOutput>
     </div>
+  ) : (
+    <Redirect to='/predictor' />
   );
 }

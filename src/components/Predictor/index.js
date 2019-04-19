@@ -17,9 +17,7 @@ import * as S from '../../styles';
 export default function Predictor(props) {
   const { state, dispatch } = useContext(GlobalContext);
   const [cookie, , removeCookie] = useCookies(['StartupTrajectoryPredictor']);
-  const [cookieResults, setCookieResults, removeCookieResults] = useCookies([
-    'PredictorResults'
-  ]);
+  const [cookieResults, setCookieResults] = useCookies(['PredictorResults']);
   const [updatedMessage, setUpdatedMessage] = useState('');
   const [currentUser, setCurrentUser] = useState({
     id: '',
@@ -85,7 +83,6 @@ export default function Predictor(props) {
             ...cookieResults['PredictorResults'],
             { ...inputs, prediction: response.data.prediction }
           ];
-          removeCookieResults('PredictorResults', { path: '/' });
           setCookieResults('PredictorResults', newResults, {
             path: '/'
           });
@@ -98,19 +95,21 @@ export default function Predictor(props) {
             }
           );
         }
-        dispatch({
-          type: PREDICT_SUCCESS,
-          payload: response.data.prediction
-        });
-        setInputs({
-          headquarters: '',
-          numFounders: '',
-          numFundingRounds: '',
-          numArticles: '',
-          numEmployees: '',
-          industry: ''
-        });
-        props.history.push('/predictor/results');
+        setTimeout(() => {
+          dispatch({
+            type: PREDICT_SUCCESS,
+            payload: response.data.prediction
+          });
+          setInputs({
+            headquarters: '',
+            numFounders: '',
+            numFundingRounds: '',
+            numArticles: '',
+            numEmployees: '',
+            industry: ''
+          });
+          props.history.push('/predictor/results');
+        }, 3000);
       })
       .catch(err => {
         dispatch({
@@ -159,6 +158,7 @@ export default function Predictor(props) {
 
   return (
     <S.Predictor>
+      <S.HtmlBackground />
       <S.BodyBackgroundHorizontal primary />
       <Navigation />
       <Route

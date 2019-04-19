@@ -36,6 +36,10 @@ h2 {
   margin-bottom: 8px;
 }
 
+button {
+  border: none;
+}
+
 input {
   border-radius: 5px;
   font-family: 'Lato', sans-serif;
@@ -52,6 +56,7 @@ a {
     text-decoration: underline;
   }
 }
+
 `;
 
 // APP CONTAINER
@@ -118,11 +123,17 @@ export const BodyBackgroundHorizontal = createGlobalStyle`
   }
 `;
 
+export const HtmlBackground = createGlobalStyle`
+  html {
+    background: ${viewContainerBackground}
+  }
+`;
+
 // LOADER
 export const Loader = styled(ViewContainer)`
   width: 700px;
   border-radius: 5px;
-  padding: 120px;
+  padding: 120px 120px 200px 120px;
   align-items: center;
   background: white;
 `;
@@ -301,7 +312,7 @@ export const StepButtonContainer = styled.div`
   align-items: center;
 `;
 
-export const NextStepButton = styled.div`
+export const NextStepButton = styled.button`
   text-transform: uppercase;
   text-align: right;
   width: 200px;
@@ -312,6 +323,13 @@ export const NextStepButton = styled.div`
   margin: 30px 0;
   font-size: 1.2rem;
   padding: 15px;
+
+  &:disabled {
+    background: ${primaryColorLight};
+    &:hover {
+      background: ${primaryColorLight};
+    }
+  }
 
   &:hover {
     background: ${primaryColor};
@@ -350,6 +368,14 @@ export const PredictorStepSubmitButton = styled.button`
   margin: 30px 0;
   font-size: 1.2rem;
   padding: 15px;
+
+  &:disabled {
+    background: #c4eed6;
+    &:hover {
+      background: #c4eed6;
+    }
+  }
+
   &:hover {
     background: rgb(4, 158, 81);
   }

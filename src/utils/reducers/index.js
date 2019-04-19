@@ -55,7 +55,6 @@ export default (state, action) => {
         errorMessage: ''
       };
     case PREDICT_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         isPredicting: false,

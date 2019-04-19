@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PredictorStep from './PredictorStep';
-import PredictorStepButtons from './PredictorStepButtons';
 import {
   headquartersLocationOptions,
   industryOptions
@@ -16,33 +15,10 @@ export default function PredictorInputForm(props) {
     setStep(prevStep => prevStep + 1);
   };
 
-  const previousStep = () => {
+  const previousStep = event => {
+    event.preventDefault();
     setStep(prevStep => prevStep - 1);
   };
-
-  // todo:
-  // display all inputs on default case
-
-  // Headquarters Location
-  // Industry
-  // Number of Founders
-  // Number of Funding rounds
-  // Number of Articles
-  // Number of Employees
-
-  // headquartersLocation: '',
-  // industry: '',
-  // numberOfFounders: '',
-  // numberOfFundingRounds: '',
-  // numberOfArticles: '',
-  // numberOfEmployees: ''
-
-  // headquarters,
-  // numFounders,
-  // numFundingRounds,
-  // numArticles,
-  // numEmployees,
-  // industry
 
   switch (step) {
     case 0:
@@ -72,11 +48,22 @@ export default function PredictorInputForm(props) {
             value={props.inputs}
             handleInputChange={props.handleInputChange}
           />
-          <PredictorStepButtons
-            step={step}
-            previousStep={previousStep}
-            nextStep={nextStep}
-          />
+          <S.StepButtonContainer>
+            <S.PreviousStepButton
+              type='button'
+              visible={false}
+              onClick={previousStep}
+            >
+              <span style={{ padding: '0 10px' }}>◀</span> Previous
+            </S.PreviousStepButton>
+            <S.NextStepButton
+              type='button'
+              onClick={nextStep}
+              disabled={!props.inputs.headquarters || !props.inputs.industry}
+            >
+              Next <span style={{ padding: '0 10px' }}>▶</span>
+            </S.NextStepButton>
+          </S.StepButtonContainer>
         </div>
       );
     case 1:
@@ -104,11 +91,24 @@ export default function PredictorInputForm(props) {
             value={props.inputs}
             handleInputChange={props.handleInputChange}
           />
-          <PredictorStepButtons
-            step={step}
-            previousStep={previousStep}
-            nextStep={nextStep}
-          />
+          <S.StepButtonContainer>
+            <S.PreviousStepButton
+              type='button'
+              visible={false}
+              onClick={previousStep}
+            >
+              <span style={{ padding: '0 10px' }}>◀</span> Previous
+            </S.PreviousStepButton>
+            <S.NextStepButton
+              type='button'
+              onClick={nextStep}
+              disabled={
+                !props.inputs.numFundingRounds || !props.inputs.numFounders
+              }
+            >
+              Next <span style={{ padding: '0 10px' }}>▶</span>
+            </S.NextStepButton>
+          </S.StepButtonContainer>
         </div>
       );
     case 2:
@@ -141,11 +141,17 @@ export default function PredictorInputForm(props) {
             value={props.inputs}
             handleInputChange={props.handleInputChange}
           />
-          <PredictorStepButtons
-            step={step}
-            previousStep={previousStep}
-            nextStep={nextStep}
-          />
+          <S.StepButtonContainer>
+            <S.PreviousStepButton type='button' visible onClick={previousStep}>
+              <span style={{ padding: '0 10px' }}>◀</span> Previous
+            </S.PreviousStepButton>
+            <S.PredictorStepSubmitButton
+              type='submit'
+              disabled={!props.inputs.numEmployees || !props.inputs.numArticles}
+            >
+              Predict Now <span style={{ padding: '0 10px' }}>▶</span>
+            </S.PredictorStepSubmitButton>
+          </S.StepButtonContainer>
         </div>
       );
     default:
