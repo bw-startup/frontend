@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import AnimatedNumber from 'react-animated-number';
@@ -9,24 +9,67 @@ import {
   faChartLine,
   faNewspaper,
   faIndustry,
-  faCity
+  faCity,
+  faSortAmountUp,
+  faSortAmountDown,
+  faSortAlphaUp,
+  faSortAlphaDown
 } from '@fortawesome/free-solid-svg-icons';
 import * as S from '../../styles';
 
-// headquarters: '',
-// numFounders: '',
-// numFundingRounds: '',
-// numArticles: '',
-// numEmployees: '',
-// industry: ''
-
 export default function PredictorOutput(props) {
+  const [resultsHistory, setResultsHistory] = useState([]);
+  const [latestResult, setLatestResult] = useState({});
   const [cookie] = useCookies(['PredictorResults']);
-  let latestResult = [];
 
-  if (cookie['PredictorResults']) {
-    latestResult = [...cookie['PredictorResults']].pop();
-  }
+  useEffect(() => {
+    setResultsHistory(cookie['PredictorResults']);
+    setLatestResult(
+      cookie['PredictorResults'][cookie['PredictorResults'].length - 1]
+    );
+  }, []);
+
+  const handlePredictionSortAscending = event => {
+    event.preventDefault();
+    setResultsHistory(
+      [...cookie['PredictorResults']].sort(
+        (a, b) => a.prediction - b.prediction
+      )
+    );
+  };
+
+  const handlePredictionSortDescending = event => {
+    event.preventDefault();
+    setResultsHistory(
+      [...cookie['PredictorResults']].sort(
+        (a, b) => b.prediction - a.prediction
+      )
+    );
+  };
+
+  const handleCitySortDescending = event => {
+    event.preventDefault();
+    function sortByDescendingOrder(a, b) {
+      a = a.headquarters.toLowerCase();
+      b = b.headquarters.toLowerCase();
+      return a > b ? -1 : b > a ? 1 : 0;
+    }
+    setResultsHistory(
+      [...cookie['PredictorResults']].sort(sortByDescendingOrder)
+    );
+  };
+
+  const handleCitySortAscending = event => {
+    event.preventDefault();
+    function sortByAscendingOrder(a, b) {
+      a = a.headquarters.toLowerCase();
+      b = b.headquarters.toLowerCase();
+      return a > b ? 1 : b > a ? -1 : 0;
+    }
+    setResultsHistory(
+      [...cookie['PredictorResults']].sort(sortByAscendingOrder)
+    );
+  };
 
   return cookie['PredictorResults'] ? (
     <div>
@@ -161,10 +204,48 @@ export default function PredictorOutput(props) {
             fontSize: '1rem'
           }}
         >
-          <h1 style={{ margin: '40px', fontWeight: '300' }}>
-            Prediction History:{' '}
-          </h1>
-          {cookie['PredictorResults'].map((result, index) => (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center'
+            }}
+          >
+            <div>
+              <FontAwesomeIcon
+                style={{ color: '249D57', cursor: 'pointer' }}
+                icon={faSortAlphaDown}
+                onClick={handleCitySortAscending}
+                size='3x'
+              />
+              <FontAwesomeIcon
+                style={{ margin: '0 20px', cursor: 'pointer' }}
+                rotation={180}
+                icon={faSortAlphaUp}
+                onClick={handleCitySortDescending}
+                size='3x'
+              />
+            </div>
+            <h1 style={{ margin: '40px', fontWeight: '300' }}>
+              Prediction History:{' '}
+            </h1>
+            <div>
+              <FontAwesomeIcon
+                style={{ margin: '0 20px', color: '249D57', cursor: 'pointer' }}
+                icon={faSortAmountDown}
+                onClick={handlePredictionSortDescending}
+                size='3x'
+              />
+              <FontAwesomeIcon
+                style={{ cursor: 'pointer' }}
+                rotation={180}
+                icon={faSortAmountUp}
+                onClick={handlePredictionSortAscending}
+                size='3x'
+              />
+            </div>
+          </div>
+          {resultsHistory.map((result, index) => (
             <div
               key={index}
               style={{
