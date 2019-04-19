@@ -42,6 +42,7 @@ export default function Login(props) {
     axios
       .post('https://startups7.herokuapp.com/api/auth/login', inputs)
       .then(response => {
+        console.log('login success', response.data.token);
         dispatch({ type: LOGIN_SUCCESS });
         setCookie('StartupTrajectoryPredictor', response.data.token, {
           path: '/'

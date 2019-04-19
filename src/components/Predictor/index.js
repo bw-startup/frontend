@@ -5,7 +5,10 @@ import GlobalContext from '../../utils/context';
 import {
   PREDICT_START,
   PREDICT_SUCCESS,
-  PREDICT_FAILURE
+  PREDICT_FAILURE,
+  DELETE_USER_START,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAILURE
 } from '../../utils/constants';
 import { Route } from 'react-router-dom';
 import Navigation from '../Navigation';
@@ -144,16 +147,24 @@ export default function Predictor(props) {
   };
 
   const handleDeleteUser = () => {
+    dispatch({ type: DELETE_USER_START });
     axios
-      .delete('https://startups7.herokuapp.com/api/me', currentUser.id, {
+      .delete('https://startups7.herokuapp.com/api/me', {
         headers: {
           Authorization: cookie['StartupTrajectoryPredictor']
         }
       })
       .then(() => {
+        dispatch({ type: DELETE_USER_SUCCESS });
         removeCookie('StartupTrajectoryPredictor', { path: '/' });
       })
-      .catch(err => console.log(err.response.data.message));
+      .catch(err => {
+        dispatch({
+          type: DELETE_USER_FAILURE,
+          payload: err.response.data.message
+        });
+        console.log(err.response.data.message);
+      });
   };
 
   return (
