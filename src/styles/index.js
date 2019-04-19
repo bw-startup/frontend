@@ -444,7 +444,7 @@ export const OutputItem = styled.div`
 
 export const OutputItemResult = styled.div`
   margin: 45px auto;
-  font-size: 9rem;
+  font-size: 6rem;
   border-radius: 5px;
   padding: 40px;
   color: white;

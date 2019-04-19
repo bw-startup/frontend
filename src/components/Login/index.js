@@ -22,7 +22,9 @@ export default function Login(props) {
 
   useEffect(() => {
     if (cookie['StartupTrajectoryPredictor']) {
+      dispatch({ type: LOGIN_START });
       setTimeout(() => {
+        dispatch({ type: LOGIN_SUCCESS });
         props.history.push('/predictor');
       }, 2000);
     }
@@ -55,7 +57,7 @@ export default function Login(props) {
   };
 
   return state.isLoggingIn ? (
-    <Loader text='Logging In...'/>
+    <Loader text='Logging In...' />
   ) : (
     <S.Login>
       <S.BodyBackgroundVertical primary />
