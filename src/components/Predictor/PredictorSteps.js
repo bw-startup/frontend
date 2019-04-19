@@ -65,7 +65,7 @@ export default function PredictorInputForm(props) {
             type='select'
             placeholder='Select industry'
             options={industryOptions}
-            title='What industry in this company in?'
+            title='What industry is this company in?'
             htmlFor='industry'
             name='industry'
             id='industry'
