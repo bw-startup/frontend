@@ -37,6 +37,7 @@ h2 {
 }
 
 input {
+  border-radius: 5px;
   font-family: 'Lato', sans-serif;
 }
 
@@ -223,19 +224,18 @@ export const Predictor = styled.div`
 `;
 
 export const PredictorInput = styled(ViewContainer)`
-  height: 100vh;
-  padding: 40px 150px;
+  padding: 40px 250px 400px 250px;
 `;
 
 export const PredictorInputStep = styled.div`
-  margin: 20px 0;
+  margin: 60px 0;
 `;
 
 export const PredictorInputForm = styled.form``;
 
 export const PredictorTitle = styled.h2`
   text-align: center;
-  margin: 15px 0 35px 0;
+  margin: 25px 0 75px 0;
 `;
 
 export const PredictorInputStepField = styled.div`
@@ -244,10 +244,10 @@ export const PredictorInputStepField = styled.div`
   flex-direction: column;
 
   label {
-    font-size: 1.2rem;
+    text-align: center;
+    font-size: 2rem;
     font-weight: 400;
-    padding: 10px 0;
-    text-transform: uppercase;
+    padding: 40px 0;
   }
 
   &:focus-within {
@@ -295,17 +295,20 @@ export const PredictorInputStepField = styled.div`
 `;
 
 export const StepButtonContainer = styled.div`
+  margin-top: 100px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const NextStepButton = styled.div`
-  text-align: center;
+  text-transform: uppercase;
+  text-align: right;
   width: 200px;
   cursor: pointer;
   color: white;
   background: ${primaryColor};
-  border-radius: 50px;
+  border-radius: 5px;
   margin: 30px 0;
   font-size: 1.2rem;
   padding: 15px;
@@ -316,7 +319,8 @@ export const NextStepButton = styled.div`
 `;
 
 export const PreviousStepButton = styled(NextStepButton)`
-  background: ${primaryColorLight};
+  text-align: left;
+  background: ${primaryColor};
   visibility: ${props => (props.visible ? 'visible' : 'hidden')};
 `;
 
@@ -328,20 +332,21 @@ export const Button = styled.button`
   cursor: pointer;
   color: white;
   background: ${primaryColor};
-  border-radius: 50px;
-  margin: 40px 0;
+  border-radius: 5px;
+  margin: 60px 0;
   font-size: 1rem;
   padding: 20px;
 `;
 
 export const PredictorStepSubmitButton = styled.button`
+  text-transform: uppercase;
   font-weight: 300;
-  text-align: center;
+  text-align: right;
   width: 230px;
   cursor: pointer;
   color: white;
   background: ${secondaryColor};
-  border-radius: 50px;
+  border-radius: 5px;
   margin: 30px 0;
   font-size: 1.2rem;
   padding: 15px;
@@ -403,7 +408,7 @@ export const OutputItemResult = styled(OutputItem)`
 // PROFILE
 export const Profile = styled(ViewContainer)`
   border-radius: 5px;
-  padding: 120px;
+  padding: 65px 120px 420px 120px;
   align-items: center;
 `;
 
@@ -416,6 +421,8 @@ export const Navigation = styled.div`
 `;
 
 export const NavigationLink = styled(NavLink)`
+  border-radius: 5px 5px 0 0;
+  margin-right: 15px;
   color: white;
   font-size: 0.8rem;
   text-decoration: none;
@@ -436,5 +443,5 @@ export const NavigationLink = styled(NavLink)`
 `;
 
 export const Title = styled.h2`
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 `;

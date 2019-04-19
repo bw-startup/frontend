@@ -22,7 +22,6 @@ export default function Login(props) {
 
   useEffect(() => {
     if (cookie['StartupTrajectoryPredictor']) {
-      dispatch({ type: LOGIN_START });
       setTimeout(() => {
         props.history.push('/predictor');
       }, 2000);
@@ -65,7 +64,7 @@ export default function Login(props) {
 
       <S.LoginForm>
         <h2>Welcome back!</h2>
-        <p>Sign in to continue using STP</p>
+        <p>Sign in to continue using Predict a Venture!</p>
         <form onSubmit={handleLoginSubmit}>
           <S.LoginField>
             <label htmlFor='email'>Email:</label>

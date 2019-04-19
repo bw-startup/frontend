@@ -49,11 +49,12 @@ export default function PredictorInputForm(props) {
       return (
         <div>
           <S.PredictorTitle>Let's get started!</S.PredictorTitle>
+          <Progress percent={33} />
           <PredictorStep
             type='select'
-            placeholder='Select Location'
+            placeholder='Select location'
             options={headquartersLocationOptions}
-            title='Headquarters Location:'
+            title='Where is this company located?'
             htmlFor='headquarters'
             name='headquarters'
             id='headquarters'
@@ -62,9 +63,9 @@ export default function PredictorInputForm(props) {
           />
           <PredictorStep
             type='select'
-            placeholder='Select Industry'
+            placeholder='Select industry'
             options={industryOptions}
-            title='Industry:'
+            title='What industry in this company in?'
             htmlFor='industry'
             name='industry'
             id='industry'
@@ -76,30 +77,30 @@ export default function PredictorInputForm(props) {
             previousStep={previousStep}
             nextStep={nextStep}
           />
-          <Progress percent={33} style={{ padding: '20px' }} />
         </div>
       );
     case 1:
       return (
         <div>
           <S.PredictorTitle>Step 2:</S.PredictorTitle>
+          <Progress percent={70} />
           <PredictorStep
             type='number'
-            title='Number of Funding Rounds:'
+            title='How many funding rounds has this company received?'
             htmlFor='numFundingRounds'
             name='numFundingRounds'
             id='numFundingRounds'
-            placeholder='Funding Rounds'
+            placeholder='e.g. 3'
             value={props.inputs}
             handleInputChange={props.handleInputChange}
           />
           <PredictorStep
             type='number'
-            title='Number of Founders:'
+            title='How many people founded this company?'
             htmlFor='numFounders'
             name='numFounders'
             id='numFounders'
-            placeholder='Founders'
+            placeholder='e.g. 2'
             value={props.inputs}
             handleInputChange={props.handleInputChange}
           />
@@ -108,31 +109,35 @@ export default function PredictorInputForm(props) {
             previousStep={previousStep}
             nextStep={nextStep}
           />
-          <Progress percent={66} style={{ padding: '20px' }} />
         </div>
       );
     case 2:
       return (
         <div>
           <S.PredictorTitle>Lets see the prediction!</S.PredictorTitle>
+          <Progress
+            percent={100}
+            style={{ padding: '20px' }}
+            status='success'
+          />
           <PredictorStep
             type='number'
-            title='Number of Employees:'
+            title='How many people are employed in this company?'
             htmlFor='numEmployees'
             name='numEmployees'
             id='numEmployees'
-            placeholder='Employees'
+            placeholder='e.g. 130'
             value={props.inputs}
             handleInputChange={props.handleInputChange}
           />
 
           <PredictorStep
             type='number'
-            title='Number of Public News Articles Written About the Company:'
+            title='How many news articles have been written about this company?'
             htmlFor='numArticles'
             name='numArticles'
             id='numArticles'
-            placeholder='Public Articles'
+            placeholder='e.g. 7'
             value={props.inputs}
             handleInputChange={props.handleInputChange}
           />
@@ -141,7 +146,6 @@ export default function PredictorInputForm(props) {
             previousStep={previousStep}
             nextStep={nextStep}
           />
-          <Progress percent={100} style={{ padding: '20px' }}  status="success"/>
         </div>
       );
     default:
