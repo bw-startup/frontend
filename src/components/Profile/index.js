@@ -7,11 +7,11 @@ export default function Profile(props) {
   const { state } = useContext(GlobalContext);
 
   return state.isDeleting ? (
-    <Loader text='Deleting User...' color='#750000' />
+    <Loader text='Deleting User...' color='#750000' type='Plane' />
   ) : state.isUpdating ? (
-    <Loader text='Updating your password...' />
+    <Loader text='Updating your password...' type='Oval' />
   ) : state.isLoggingOut ? (
-    <Loader text='Logging out...' />
+    <Loader text='Logging out...' type='Plane' />
   ) : (
     <S.Profile>
       {props.updatedMessage && (

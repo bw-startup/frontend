@@ -9,7 +9,7 @@ export default function PredictorInput(props) {
   const { state } = useContext(GlobalContext);
 
   return state.isPredicting ? (
-    <Loader text='Data Scientists working...' color='#38c172' />
+    <Loader text='Data Scientists working...' color='#38c172' type='Grid' />
   ) : (
     <S.PredictorInput>
       <S.PredictorInputForm onSubmit={props.handlePredictorInputSubmit}>

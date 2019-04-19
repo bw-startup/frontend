@@ -41,7 +41,7 @@ export default function PredictorInputForm(props) {
             type='select'
             placeholder='Select industry'
             options={industryOptions}
-            title='What industry in this company in?'
+            title='What Industry in this company in?'
             htmlFor='industry'
             name='industry'
             id='industry'
@@ -83,7 +83,7 @@ export default function PredictorInputForm(props) {
           />
           <PredictorStep
             type='number'
-            title='How many people founded this company?'
+            title='How many founders does this company have?'
             htmlFor='numFounders'
             name='numFounders'
             id='numFounders'

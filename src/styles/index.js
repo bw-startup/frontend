@@ -140,6 +140,7 @@ export const Loader = styled(ViewContainer)`
 `;
 
 export const LoaderText = styled.div`
+  margin: 60px;
   font-size: 1.5rem;
 `;
 

@@ -7,10 +7,10 @@ export default function(props) {
   return (
     <S.Loader>
       <Loader
-        type='ThreeDots'
+        type={props.type ? props.type : 'ThreeDots'}
         color={props.color ? props.color : primaryColor}
-        height={200}
-        width={200}
+        height={500}
+        width={500}
       />
       <S.LoaderText>{props.text}</S.LoaderText>
     </S.Loader>
