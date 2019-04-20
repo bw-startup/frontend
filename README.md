@@ -21,6 +21,13 @@ User inputs:
 }
 ```
 
+Output:
+```js
+{
+    prediction: // percentage float
+}
+```
+
 [Marketing Landing Page](https://bw-startup.github.io/User_Interface/)
 
 [Live Demo](https://predict-a-venture.netlify.com/)
