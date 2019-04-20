@@ -20,32 +20,38 @@ import * as S from '../../styles';
 export default function PredictorOutput(props) {
   const [resultsHistory, setResultsHistory] = useState([]);
   const [latestResult, setLatestResult] = useState({});
-  const [cookie] = useCookies(['PredictorResults']);
+  const [hasPredictedCookie, setHasPredictedCookie] = useCookies([
+    'hasPredictedCookie'
+  ]);
+  const [displayAnimation, setDisplayAnimation] = useState(false);
 
   useEffect(() => {
-    if (cookie['PredictorResults']) {
-      setResultsHistory(cookie['PredictorResults']);
-      setLatestResult(
-        cookie['PredictorResults'][cookie['PredictorResults'].length - 1]
-      );
+    if (hasPredictedCookie['hasPredictedCookie']) {
+      setDisplayAnimation(false);
+    } else {
+      setHasPredictedCookie('hasPredictedCookie', true, {
+        path: '/'
+      });
+      setDisplayAnimation(true);
+    }
+
+    if (props.cookie) {
+      setResultsHistory(props.cookie);
+      setLatestResult(props.cookie[props.cookie.length - 1]);
     }
   }, []);
 
   const handlePredictionSortAscending = event => {
     event.preventDefault();
     setResultsHistory(
-      [...cookie['PredictorResults']].sort(
-        (a, b) => a.prediction - b.prediction
-      )
+      [...props.cookie].sort((a, b) => a.prediction - b.prediction)
     );
   };
 
   const handlePredictionSortDescending = event => {
     event.preventDefault();
     setResultsHistory(
-      [...cookie['PredictorResults']].sort(
-        (a, b) => b.prediction - a.prediction
-      )
+      [...props.cookie].sort((a, b) => b.prediction - a.prediction)
     );
   };
 
@@ -56,9 +62,7 @@ export default function PredictorOutput(props) {
       b = b.headquarters.toLowerCase();
       return a > b ? -1 : b > a ? 1 : 0;
     }
-    setResultsHistory(
-      [...cookie['PredictorResults']].sort(sortByDescendingOrder)
-    );
+    setResultsHistory([...props.cookie].sort(sortByDescendingOrder));
   };
 
   const handleCitySortAscending = event => {
@@ -68,12 +72,10 @@ export default function PredictorOutput(props) {
       b = b.headquarters.toLowerCase();
       return a > b ? 1 : b > a ? -1 : 0;
     }
-    setResultsHistory(
-      [...cookie['PredictorResults']].sort(sortByAscendingOrder)
-    );
+    setResultsHistory([...props.cookie].sort(sortByAscendingOrder));
   };
 
-  return cookie['PredictorResults'] ? (
+  return props.cookie ? (
     <div>
       <S.PredictorOutput>
         <S.OutputTop>
@@ -139,20 +141,24 @@ export default function PredictorOutput(props) {
         </S.OutputTop>
         <S.OutputMiddle>
           <S.OutputItemResult>
-            <AnimatedNumber
-              style={{
-                transition: '7s ease-out',
-                lineHeight: 1.1,
-                transitionProperty: 'background-color, color'
-              }}
-              frameStyle={perc =>
-                perc === 100 ? {} : { backgroundColor: 'transparent' }
-              }
-              duration={900}
-              stepPrecision={0}
-              value={latestResult.prediction}
-              formatValue={n => `▲ ${n} %`}
-            />
+            {displayAnimation ? (
+              <AnimatedNumber
+                style={{
+                  transition: '7s ease-out',
+                  lineHeight: 1.1,
+                  transitionProperty: 'background-color, color'
+                }}
+                frameStyle={perc =>
+                  perc === 100 ? {} : { backgroundColor: 'transparent' }
+                }
+                duration={900}
+                stepPrecision={0}
+                value={latestResult.prediction}
+                formatValue={n => `▲ ${n} %`}
+              />
+            ) : (
+              <span>▲ {latestResult.prediction} %</span>
+            )}
           </S.OutputItemResult>
         </S.OutputMiddle>
         <S.OutputBottom>
@@ -177,7 +183,7 @@ export default function PredictorOutput(props) {
           <S.OutputItem
             style={{
               display: 'flex',
-              justifyContent: 'flex-end',
+              justifyContent: 'center',
               alignItems: 'center'
             }}
           >

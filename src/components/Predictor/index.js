@@ -26,6 +26,7 @@ export default function Predictor(props) {
   const { state, dispatch } = useContext(GlobalContext);
   const [cookie, , removeCookie] = useCookies(['StartupTrajectoryPredictor']);
   const [cookieResults, setCookieResults] = useCookies(['PredictorResults']);
+  const [, , removeHasPredictedCookie] = useCookies(['hasPredictedCookie']);
   const [updatedMessage, setUpdatedMessage] = useState('');
   const [currentUser, setCurrentUser] = useState({
     id: '',
@@ -77,6 +78,7 @@ export default function Predictor(props) {
   const handlePredictorInputSubmit = event => {
     event.preventDefault();
     dispatch({ type: PREDICT_START });
+    removeHasPredictedCookie('hasPredictedCookie', { path: '/' });
     axios
       .post(
         'https://startups7.herokuapp.com/api/predict',
@@ -94,24 +96,24 @@ export default function Predictor(props) {
         }
       )
       .then(response => {
-        if (cookieResults['PredictorResults']) {
-          const newResults = [
-            ...cookieResults['PredictorResults'],
-            { ...inputs, prediction: response.data.prediction }
-          ];
-          setCookieResults('PredictorResults', newResults, {
-            path: '/'
-          });
-        } else {
-          setCookieResults(
-            'PredictorResults',
-            [{ ...inputs, prediction: response.data.prediction }],
-            {
-              path: '/'
-            }
-          );
-        }
         setTimeout(() => {
+          if (cookieResults['PredictorResults']) {
+            const newResults = [
+              ...cookieResults['PredictorResults'],
+              { ...inputs, prediction: response.data.prediction }
+            ];
+            setCookieResults('PredictorResults', newResults, {
+              path: '/'
+            });
+          } else {
+            setCookieResults(
+              'PredictorResults',
+              [{ ...inputs, prediction: response.data.prediction }],
+              {
+                path: '/'
+              }
+            );
+          }
           dispatch({
             type: PREDICT_SUCCESS,
             payload: response.data.prediction
