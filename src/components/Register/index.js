@@ -72,59 +72,60 @@ export default function Register(props) {
   if (state.isRegistering) {
     return <Loader text='Registering...' />;
   } else if (state.isLoggingIn) {
-    return <Loader text='Thank you for registering! Logging you in...' />;
+    return <Loader text='Thank you for registering! Logging in...' />;
   } else {
-    // if (cookie['StartupTrajectoryPredictor']) {
-    //   return <Loader text='Thank you for Registering. Logging you in...' />;
-    // }
-
-    return (
-      <S.Register>
-        <S.BodyBackgroundVertical />
-        <S.RegisterImage>
-          <S.RegisterImageImg
-            className='login__image--img'
-            src='/images/investing-register.svg'
-            alt='Investing'
-          />
-        </S.RegisterImage>
-        <S.RegisterForm>
-          <h2>Hello, Friend!</h2>
-          <p>Join us and lets get started.</p>
-          <form onSubmit={handleRegisterSubmit}>
-            <S.RegisterField>
-              <label htmlFor='email'>Email:</label>
-              <input
-                required
-                type='email'
-                name='email'
-                onChange={handleInputChange}
-                value={inputs.email}
-              />
-            </S.RegisterField>
-
-            <S.RegisterField>
-              <label htmlFor='password'>Password:</label>
-              <input
-                required
-                type='password'
-                name='password'
-                onChange={handleInputChange}
-                value={inputs.password}
-              />
-            </S.RegisterField>
-            {state.errorMessage && (
-              <ErrorMessage message={state.errorMessage} />
-            )}
-            <S.RegisterButton type='submit'>Join Now</S.RegisterButton>
-            <FormFooterLink
-              text='Already a member?'
-              to='/'
-              linkText='Log In!'
+    if (cookie['StartupTrajectoryPredictor']) {
+      return <Loader text='Logging in...' />;
+    } else {
+      return (
+        <S.Register>
+          {console.log('render')}
+          <S.BodyBackgroundVertical />
+          <S.RegisterImage>
+            <S.RegisterImageImg
+              className='login__image--img'
+              src='/images/investing-register.svg'
+              alt='Investing'
             />
-          </form>
-        </S.RegisterForm>
-      </S.Register>
-    );
+          </S.RegisterImage>
+          <S.RegisterForm>
+            <h2>Hello, Friend!</h2>
+            <p>Join us and lets get started.</p>
+            <form onSubmit={handleRegisterSubmit}>
+              <S.RegisterField>
+                <label htmlFor='email'>Email:</label>
+                <input
+                  required
+                  type='email'
+                  name='email'
+                  onChange={handleInputChange}
+                  value={inputs.email}
+                />
+              </S.RegisterField>
+
+              <S.RegisterField>
+                <label htmlFor='password'>Password:</label>
+                <input
+                  required
+                  type='password'
+                  name='password'
+                  onChange={handleInputChange}
+                  value={inputs.password}
+                />
+              </S.RegisterField>
+              {state.errorMessage && (
+                <ErrorMessage message={state.errorMessage} />
+              )}
+              <S.RegisterButton type='submit'>Join Now</S.RegisterButton>
+              <FormFooterLink
+                text='Already a member?'
+                to='/'
+                linkText='Log In!'
+              />
+            </form>
+          </S.RegisterForm>
+        </S.Register>
+      );
+    }
   }
 }
