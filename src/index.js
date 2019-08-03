@@ -28,7 +28,7 @@ export default function App() {
             <Switch>
               <Route path='/' exact component={Login} />
               <Route path='/register' exact component={Register} />
-              <AuthenticationRoute path='/predictor' component={Predictor} />
+              <AuthenticationRoute path='/predictor' exact component={Predictor} />
               <Route component={Login} />
             </Switch>
           </BrowserRouter>
