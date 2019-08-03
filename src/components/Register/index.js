@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
+import React, {useState, useContext, useEffect} from 'react';
+import {useCookies} from 'react-cookie';
 import axios from 'axios';
 import GlobalContext from '../../utils/context';
 import {
@@ -7,7 +7,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAILURE,
   LOGIN_START,
-  LOGIN_SUCCESS
+  LOGIN_SUCCESS,
 } from '../../utils/constants';
 import Loader from '../shared/Loader';
 import ErrorMessage from '../shared/ErrorMessage';
@@ -15,56 +15,56 @@ import FormFooterLink from '../shared/FormFooterLink';
 import * as S from '../../styles';
 
 export default function Register(props) {
-  const { state, dispatch } = useContext(GlobalContext);
+  const {state, dispatch} = useContext(GlobalContext);
   const [cookie, setCookie] = useCookies(['StartupTrajectoryPredictor']);
   const [inputs, setInputs] = useState({
     email: '',
-    password: ''
+    password: '',
   });
 
   useEffect(() => {
     if (cookie['StartupTrajectoryPredictor']) {
-      dispatch({ type: LOGIN_START });
+      dispatch({type: LOGIN_START});
       setTimeout(() => {
         props.history.push('/predictor');
       }, 2000);
     }
   }, []);
 
-  const handleInputChange = event => {
+  const handleInputChange = (event) => {
     event.persist();
-    setInputs(inputs => ({
+    setInputs((inputs) => ({
       ...inputs,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     }));
   };
 
-  const handleRegisterSubmit = event => {
+  const handleRegisterSubmit = (event) => {
     event.preventDefault();
-    dispatch({ type: REGISTER_START });
+    dispatch({type: REGISTER_START});
     axios
       .post('https://startups7.herokuapp.com/api/auth/register', inputs)
-      .then(response => {
-        dispatch({ type: REGISTER_SUCCESS, payload: response.data.message });
-        dispatch({ type: LOGIN_START });
+      .then((response) => {
+        dispatch({type: REGISTER_SUCCESS, payload: response.data.message});
+        dispatch({type: LOGIN_START});
         return axios.post(
           'https://startups7.herokuapp.com/api/auth/login',
-          inputs
+          inputs,
         );
       })
-      .then(response => {
+      .then((response) => {
         setTimeout(() => {
-          dispatch({ type: LOGIN_SUCCESS, payload: response.data.token });
+          dispatch({type: LOGIN_SUCCESS, payload: response.data.token});
           setCookie('StartupTrajectoryPredictor', response.data.token, {
-            path: '/'
+            path: '/',
           });
           props.history.push('/predictor');
         }, 2000);
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch({
           type: REGISTER_FAILURE,
-          payload: err.response.data.message
+          payload: err.response.data.message,
         });
       });
   };
