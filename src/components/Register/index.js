@@ -113,10 +113,10 @@ export default function Register(props) {
                 value={inputs.password}
               />
             </S.RegisterField>
-            <S.RegisterButton type='submit'>Join Now</S.RegisterButton>
             {state.errorMessage && (
               <ErrorMessage message={state.errorMessage} />
             )}
+            <S.RegisterButton type='submit'>Join Now</S.RegisterButton>
             <FormFooterLink
               text='Already a member?'
               to='/'
