@@ -15,7 +15,7 @@ import {
   DELETE_USER_FAILURE,
   UPDATE_USER_START,
   UPDATE_USER_SUCCESS,
-  UPDATE_USER_FAILURE
+  UPDATE_USER_FAILURE,
 } from '../constants';
 
 export default (state, action) => {
@@ -24,108 +24,108 @@ export default (state, action) => {
       return {
         ...state,
         isLoggingIn: true,
-        errorMessage: ''
+        errorMessage: '',
       };
     case LOGIN_SUCCESS:
       return {
         ...state,
         isLoggingIn: false,
-        errorMessage: ''
+        errorMessage: '',
       };
     case LOGIN_FAILURE:
       return {
         ...state,
         isLoggingIn: false,
-        errorMessage: action.payload
+        errorMessage: action.payload,
       };
     case LOGOUT_START:
       return {
         ...state,
         isLoggingOut: true,
-        errorMessage: ''
+        errorMessage: '',
       };
     case LOGOUT_SUCCESS:
       return {
         ...state,
         isLoggingOut: false,
-        errorMessage: ''
+        errorMessage: '',
       };
     case REGISTER_START:
       return {
         ...state,
         isRegistering: true,
-        errorMessage: ''
+        errorMessage: '',
       };
     case REGISTER_SUCCESS:
       return {
         ...state,
         isRegistering: false,
-        errorMessage: ''
+        errorMessage: '',
       };
     case REGISTER_FAILURE:
       return {
         ...state,
         isRegistering: false,
-        errorMessage: action.payload
+        errorMessage: action.payload,
       };
     case PREDICT_START:
       return {
         ...state,
         isPredicting: true,
-        errorMessage: ''
+        errorMessage: '',
       };
     case PREDICT_SUCCESS:
       return {
         ...state,
         isPredicting: false,
         errorMessage: '',
-        prediction: action.payload
+        prediction: action.payload,
       };
     case PREDICT_FAILURE:
       return {
         ...state,
         isPredicting: false,
-        errorMessage: action.payload
+        errorMessage: action.payload,
       };
     case DELETE_USER_START:
       return {
         ...state,
         isDeleting: true,
-        errorMessage: ''
+        errorMessage: '',
       };
     case DELETE_USER_SUCCESS:
       return {
         ...state,
         isDeleting: false,
-        errorMessage: ''
+        errorMessage: '',
       };
     case DELETE_USER_FAILURE:
       return {
         ...state,
         isDeleting: false,
-        errorMessage: action.payload
+        errorMessage: action.payload,
       };
     case UPDATE_USER_START:
       return {
         ...state,
         isUpdating: true,
-        errorMessage: ''
+        errorMessage: '',
       };
     case UPDATE_USER_SUCCESS:
       return {
         ...state,
         isUpdating: false,
-        errorMessage: ''
+        errorMessage: '',
       };
     case UPDATE_USER_FAILURE:
       return {
         ...state,
         isUpdating: false,
-        errorMessage: action.payload
+        errorMessage: action.payload,
       };
     default:
       return {
-        ...state
+        ...state,
       };
   }
 };

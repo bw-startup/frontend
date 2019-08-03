@@ -7,7 +7,7 @@ const GlobalState = React.createContext({
   isPredicting: false,
   isDeleting: false,
   isUpdating: false,
-  errorMessage: ''
+  errorMessage: '',
 });
 
 export default GlobalState;

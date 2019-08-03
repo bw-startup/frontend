@@ -26,7 +26,7 @@ export const headquartersLocationOptions = [
   'Vancouver, British Columbia, Canada',
   'Tokyo, Tokyo, Japan',
   'Stockholm, Stockholms Lan, Sweden',
-  'Dublin, Dublin, Ireland'
+  'Dublin, Dublin, Ireland',
 ];
 
 export const industryOptions = [
@@ -64,5 +64,5 @@ export const industryOptions = [
   'News',
   'Fashion',
   'Hospitality',
-  'Artificial Intelligence'
+  'Artificial Intelligence',
 ];
