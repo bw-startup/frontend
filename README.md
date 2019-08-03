@@ -2,6 +2,8 @@
 
 # _Predict A Venture_
 
+[Live Demo](https://predict-a-venture.netlify.com/)
+
 Project built in the 3rd week of April 2019 using:
 
 React Hooks `useState`, `useEffect`, `useContext` and `useReducer`
@@ -29,8 +31,6 @@ Output:
 ```
 
 [Marketing Landing Page](https://bw-startup.github.io/User_Interface/)
-
-[Live Demo](https://predict-a-venture.netlify.com/)
 
 [UI Team Repository](https://github.com/bw-startup/User_Interface)
 
