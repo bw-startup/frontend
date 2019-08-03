@@ -79,7 +79,6 @@ export default function Register(props) {
     } else {
       return (
         <S.Register>
-          {console.log('render')}
           <S.BodyBackgroundVertical />
           <S.RegisterImage>
             <S.RegisterImageImg
