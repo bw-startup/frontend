@@ -453,7 +453,7 @@ export const OutputItem = styled.div`
 `;
 
 export const OutputItemResult = styled.div`
-  width: 530px;
+  width: 600px;
   margin: 45px auto;
   font-size: 6rem;
   border-radius: 5px;
