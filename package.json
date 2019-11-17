@@ -17,7 +17,7 @@
     "react-scripts": "2.1.8",
     "react-sweet-progress": "^1.1.2",
     "styled-components": "^4.2.0",
-    "yarn": "^1.15.2"
+    "yarn": "^1.17.3"
   },
   "scripts": {
     "start": "react-scripts start",
