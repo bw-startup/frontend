@@ -1,6 +1,9 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
+export const textPrimaryColor = '#05133C';
+export const textSecondaryColor = '#838EAF';
+
 export const primaryColor = '#4285f4';
 export const primaryColorLight = '#aad4f5';
 export const secondaryColor = '#38c172';
@@ -25,7 +28,7 @@ html {
 }
 
 body {
-  color: #05133C;
+  color: ${textPrimaryColor};
   font-family: 'Lato', sans-serif;
   font-size: 62.5%;
   font-weight: 300;
@@ -46,7 +49,7 @@ input {
 }
 
 p {
-  color: #838eaf;
+  color: ${textSecondaryColor};
   font-size: 0.8rem;
 }
 
@@ -181,16 +184,16 @@ export const LoginForm = styled.div`
   flex: 1 1 50%;
 
   input {
-    color: #838eaf;
+    color: ${textSecondaryColor};
     padding: 10px;
     border-top: none;
     border-right: none;
     border-bottom: 4px solid #dde0e9;
     border-left: none;
     &:focus {
-      color: #838eaf;
+      color: ${textSecondaryColor};
       outline: none;
-      border-bottom: 4px solid #4285f4;
+      border-bottom: 4px solid ${primaryColor};
     }
   }
 `;
@@ -209,7 +212,7 @@ export const LoginField = styled.div`
   }
 
   &:focus-within {
-    color: #4285f4;
+    color: ${primaryColor};
   }
 `;
 
@@ -217,7 +220,7 @@ export const LoginButton = styled.button`
   cursor: pointer;
   border-radius: 5px;
   color: white;
-  background: #4285f4;
+  background: ${primaryColor};
   text-transform: uppercase;
   width: 100%;
   padding: 10px;
@@ -239,7 +242,7 @@ export const RegisterImageImg = styled(LoginImageImg)``;
 export const RegisterForm = styled(LoginForm)`
   input {
     &:focus {
-      color: #838eaf;
+      color: ${textSecondaryColor};
       outline: none;
       border-bottom: 4px solid #38c172;
     }
@@ -297,7 +300,7 @@ export const PredictorInputStepField = styled.div`
 
   input {
     font-size: 2rem;
-    color: #838eaf;
+    color: ${textSecondaryColor};
     padding: 10px;
     border-top: none;
     border-right: none;
@@ -305,14 +308,14 @@ export const PredictorInputStepField = styled.div`
     border-left: none;
 
     &:focus {
-      color: #05133c;
+      color: ${textPrimaryColor};
       outline: none;
-      border-bottom: 4px solid #4285f4;
+      border-bottom: 4px solid ${primaryColor};
     }
 
     &::placeholder {
       font-weight: 300;
-      color: #838eaf;
+      color: ${textSecondaryColor};
     }
   }
 
@@ -321,16 +324,16 @@ export const PredictorInputStepField = styled.div`
     font-size: 2rem;
     width: 100%;
     height: 65px;
-    color: #838eaf;
+    color: ${textSecondaryColor};
     border-radius: none;
     border-top: none;
     border-right: none;
     border-bottom: 4px solid #dde0e9;
     border-left: none;
     &:focus {
-      color: #05133c;
+      color: ${textPrimaryColor};
       outline: none;
-      border-bottom: 4px solid #4285f4;
+      border-bottom: 4px solid ${primaryColor};
     }
   }
 `;
