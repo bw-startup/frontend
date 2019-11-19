@@ -91,7 +91,9 @@ export default function Login(props) {
             />
           </S.LoginField>
           {state.errorMessage && <ErrorMessage message={state.errorMessage} />}
-          <S.LoginButton type='submit'>Log In</S.LoginButton>
+          <S.LoginButton type='submit' data-testid='loginButton'>
+            Log In
+          </S.LoginButton>
           <FormFooterLink
             primary
             text="Don't have an account?"
