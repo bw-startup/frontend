@@ -2,7 +2,7 @@ import React from 'react';
 import {useQuery} from '@apollo/react-hooks';
 import {gql} from 'apollo-boost';
 
-import {Grid, Segment, Header} from 'semantic-ui-react';
+import {Grid, Header} from 'semantic-ui-react';
 
 const ALL_PREDICTIONS = gql`
   {
@@ -35,7 +35,16 @@ export default function Predictions() {
   return (
     <div>
       {data.allPredictions.data.map((prediction) => (
-        <Grid columns={4} stackable style={{border: '1px solid #000'}}>
+        <Grid
+          columns={4}
+          stackable
+          style={{
+            border: '1px solid #F5F7FB',
+            background: '#FFFFFF',
+            margin: '40px 0',
+          }}
+          key={prediction._id}
+        >
           <Grid.Row stretched>
             <Grid.Column width={7}>
               <Header size='medium'>
@@ -72,6 +81,8 @@ export default function Predictions() {
                 display: 'flex',
                 alignItems: 'center',
                 flexDirection: 'row',
+                textAlign: 'right',
+                padding: '0 25px',
               }}
               width={4}
             >
