@@ -12,6 +12,7 @@ html {
   box-sizing: inherit;
   margin: 0;
   padding: 0;
+  border: 1px solid red;
 }
 body {
   font-family: 'Lato', sans-serif;
@@ -53,7 +54,11 @@ export const PredictionLeft = styled.div`
   display: flex;
 `;
 
-export const PredictionRight = styled.div``;
+export const PredictionRight = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const PredictionColumn = styled.div`
   display: flex;
@@ -61,5 +66,23 @@ export const PredictionColumn = styled.div`
 `;
 
 export const PredictionRow = styled.div`
+  display: flex;
+  flex-direction: column;
   padding: 40px;
+`;
+
+export const PredictionDataLeft = styled.div`
+  text-align: left;
+`;
+
+export const PredictionDataLeftHeader = styled.div`
+  font-size: 1.5rem;
+`;
+
+export const PredictionDataLeftSubHeader = styled.div`
+  font-size: 1rem;
+`;
+
+export const PredictionDataRight = styled.div`
+  text-align: right;
 `;

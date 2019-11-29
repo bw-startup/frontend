@@ -38,8 +38,22 @@ export default function Predictions() {
         <S.Prediction>
           <S.PredictionLeft>
             <S.PredictionColumn>
-              <S.PredictionRow>{prediction.headquarters}</S.PredictionRow>
-              <S.PredictionRow>{prediction.industry}</S.PredictionRow>
+              <S.PredictionRow>
+                <S.PredictionDataLeftHeader>
+                  {prediction.headquarters}
+                </S.PredictionDataLeftHeader>
+                <S.PredictionDataLeftSubHeader>
+                  Location
+                </S.PredictionDataLeftSubHeader>
+              </S.PredictionRow>
+              <S.PredictionRow>
+                <S.PredictionDataLeftHeader>
+                  {prediction.industry}
+                </S.PredictionDataLeftHeader>
+                <S.PredictionDataLeftSubHeader>
+                  Industry
+                </S.PredictionDataLeftSubHeader>
+              </S.PredictionRow>
             </S.PredictionColumn>
             <S.PredictionColumn>
               <S.PredictionRow>{prediction.numFundingRounds}</S.PredictionRow>
