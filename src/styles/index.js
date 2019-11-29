@@ -51,6 +51,7 @@ export const PredictionContainer = styled.div`
 `;
 
 export const Prediction = styled.div`
+  margin-bottom: 80px;
   display: flex;
   flex-wrap: wrap;
 `;
@@ -86,7 +87,7 @@ export const PredictionDataLeft = styled.div`
 
 export const PredictionDataLeftHeader = styled.div`
   font-weight: 400;
-  font-size: 1.5rem;
+  font-size: 2rem;
 `;
 
 export const PredictionDataLeftSubHeader = styled.div`
