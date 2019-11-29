@@ -26,7 +26,7 @@ const ALL_PREDICTIONS = gql`
   }
 `;
 
-export default function Predictions() {
+const Predictions = () => {
   const {loading, error, data} = useQuery(ALL_PREDICTIONS);
 
   if (loading) return <p>Loading...</p>;
@@ -34,76 +34,89 @@ export default function Predictions() {
 
   return (
     <S.PredictionContainer>
-      {data.allPredictions.data.map((prediction) => (
-        <S.Prediction>
-          <S.PredictionLeft>
-            <S.PredictionColumn>
+      {data.allPredictions.data.map(
+        ({
+          _id,
+          headquarters,
+          numFounders,
+          numFundingRounds,
+          numArticles,
+          numEmployees,
+          industry,
+          predictionPercent,
+        }) => (
+          <S.Prediction key={_id}>
+            <S.PredictionLeft>
+              <S.PredictionColumn>
+                <S.PredictionRow>
+                  <S.PredictionDataLeftHeader>
+                    {headquarters}
+                  </S.PredictionDataLeftHeader>
+                  <S.PredictionDataLeftSubHeader>
+                    Location
+                  </S.PredictionDataLeftSubHeader>
+                </S.PredictionRow>
+                <S.PredictionRow>
+                  <S.PredictionDataLeftHeader>
+                    {industry}
+                  </S.PredictionDataLeftHeader>
+                  <S.PredictionDataLeftSubHeader>
+                    Industry
+                  </S.PredictionDataLeftSubHeader>
+                </S.PredictionRow>
+              </S.PredictionColumn>
+              <S.PredictionColumn>
+                <S.PredictionRow>
+                  <S.PredictionDataRightHeader>
+                    {numFundingRounds}
+                  </S.PredictionDataRightHeader>
+                  <S.PredictionDataRightSubHeader>
+                    Funding Rounds
+                  </S.PredictionDataRightSubHeader>
+                </S.PredictionRow>
+                <S.PredictionRow>
+                  <S.PredictionDataRightHeader>
+                    {numArticles}
+                  </S.PredictionDataRightHeader>
+                  <S.PredictionDataRightSubHeader>
+                    Public Articles
+                  </S.PredictionDataRightSubHeader>
+                </S.PredictionRow>
+              </S.PredictionColumn>
+              <S.PredictionColumn>
+                <S.PredictionRow>
+                  <S.PredictionDataRightHeader>
+                    {numFounders}
+                  </S.PredictionDataRightHeader>
+                  <S.PredictionDataRightSubHeader>
+                    Founders
+                  </S.PredictionDataRightSubHeader>
+                </S.PredictionRow>
+                <S.PredictionRow>
+                  <S.PredictionDataRightHeader>
+                    {numEmployees}
+                  </S.PredictionDataRightHeader>
+                  <S.PredictionDataRightSubHeader>
+                    Employees
+                  </S.PredictionDataRightSubHeader>
+                </S.PredictionRow>
+              </S.PredictionColumn>
+            </S.PredictionLeft>
+            <S.PredictionRight>
               <S.PredictionRow>
-                <S.PredictionDataLeftHeader>
-                  {prediction.headquarters}
-                </S.PredictionDataLeftHeader>
-                <S.PredictionDataLeftSubHeader>
-                  Location
-                </S.PredictionDataLeftSubHeader>
+                <S.PredictionPercentRightHeader>
+                  {predictionPercent} %
+                </S.PredictionPercentRightHeader>
+                <S.PredictionPercentRightSubHeader>
+                  Survival Chance
+                </S.PredictionPercentRightSubHeader>
               </S.PredictionRow>
-              <S.PredictionRow>
-                <S.PredictionDataLeftHeader>
-                  {prediction.industry}
-                </S.PredictionDataLeftHeader>
-                <S.PredictionDataLeftSubHeader>
-                  Industry
-                </S.PredictionDataLeftSubHeader>
-              </S.PredictionRow>
-            </S.PredictionColumn>
-            <S.PredictionColumn>
-              <S.PredictionRow>
-                <S.PredictionDataRightHeader>
-                  {prediction.numFundingRounds}
-                </S.PredictionDataRightHeader>
-                <S.PredictionDataRightSubHeader>
-                  Funding Rounds
-                </S.PredictionDataRightSubHeader>
-              </S.PredictionRow>
-              <S.PredictionRow>
-                <S.PredictionDataRightHeader>
-                  {prediction.numArticles}
-                </S.PredictionDataRightHeader>
-                <S.PredictionDataRightSubHeader>
-                  Public Articles
-                </S.PredictionDataRightSubHeader>
-              </S.PredictionRow>
-            </S.PredictionColumn>
-            <S.PredictionColumn>
-              <S.PredictionRow>
-                <S.PredictionDataRightHeader>
-                  {prediction.numFounders}
-                </S.PredictionDataRightHeader>
-                <S.PredictionDataRightSubHeader>
-                  Founders
-                </S.PredictionDataRightSubHeader>
-              </S.PredictionRow>
-              <S.PredictionRow>
-                <S.PredictionDataRightHeader>
-                  {prediction.numEmployees}
-                </S.PredictionDataRightHeader>
-                <S.PredictionDataRightSubHeader>
-                  Employees
-                </S.PredictionDataRightSubHeader>
-              </S.PredictionRow>
-            </S.PredictionColumn>
-          </S.PredictionLeft>
-          <S.PredictionRight>
-            <S.PredictionRow>
-              <S.PredictionPercentRightHeader>
-                {prediction.predictionPercent} %
-              </S.PredictionPercentRightHeader>
-              <S.PredictionPercentRightSubHeader>
-                Survival Chance
-              </S.PredictionPercentRightSubHeader>
-            </S.PredictionRow>
-          </S.PredictionRight>
-        </S.Prediction>
-      ))}
+            </S.PredictionRight>
+          </S.Prediction>
+        ),
+      )}
     </S.PredictionContainer>
   );
-}
+};
+
+export default Predictions;

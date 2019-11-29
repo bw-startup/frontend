@@ -1,23 +1,32 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {ApolloProvider} from '@apollo/react-hooks';
+import ApolloClient from 'apollo-boost';
 import Predictions from './components/Predictions';
 import Navigation from './components/Navigation';
 
 import * as S from './styles';
 
-function App() {
+const App = () => {
+  const client = new ApolloClient({
+    uri: 'https://graphql-backend-startup.herokuapp.com/',
+  });
+
   return (
-    <S.Container>
-      <Router>
-        <Navigation />
-        <Switch>
-          <Route path='/'>
-            <Predictions />
-          </Route>
-        </Switch>
-      </Router>
-    </S.Container>
+    <ApolloProvider client={client}>
+      <S.GlobalCssReset />
+      <S.Container>
+        <Router>
+          <Navigation />
+          <Switch>
+            <Route path='/'>
+              <Predictions />
+            </Route>
+          </Switch>
+        </Router>
+      </S.Container>
+    </ApolloProvider>
   );
-}
+};
 
 export default App;

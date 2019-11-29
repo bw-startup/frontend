@@ -2,7 +2,7 @@ import React from 'react';
 
 import * as S from '../styles';
 
-export default function Navigation() {
+const Navigation = () => {
   return (
     <S.NavigationContainer>
       <S.NavigationLeft>
@@ -16,4 +16,6 @@ export default function Navigation() {
       </S.NavigationRight>
     </S.NavigationContainer>
   );
-}
+};
+
+export default Navigation;
