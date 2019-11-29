@@ -1,3 +1,4 @@
+import 'semantic-ui-css/semantic.min.css'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ApolloClient from 'apollo-boost';
@@ -15,7 +16,6 @@ ReactDOM.render(
   <ApolloProvider client={client}>
     <App />
   </ApolloProvider>,
-
   document.getElementById('root'),
 );
 

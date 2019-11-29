@@ -1,10 +1,32 @@
 import React from 'react';
-import 'semantic-ui-css/semantic.min.css'
+import {useQuery} from '@apollo/react-hooks';
+import {gql} from 'apollo-boost';
+
+const ALL_PREDICTIONS = gql`
+  {
+    allPredictions {
+      data {
+        _id
+        headquarters
+        numFounders
+      }
+    }
+  }
+`;
 
 function App() {
+  const {loading, error, data} = useQuery(ALL_PREDICTIONS);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: </p>;
+
   return (
     <div>
-      APP
+      {data.allPredictions.data.map((prediction) => (
+        <div key={prediction._id}>
+          {prediction.headquarters} : {prediction.numFounders}
+        </div>
+      ))}
     </div>
   );
 }
