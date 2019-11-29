@@ -1,11 +1,12 @@
 import React from 'react';
 import Predictions from './components/Predictions';
+import * as S from './styles';
 
 function App() {
   return (
-    <div>
+    <S.Container>
       <Predictions />
-    </div>
+    </S.Container>
   );
 }
 
