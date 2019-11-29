@@ -47,16 +47,23 @@ export const Container = styled.div`
   margin: 0 auto;
 `;
 
-/**
-|--------------------------------------------------
-| NAVIGATION
-|--------------------------------------------------
-*/
+// NAVIGATION
+export const NavigationContainer = styled.div`
+  padding: 40px 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`;
+
+export const NavigationLeft = styled.div``;
+
+export const NavigationRight = styled.div``;
+
 export const NavigationLink = styled(NavLink)`
   padding: 20px;
-
   &.active {
     font-weight: 400;
+    color: red;
   }
 `;
 
