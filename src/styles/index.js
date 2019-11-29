@@ -46,23 +46,32 @@ export const Container = styled.div`
   margin: 0 auto;
 `;
 
+export const PredictionContainer = styled.div`
+  margin: 0 auto;
+`;
+
 export const Prediction = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 
 export const PredictionLeft = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
 `;
 
 export const PredictionRight = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-grow: 1;
 `;
 
 export const PredictionColumn = styled.div`
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
 `;
 
 export const PredictionRow = styled.div`
@@ -76,6 +85,7 @@ export const PredictionDataLeft = styled.div`
 `;
 
 export const PredictionDataLeftHeader = styled.div`
+  font-weight: 400;
   font-size: 1.5rem;
 `;
 
@@ -84,5 +94,27 @@ export const PredictionDataLeftSubHeader = styled.div`
 `;
 
 export const PredictionDataRight = styled.div`
+  text-align: right;
+`;
+
+export const PredictionDataRightHeader = styled.div`
+  font-weight: 400;
+  font-size: 2rem;
+  text-align: right;
+`;
+
+export const PredictionDataRightSubHeader = styled.div`
+  font-size: 1rem;
+  text-align: right;
+`;
+
+export const PredictionPercentRightHeader = styled.div`
+  font-weight: 400;
+  font-size: 5rem;
+  text-align: right;
+`;
+
+export const PredictionPercentRightSubHeader = styled.div`
+  font-size: 1rem;
   text-align: right;
 `;

@@ -33,7 +33,7 @@ export default function Predictions() {
   if (error) return <p>Error: </p>;
 
   return (
-    <div>
+    <S.PredictionContainer>
       {data.allPredictions.data.map((prediction) => (
         <S.Prediction>
           <S.PredictionLeft>
@@ -56,17 +56,54 @@ export default function Predictions() {
               </S.PredictionRow>
             </S.PredictionColumn>
             <S.PredictionColumn>
-              <S.PredictionRow>{prediction.numFundingRounds}</S.PredictionRow>
-              <S.PredictionRow>{prediction.numArticles}</S.PredictionRow>
+              <S.PredictionRow>
+                <S.PredictionDataRightHeader>
+                  {prediction.numFundingRounds}
+                </S.PredictionDataRightHeader>
+                <S.PredictionDataRightSubHeader>
+                  Funding Rounds
+                </S.PredictionDataRightSubHeader>
+              </S.PredictionRow>
+              <S.PredictionRow>
+                <S.PredictionDataRightHeader>
+                  {prediction.numArticles}
+                </S.PredictionDataRightHeader>
+                <S.PredictionDataRightSubHeader>
+                  Public Articles
+                </S.PredictionDataRightSubHeader>
+              </S.PredictionRow>
             </S.PredictionColumn>
             <S.PredictionColumn>
-              <S.PredictionRow>{prediction.numFounders}</S.PredictionRow>
-              <S.PredictionRow>{prediction.numEmployees}</S.PredictionRow>
+              <S.PredictionRow>
+                <S.PredictionDataRightHeader>
+                  {prediction.numFounders}
+                </S.PredictionDataRightHeader>
+                <S.PredictionDataRightSubHeader>
+                  Founders
+                </S.PredictionDataRightSubHeader>
+              </S.PredictionRow>
+              <S.PredictionRow>
+                <S.PredictionDataRightHeader>
+                  {prediction.numEmployees}
+                </S.PredictionDataRightHeader>
+                <S.PredictionDataRightSubHeader>
+                  Employees
+                </S.PredictionDataRightSubHeader>
+              </S.PredictionRow>
             </S.PredictionColumn>
           </S.PredictionLeft>
-          <S.PredictionRight>{prediction.predictionPercent}</S.PredictionRight>
+          <S.PredictionRight>
+            <S.PredictionRow>
+              <S.PredictionPercentRightHeader>
+                {prediction.predictionPercent} %
+              </S.PredictionPercentRightHeader>
+              <S.PredictionPercentRightSubHeader>
+                Survival Chance
+              </S.PredictionPercentRightSubHeader>
+            </S.PredictionRow>
+          </S.PredictionRight>
         </S.Prediction>
       ))}
-    </div>
+    </S.PredictionContainer>
   );
 }
