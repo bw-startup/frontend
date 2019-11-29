@@ -46,7 +46,7 @@ export default function Predictions() {
           key={prediction._id}
         >
           <Grid.Row stretched>
-            <Grid.Column width={7}>
+            <Grid.Column width={6}>
               <Header size='medium'>
                 {prediction.headquarters}
                 <Header.Subheader>Location</Header.Subheader>
@@ -57,21 +57,21 @@ export default function Predictions() {
               </Header>
             </Grid.Column>
             <Grid.Column width={3}>
-              <Header size='huge'>
+              <Header size='huge' style={{textAlign: 'right'}}>
                 {prediction.numFundingRounds}
                 <Header.Subheader>Funding Rounds</Header.Subheader>
               </Header>
-              <Header size='huge'>
+              <Header size='huge' style={{textAlign: 'right'}}>
                 {prediction.numArticles}
                 <Header.Subheader>Public Articles</Header.Subheader>
               </Header>
             </Grid.Column>
             <Grid.Column width={2}>
-              <Header size='huge'>
+              <Header size='huge' style={{textAlign: 'right'}}>
                 {prediction.numFounders}
                 <Header.Subheader>Founders</Header.Subheader>
               </Header>
-              <Header size='huge'>
+              <Header size='huge' style={{textAlign: 'right'}}>
                 {prediction.numEmployees}
                 <Header.Subheader>Employees</Header.Subheader>
               </Header>
@@ -81,13 +81,15 @@ export default function Predictions() {
                 display: 'flex',
                 alignItems: 'center',
                 flexDirection: 'row',
-                textAlign: 'right',
-                padding: '0 25px',
               }}
-              width={4}
+              width={5}
             >
-              <Header size='huge' color='green' style={{fontSize: '50px'}}>
-                % {prediction.predictionPercent}
+              <Header
+                size='huge'
+                color='green'
+                style={{fontSize: '50px', textAlign: 'right'}}
+              >
+                {prediction.predictionPercent}%
                 <Header.Subheader>Survival Chance</Header.Subheader>
               </Header>
             </Grid.Column>
