@@ -27,10 +27,56 @@ const ALL_PREDICTIONS = gql`
 `;
 
 const Predictions = () => {
-  const {loading, error, data} = useQuery(ALL_PREDICTIONS);
+  // const {loading, error, data} = useQuery(ALL_PREDICTIONS);
+  const data = {
+    allPredictions: {
+      data: [
+        {
+          _id: '21421424',
+          headquarters: 'San Francisco, California, United States',
+          numFounders: 1,
+          numFundingRounds: 4,
+          numArticles: 3,
+          numEmployees: 20,
+          industry: 'Software',
+          predictionPercent: 30.5,
+        },
+        {
+          _id: '214214265',
+          headquarters: 'San Jose, California, United States',
+          numFounders: 1,
+          numFundingRounds: 4,
+          numArticles: 3,
+          numEmployees: 20,
+          industry: 'Artificial Intelligence',
+          predictionPercent: 30.5,
+        },
+        {
+          _id: '2142142656',
+          headquarters: 'Washington, District of Columbia, United States',
+          numFounders: 1,
+          numFundingRounds: 4,
+          numArticles: 3,
+          numEmployees: 20,
+          industry: 'Information Technology',
+          predictionPercent: 90.5,
+        },
+        {
+          _id: '214214265661',
+          headquarters: 'Washington, District of Columbia, United States',
+          numFounders: 1,
+          numFundingRounds: 4,
+          numArticles: 3,
+          numEmployees: 20,
+          industry: 'Telecommunications',
+          predictionPercent: 40.5,
+        },
+      ],
+    },
+  };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: </p>;
+  // if (loading) return <p>Loading...</p>;
+  // if (error) return <p>Error: </p>;
 
   return (
     <S.PredictionContainer>
