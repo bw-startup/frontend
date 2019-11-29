@@ -1,8 +1,7 @@
 import React from 'react';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Predictions from './components/Predictions';
 import Navigation from './components/Navigation';
-
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import * as S from './styles';
 

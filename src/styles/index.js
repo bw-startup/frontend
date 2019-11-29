@@ -1,4 +1,5 @@
 import styled, {createGlobalStyle} from 'styled-components';
+import {NavLink} from 'react-router-dom';
 
 export const GlobalCssReset = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400');
@@ -44,6 +45,19 @@ a {
 export const Container = styled.div`
   padding: 40px;
   margin: 0 auto;
+`;
+
+/**
+|--------------------------------------------------
+| NAVIGATION
+|--------------------------------------------------
+*/
+export const NavigationLink = styled(NavLink)`
+  padding: 20px;
+
+  &.active {
+    font-weight: 400;
+  }
 `;
 
 export const PredictionContainer = styled.div`
