@@ -5,6 +5,7 @@ import {ApolloProvider} from '@apollo/react-hooks';
 
 import App from './App';
 
+import * as S from './styles';
 import * as serviceWorker from './serviceWorker';
 
 const client = new ApolloClient({
@@ -13,6 +14,7 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
+    <S.GlobalCssReset />
     <App />
   </ApolloProvider>,
   document.getElementById('root'),

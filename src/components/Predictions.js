@@ -2,6 +2,8 @@ import React from 'react';
 import {useQuery} from '@apollo/react-hooks';
 import {gql} from 'apollo-boost';
 
+import * as S from '../styles';
+
 const ALL_PREDICTIONS = gql`
   {
     allPredictions {
@@ -32,7 +34,25 @@ export default function Predictions() {
 
   return (
     <div>
-      {data.allPredictions.data.map((prediction) => prediction.headquarters)}
+      {data.allPredictions.data.map((prediction) => (
+        <S.Prediction>
+          <S.PredictionLeft>
+            <S.PredictionColumn>
+              <S.PredictionRow>{prediction.headquarters}</S.PredictionRow>
+              <S.PredictionRow>{prediction.industry}</S.PredictionRow>
+            </S.PredictionColumn>
+            <S.PredictionColumn>
+              <S.PredictionRow>{prediction.numFundingRounds}</S.PredictionRow>
+              <S.PredictionRow>{prediction.numArticles}</S.PredictionRow>
+            </S.PredictionColumn>
+            <S.PredictionColumn>
+              <S.PredictionRow>{prediction.numFounders}</S.PredictionRow>
+              <S.PredictionRow>{prediction.numEmployees}</S.PredictionRow>
+            </S.PredictionColumn>
+          </S.PredictionLeft>
+          <S.PredictionRight>{prediction.predictionPercent}</S.PredictionRight>
+        </S.Prediction>
+      ))}
     </div>
   );
 }
