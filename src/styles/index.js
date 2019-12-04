@@ -47,6 +47,12 @@ export const Container = styled.div`
   margin: 0 auto;
 `;
 
+// SHARED
+export const Header = styled.div`
+  font-weight: 400;
+  font-size: 3rem;
+`;
+
 // NAVIGATION
 export const NavigationContainer = styled.div`
   padding: 40px 0;
@@ -67,6 +73,7 @@ export const NavigationLink = styled(NavLink)`
   }
 `;
 
+// PREDICTOR
 export const PredictionContainer = styled.div`
   margin: 0 auto;
 `;
@@ -139,4 +146,15 @@ export const PredictionPercentRightHeader = styled.div`
 export const PredictionPercentRightSubHeader = styled.div`
   font-size: 1rem;
   text-align: right;
+`;
+
+export const AuthenticationContainer = styled.div`
+  display: flex;
+`;
+
+export const AuthenticationSplit = styled.div``;
+
+export const AuthenticationImg = styled.img`
+  width: 100%;
+  height: auto;
 `;
