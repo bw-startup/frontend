@@ -11,8 +11,12 @@ const Login = () => {
         />
       </S.AuthenticationSplit>
       <S.AuthenticationSplit>
-        <S.Header>Welcome back!</S.Header>
-        <p>Please sign in to view/save your prections</p>
+        <S.AuthenticationHeader>
+          <S.Header>Welcome back!</S.Header>
+          <S.SubHeader>
+            Please sign in to view your saved your predictions
+          </S.SubHeader>
+        </S.AuthenticationHeader>
         <S.AuthenticationForm>
           <S.AuthenticationField>
             <label htmlFor='email'>Email:</label>

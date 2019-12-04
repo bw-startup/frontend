@@ -53,6 +53,11 @@ export const Header = styled.div`
   font-size: 3rem;
 `;
 
+export const SubHeader = styled.div`
+  font-weight: 300;
+  font-size: 1rem;
+`;
+
 // NAVIGATION
 export const NavigationContainer = styled.div`
   padding: 40px 0;
@@ -150,11 +155,14 @@ export const PredictionPercentRightSubHeader = styled.div`
 
 export const AuthenticationContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const AuthenticationSplit = styled.div`
   flex: 1 1 50%;
-  padding: 80px;
+  padding: 0 80px;
 `;
 
 export const AuthenticationImg = styled.img`
@@ -162,13 +170,33 @@ export const AuthenticationImg = styled.img`
   height: auto;
 `;
 
+export const AuthenticationHeader = styled.div`
+  padding: 40px 0;
+`;
+
 export const AuthenticationForm = styled.form``;
 
 export const AuthenticationField = styled.div`
   display: flex;
   flex-direction: column;
+
+  label {
+    padding: 10px 0;
+    text-transform: uppercase;
+    font-size: 1rem;
+  }
+
+  input {
+    padding: 10px;
+    font-size: 1rem;
+  }
 `;
 
 export const AuthenticationButton = styled.button`
   width: 100%;
+  border-radius: 50px;
+  padding: 10px;
+  text-transform: uppercase;
+  font-size: 1rem;
+  cursor: pointer;
 `;
