@@ -11,7 +11,7 @@ const Navigation = () => {
         <S.NavigationLink to='/'>Predict</S.NavigationLink>
       </S.NavigationLeft>
       <S.NavigationRight>
-        <S.NavigationLink to='/'>Login</S.NavigationLink>
+        <S.NavigationLink to='/login'>Login</S.NavigationLink>
         <S.NavigationLink to='/'>Register</S.NavigationLink>
         <S.NavigationLink to='/'>Log Out</S.NavigationLink>
       </S.NavigationRight>

@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import {ApolloProvider} from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
+import Login from './components/Login';
 import Predictions from './components/Predictions';
 import Navigation from './components/Navigation';
 
@@ -19,6 +20,9 @@ const App = () => {
         <Router>
           <Navigation />
           <Switch>
+            <Route path='/login'>
+              <Login />
+            </Route>
             <Route path='/'>
               <Predictions />
             </Route>
