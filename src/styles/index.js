@@ -152,9 +152,23 @@ export const AuthenticationContainer = styled.div`
   display: flex;
 `;
 
-export const AuthenticationSplit = styled.div``;
+export const AuthenticationSplit = styled.div`
+  flex: 1 1 50%;
+  padding: 80px;
+`;
 
 export const AuthenticationImg = styled.img`
   width: 100%;
   height: auto;
+`;
+
+export const AuthenticationForm = styled.form``;
+
+export const AuthenticationField = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const AuthenticationButton = styled.button`
+  width: 100%;
 `;

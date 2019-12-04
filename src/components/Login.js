@@ -12,19 +12,18 @@ const Login = () => {
       </S.AuthenticationSplit>
       <S.AuthenticationSplit>
         <S.Header>Welcome back!</S.Header>
-        <form>
-          <div>
+        <p>Please sign in to view/save your prections</p>
+        <S.AuthenticationForm>
+          <S.AuthenticationField>
             <label htmlFor='email'>Email:</label>
             <input type='text' name='email' id='email' />
-          </div>
-          <div>
+          </S.AuthenticationField>
+          <S.AuthenticationField>
             <label htmlFor='password'>Password:</label>
             <input type='password' name='email' id='email' />
-          </div>
-          <div>
-            <button type='submit'>Login</button>
-          </div>
-        </form>
+          </S.AuthenticationField>
+          <S.AuthenticationButton type='submit'>Login</S.AuthenticationButton>
+        </S.AuthenticationForm>
       </S.AuthenticationSplit>
     </S.AuthenticationContainer>
   );
