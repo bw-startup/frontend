@@ -36,6 +36,7 @@ const Login = () => {
   );
 
   const handleLogin = (event) => {
+    console.log(inputs);
     event.preventDefault();
 
     console.log('loginloading', loginLoading);
@@ -61,8 +62,8 @@ const Login = () => {
   const handleInputChange = (event) => {
     event.persist();
     setInputs((inputs) => ({
-      [event.target.id]: event.target.value,
       ...inputs,
+      [event.target.id]: event.target.value,
     }));
   };
 
@@ -92,6 +93,7 @@ const Login = () => {
               name='email'
               id='email'
               onChange={handleInputChange}
+              value={inputs.email}
             />
           </S.AuthenticationField>
           <S.AuthenticationField>
@@ -101,6 +103,7 @@ const Login = () => {
               name='password'
               id='password'
               onChange={handleInputChange}
+              value={inputs.password}
             />
           </S.AuthenticationField>
           <S.AuthenticationButton type='submit'>Login</S.AuthenticationButton>
