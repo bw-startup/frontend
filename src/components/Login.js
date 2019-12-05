@@ -25,38 +25,27 @@ const Login = () => {
 
   const [loginUser, {loading: loginLoading, error: loginError}] = useMutation(
     LOGIN_USER,
-    {
-      onCompleted({login}) {
-        console.log('completed');
-      },
-      onError(error) {
-        console.log('error', error.message);
-      },
-    },
   );
 
-  const handleLogin = (event) => {
-    console.log(inputs);
+  const handleLogin = async (event) => {
     event.preventDefault();
+    try {
+      const response = await loginUser({
+        variables: {
+          email: inputs.email,
+          password: inputs.password,
+        },
+      });
 
-    console.log('loginloading', loginLoading);
-
-    loginUser({
-      variables: {
-        email: inputs.email,
-        password: inputs.password,
-      },
-    });
-
-    console.log('loginloading', loginLoading);
-    // console.log('loginError', loginError.graphQLErrors);
+      console.log('response', response.data.loginUser.token);
+    } catch (error) {
+      console.log(error.message);
+    }
 
     setInputs(() => ({
       email: '',
       password: '',
     }));
-
-    console.log('success');
   };
 
   const handleInputChange = (event) => {
@@ -68,7 +57,6 @@ const Login = () => {
   };
 
   if (loginLoading) return <S.Header>Loading...</S.Header>;
-  if (loginError) return <S.Header>Error</S.Header>;
 
   return (
     <S.AuthenticationContainer>
@@ -107,6 +95,7 @@ const Login = () => {
             />
           </S.AuthenticationField>
           <S.AuthenticationButton type='submit'>Login</S.AuthenticationButton>
+          {loginError && <div>Please try again</div>}
         </S.AuthenticationForm>
       </S.AuthenticationSplit>
     </S.AuthenticationContainer>
