@@ -7,7 +7,7 @@ const Navigation = () => {
     <S.NavigationContainer>
       <S.NavigationLeft>
         <S.NavigationLink to='/'>All Predictions</S.NavigationLink>
-        <S.NavigationLink to='/'>My Predictions</S.NavigationLink>
+        <S.NavigationLink to='/mypredictions'>My Predictions</S.NavigationLink>
         <S.NavigationLink to='/'>Predict</S.NavigationLink>
       </S.NavigationLeft>
       <S.NavigationRight>

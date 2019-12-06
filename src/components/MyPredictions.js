@@ -1,8 +1,9 @@
 import React from 'react';
 import {useQuery} from '@apollo/react-hooks';
+import {gql} from 'apollo-boost';
 
 const GET_PREDICTIONS_BY_ID = gql`
-  query allPredictionsByUserID($id: String!) {
+  query allPredictionsByUserID($id: ID!) {
     allPredictionsByUserID(id: $id) {
       _id
       name
@@ -28,13 +29,26 @@ const MyPredictions = () => {
     loading: getMyPredictionsLoading,
     error: getMyPredictionsError,
     data: getMyPredictions,
-  } = useQuery(GET_PREDICTIONS_BY_ID);
+  } = useQuery(GET_PREDICTIONS_BY_ID, {
+    variables: {
+      id: '250309968404677138',
+    },
+  });
+
+  console.log(getMyPredictions);
+
+  if (getMyPredictionsLoading) return <div>Loading...</div>;
 
   return (
     <div>
-      {getMyPredictions.data.allPreditionsByUserID.data.map((prediction) => (
-        <div>{prediction.name}</div>
-      ))}
+      <h1>Hi {getMyPredictions.allPredictionsByUserID.name}</h1>
+      <div>
+        {getMyPredictions.allPredictionsByUserID.predictions.data.map(
+          (prediction) => (
+            <div key={prediction._id}>{prediction.headquarters}</div>
+          ),
+        )}
+      </div>
     </div>
   );
 };

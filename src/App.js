@@ -5,6 +5,7 @@ import ApolloClient from 'apollo-boost';
 import Login from './components/Login';
 import Register from './components/Register';
 import Predictions from './components/Predictions';
+import MyPredictions from './components/MyPredictions';
 import Navigation from './components/Navigation';
 
 import * as S from './styles';
@@ -21,6 +22,9 @@ const App = () => {
         <Router>
           <Navigation />
           <Switch>
+            <Route path='/mypredictions'>
+              <MyPredictions />
+            </Route>
             <Route path='/login'>
               <Login />
             </Route>
