@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useQuery, useMutation} from '@apollo/react-hooks';
+import {useMutation} from '@apollo/react-hooks';
 import {gql} from 'apollo-boost';
 
 import * as S from '../styles';
@@ -19,14 +19,34 @@ const REGISTER_USER = gql`
 
 const Register = () => {
   const [inputs, setInputs] = useState({
+    name: '',
     email: '',
     password: '',
   });
 
+  const [
+    registerUser,
+    {loading: registerLoading, error: registerError},
+  ] = useMutation(REGISTER_USER);
+
   const handleRegister = async (event) => {
     event.preventDefault();
 
+    try {
+      const response = await registerUser({
+        variables: {
+          name: inputs.name,
+          email: inputs.email,
+          password: inputs.password,
+        },
+      });
+      console.log(response.data.registerUser);
+    } catch (error) {
+      console.log(error.message);
+    }
+
     setInputs(() => ({
+      name: '',
       email: '',
       password: '',
     }));
@@ -39,6 +59,8 @@ const Register = () => {
       [event.target.id]: event.target.value,
     }));
   };
+
+  if (registerLoading) return <S.Header>Loading...</S.Header>;
 
   return (
     <S.AuthenticationContainer>
@@ -67,7 +89,7 @@ const Register = () => {
           <S.AuthenticationField>
             <label htmlFor='email'>Email:</label>
             <input
-              type='text'
+              type='email'
               name='email'
               id='email'
               onChange={handleInputChange}
