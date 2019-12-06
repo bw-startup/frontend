@@ -12,7 +12,7 @@ const Navigation = () => {
       </S.NavigationLeft>
       <S.NavigationRight>
         <S.NavigationLink to='/login'>Login</S.NavigationLink>
-        <S.NavigationLink to='/'>Register</S.NavigationLink>
+        <S.NavigationLink to='/register'>Register</S.NavigationLink>
         <S.NavigationLink to='/'>Log Out</S.NavigationLink>
       </S.NavigationRight>
     </S.NavigationContainer>
