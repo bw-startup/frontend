@@ -4,8 +4,9 @@ import {ApolloProvider} from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 import Login from './components/Login';
 import Register from './components/Register';
-import Predictions from './components/Predictions';
+import AllPredictions from './components/AllPredictions';
 import MyPredictions from './components/MyPredictions';
+import Predict from './components/Predict';
 import Navigation from './components/Navigation';
 
 import * as S from './styles';
@@ -25,6 +26,9 @@ const App = () => {
             <Route path='/mypredictions'>
               <MyPredictions />
             </Route>
+            <Route path='/predict'>
+              <Predict />
+            </Route>
             <Route path='/login'>
               <Login />
             </Route>
@@ -32,7 +36,7 @@ const App = () => {
               <Register />
             </Route>
             <Route path='/'>
-              <Predictions />
+              <AllPredictions />
             </Route>
           </Switch>
         </Router>

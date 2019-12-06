@@ -26,7 +26,7 @@ const ALL_PREDICTIONS = gql`
   }
 `;
 
-const Predictions = () => {
+const AllPredictions = () => {
   // const {loading, error, data} = useQuery(ALL_PREDICTIONS);
   const data = {
     allPredictions: {
@@ -165,4 +165,4 @@ const Predictions = () => {
   );
 };
 
-export default Predictions;
+export default AllPredictions;
