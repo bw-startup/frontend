@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {useMutation} from '@apollo/react-hooks';
 import {gql} from 'apollo-boost';
 
+import {headquartersOptions, industryOptions} from '../utils/formOptions';
+
 const Predict = () => {
   const [inputs, setInputs] = useState({
     headquarters: '',
@@ -17,23 +19,25 @@ const Predict = () => {
       <form>
         <div>
           <label htmlFor='headquarters'>Where is this company located?</label>
-          <input
-            type='text'
-            name='headquarters'
-            id='headquarters'
-            onChange={}
-            value={}
-          />
+          <select name='headquarters' id='headquarters' onChange={} value={}>
+            {headquartersOptions.map((option) => (
+              <option key={option}>{option}</option>
+            ))}
+          </select>
         </div>
         <div>
           <label htmlFor='industry'>What industry is this company in?</label>
-          <input
+          <select
             type='text'
             name='industry'
             id='industry'
             onChange={}
             value={}
-          />
+          >
+            {industryOptions.map((option) => (
+              <option key={option}>{option}</option>
+            ))}
+          </select>
         </div>
         <div>
           <label htmlFor='numFundingRounds'>
