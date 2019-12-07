@@ -4,6 +4,40 @@ import {gql} from 'apollo-boost';
 
 import {headquartersOptions, industryOptions} from '../utils/formOptions';
 
+const PREDICT = gql`
+  mutation predict(
+    $headquarters: String!
+    $industry: String!
+    $numFundingRounds: Int!
+    $numFounders: Int!
+    $numEmployees: Int!
+    $numArticles: Int!
+  ) {
+    createPrediction(
+      data: {
+        headquarters: $headquarters,
+        industry: $industry,
+        numFundingRounds: $numFundingRounds,
+        numFounders: $numFounders,
+        numEmployees: $numEmployees,
+        numArticles: $numArticles,
+        user: {
+          connect: '250309968404677138'
+        }
+      }
+    ) {
+      _id
+      headquarters
+      industry
+      numFundingRounds
+      numFoundersƒ
+      numEmployees
+      numArticles
+      predictionPercent
+    }
+  }
+`;
+
 const Predict = () => {
   const [inputs, setInputs] = useState({
     headquarters: '',
@@ -26,10 +60,10 @@ const Predict = () => {
         variables: {
           headquarters: inputs.headquarters,
           industry: inputs.industry,
-          numFundingRounds: inputs.numFundingRounds,
-          numFounders: inputs.numFounders,
-          numEmployees: inputs.numEmployees,
-          numArticles: inputs.numArticles,
+          numFundingRounds: +inputs.numFundingRounds,
+          numFounders: +inputs.numFounders,
+          numEmployees: +inputs.numEmployees,
+          numArticles: +inputs.numArticles,
         },
       });
 

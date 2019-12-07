@@ -1,8 +1,10 @@
-# Startup Trajectory Predictor - FrontEnd Development
+### Startup Trajectory Predictor - FrontEnd Development
 
-# _Predict A Venture_ -> [Live Demo](https://predict-a-venture.netlify.com/)
+### _Predict A Venture_ -> [Live Demo](https://predict-a-venture.netlify.com/)
 
-# New GraphQL, Apollo Server and FaunaDB Back End -> [Repository](https://github.com/chrisipanaque/graphql-backend-startup-success-predictor) [GraphQL Playground](https://graphql-backend-startup.herokuapp.com/)
+# New GraphQL, Apollo Server and FaunaDB Back End:
+# [Repository](https://github.com/chrisipanaque/graphql-backend-startup-success-predictor)
+# [GraphQL Playground](https://graphql-backend-startup.herokuapp.com/)
 
 Project built in the 3rd week of April 2019 using:
 
