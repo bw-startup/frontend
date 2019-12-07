@@ -15,22 +15,19 @@ const PREDICT = gql`
   ) {
     createPrediction(
       data: {
-        headquarters: $headquarters,
-        industry: $industry,
-        numFundingRounds: $numFundingRounds,
-        numFounders: $numFounders,
-        numEmployees: $numEmployees,
-        numArticles: $numArticles,
-        user: {
-          connect: '250309968404677138'
-        }
+        headquarters: $headquarters
+        industry: $industry
+        numFundingRounds: $numFundingRounds
+        numFounders: $numFounders
+        numEmployees: $numEmployees
+        numArticles: $numArticles
       }
     ) {
       _id
       headquarters
       industry
       numFundingRounds
-      numFoundersƒ
+      numFounders
       numEmployees
       numArticles
       predictionPercent
@@ -50,7 +47,23 @@ const Predict = () => {
 
   const [predict, {loading: predictLoading, error: predictError}] = useMutation(
     PREDICT,
+    {
+      context: {
+        headers: {
+          authorization:
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyNTAzMDk5Njg0MDQ2NzcxMzgiLCJuYW1lIjoiY2hyaXN0aWFuIiwiZW1haWwiOiJjaHJpcy5pcGFuYXF1ZUBnbWFpbC5jb20iLCJpYXQiOjE1NzU3NTA1NjksImV4cCI6MTU3ODM0MjU2OX0.rUMX4euVot9GGQ2A-CwSOQ1PGoc6DxurQ3d1Mt14WiY',
+        },
+      },
+    },
   );
+
+  const handleInputChange = (event) => {
+    event.persist();
+    setInputs((inputs) => ({
+      ...inputs,
+      [event.target.id]: event.target.value,
+    }));
+  };
 
   const handlePredict = async (event) => {
     event.preventDefault();
@@ -67,7 +80,16 @@ const Predict = () => {
         },
       });
 
-      console.log(response);
+      console.log(response.data);
+
+      setInputs({
+        headquarters: '',
+        industry: '',
+        numFundingRounds: '',
+        numFounders: '',
+        numEmployees: '',
+        numArticles: '',
+      });
     } catch (error) {
       console.log(error);
     }
@@ -80,7 +102,12 @@ const Predict = () => {
       <form onSubmit={handlePredict}>
         <div>
           <label htmlFor='headquarters'>Where is this company located?</label>
-          <select name='headquarters' id='headquarters' onChange={} value={}>
+          <select
+            name='headquarters'
+            id='headquarters'
+            onChange={handleInputChange}
+            value={inputs.headquarters}
+          >
             {headquartersOptions.map((option) => (
               <option key={option}>{option}</option>
             ))}
@@ -92,8 +119,8 @@ const Predict = () => {
             type='text'
             name='industry'
             id='industry'
-            onChange={}
-            value={}
+            onChange={handleInputChange}
+            value={inputs.industry}
           >
             {industryOptions.map((option) => (
               <option key={option}>{option}</option>
@@ -108,8 +135,8 @@ const Predict = () => {
             type='text'
             name='numFundingRounds'
             id='numFundingRounds'
-            onChange={}
-            value={}
+            onChange={handleInputChange}
+            value={inputs.numFundingRounds}
           />
         </div>
         <div>
@@ -120,8 +147,8 @@ const Predict = () => {
             type='text'
             name='numFounders'
             id='numFounders'
-            onChange={}
-            value={}
+            onChange={handleInputChange}
+            value={inputs.numFounders}
           />
         </div>
         <div>
@@ -132,8 +159,8 @@ const Predict = () => {
             type='text'
             name='numEmployees'
             id='numEmployees'
-            onChange={}
-            value={}
+            onChange={handleInputChange}
+            value={inputs.numEmployees}
           />
         </div>
         <div>
@@ -144,8 +171,8 @@ const Predict = () => {
             type='text'
             name='numArticles'
             id='numArticles'
-            onChange={}
-            value={}
+            onChange={handleInputChange}
+            value={inputs.numArticles}
           />
         </div>
         <button>Predict now</button>
