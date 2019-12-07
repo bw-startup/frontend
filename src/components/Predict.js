@@ -14,9 +14,36 @@ const Predict = () => {
     numArticles: '',
   });
 
+  const [predict, {loading: predictLoading, error: predictError}] = useMutation(
+    PREDICT,
+  );
+
+  const handlePredict = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await predict({
+        variables: {
+          headquarters: inputs.headquarters,
+          industry: inputs.industry,
+          numFundingRounds: inputs.numFundingRounds,
+          numFounders: inputs.numFounders,
+          numEmployees: inputs.numEmployees,
+          numArticles: inputs.numArticles,
+        },
+      });
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (predictLoading) return <div>Loading...</div>;
+
   return (
     <div>
-      <form>
+      <form onSubmit={handlePredict}>
         <div>
           <label htmlFor='headquarters'>Where is this company located?</label>
           <select name='headquarters' id='headquarters' onChange={} value={}>
