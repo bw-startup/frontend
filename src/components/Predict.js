@@ -1,8 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useMutation} from '@apollo/react-hooks';
 import {gql} from 'apollo-boost';
 
 const Predict = () => {
+  const [inputs, setInputs] = useState({
+    headquarters: '',
+    industry: '',
+    numFundingRounds: '',
+    numFounders: '',
+    numEmployees: '',
+    numArticles: '',
+  });
+
   return (
     <div>
       <form>
