@@ -65,7 +65,7 @@ export default function Login(props) {
       <S.LoginForm>
         <h2>Welcome back!</h2>
         <p>Sign in to continue using Predict a Venture!</p>
-        <p>Please use these credentials:</p>
+        <p style={{marginTop: '8px'}}>Please use these credentials:</p>
         <p>email: test@test.com</p>
         <p>password: test</p>
         <form onSubmit={handleLoginSubmit}>
