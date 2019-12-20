@@ -1,59 +1,55 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
+import React, {useState, useContext, useEffect} from 'react';
+import {useCookies} from 'react-cookie';
 import axios from 'axios';
 import GlobalContext from '../../utils/context';
-import {
-  LOGIN_START,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE
-} from '../../utils/constants';
+import {LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE} from '../../utils/constants';
 import Loader from '../shared/Loader';
 import ErrorMessage from '../shared/ErrorMessage';
 import FormFooterLink from '../shared/FormFooterLink';
 import * as S from '../../styles';
 
 export default function Login(props) {
-  const { state, dispatch } = useContext(GlobalContext);
+  const {state, dispatch} = useContext(GlobalContext);
   const [cookie, setCookie] = useCookies(['StartupTrajectoryPredictor']);
   const [inputs, setInputs] = useState({
     email: '',
-    password: ''
+    password: '',
   });
 
   useEffect(() => {
     if (cookie['StartupTrajectoryPredictor']) {
-      dispatch({ type: LOGIN_START });
+      dispatch({type: LOGIN_START});
       setTimeout(() => {
-        dispatch({ type: LOGIN_SUCCESS });
+        dispatch({type: LOGIN_SUCCESS});
         props.history.push('/predictor');
       }, 2000);
     }
   }, []);
 
-  const handleInputChange = event => {
+  const handleInputChange = (event) => {
     event.persist();
-    setInputs(inputs => ({
+    setInputs((inputs) => ({
       ...inputs,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     }));
   };
 
-  const handleLoginSubmit = event => {
+  const handleLoginSubmit = (event) => {
     event.preventDefault();
-    dispatch({ type: LOGIN_START });
+    dispatch({type: LOGIN_START});
     axios
       .post('https://startups7.herokuapp.com/api/auth/login', inputs)
-      .then(response => {
+      .then((response) => {
         setTimeout(() => {
-          dispatch({ type: LOGIN_SUCCESS });
+          dispatch({type: LOGIN_SUCCESS});
           setCookie('StartupTrajectoryPredictor', response.data.token, {
-            path: '/'
+            path: '/',
           });
           props.history.push('/predictor');
         });
       })
-      .catch(err => {
-        dispatch({ type: LOGIN_FAILURE, payload: err.response.data.message });
+      .catch((err) => {
+        dispatch({type: LOGIN_FAILURE, payload: err.response.data.message});
       });
   };
 
@@ -69,6 +65,9 @@ export default function Login(props) {
       <S.LoginForm>
         <h2>Welcome back!</h2>
         <p>Sign in to continue using Predict a Venture!</p>
+        <p>Please use these credentials:</p>
+        <p>email: test@test.com</p>
+        <p>password: test</p>
         <form onSubmit={handleLoginSubmit}>
           <S.LoginField>
             <label htmlFor='email'>Email:</label>
