@@ -17,13 +17,17 @@ export default function Login(props) {
   });
 
   useEffect(() => {
-    if (cookie['StartupTrajectoryPredictor']) {
-      dispatch({type: LOGIN_START});
-      setTimeout(() => {
-        dispatch({type: LOGIN_SUCCESS});
-        props.history.push('/predictor');
-      }, 2000);
-    }
+    const checkForCookie = () => {
+      if (cookie['StartupTrajectoryPredictor']) {
+        dispatch({type: LOGIN_START});
+        setTimeout(() => {
+          dispatch({type: LOGIN_SUCCESS});
+          props.history.push('/predictor');
+        }, 2000);
+      }
+    };
+
+    checkForCookie();
   }, []);
 
   const handleInputChange = (event) => {
